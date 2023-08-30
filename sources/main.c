@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/30 21:00:17 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/08/30 21:42:43 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include "parser/parser.h"
 #include "command/env_path.h"
 #include "command/execute.h"
+
+#include "builtin/builtin.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -67,58 +69,8 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	printf("\nstart execute\n=========\n");
 
-	printf("t_cmd_arr\n");
-	printf("size : %d capa : %d\n",arr->size , arr->capa);
-
-	printf("t_command\n");
-	printf("1. t_str_arr\n");
-	printf("size : %d capa : %d\n",arr->arr->token->size , arr->arr->token->capa);
-	printf("arr[][] = \n");
-	for(int i = 0 ; i < arr->arr->token->size ; i++) {
-		printf("%d : %s\n", i + 1 , arr->arr->token->arr[i]);
-	}
-	printf("2. t_io_arr\n");
-	printf("size : %d capa : %d\n",arr->arr->io->size , arr->arr->io->capa);
-	for(int i = 0 ; i < arr->arr->io->size ; i++) {
-		printf("fd : %d : %s\n",arr->arr->io->arr->fd , arr->arr->io->arr->str);
-	}
+	// init_builtin(arr->arr->token->arr);
 	
-// 	typedef struct s_cmd_arr
-// {
-// 	int			size;
-// 	int			capa;
-// 	t_command	*arr;
-// }	t_cmd_arr;
-
-// typedef struct s_command
-// {
-// 	t_str_arr	*token;
-// 	t_io_arr	*io;
-// }	t_command;
-
-
-// typedef struct s_io_arr
-// {
-// 	int			size;
-// 	int			capa;
-// 	t_io_file	*arr;
-// }	t_io_arr;
-// typedef struct s_io_file
-// {
-// 	int			fd;
-// 	char		*str;
-// 	t_io_type	type;
-// }	t_io_file;
-
-
-// typedef struct s_str_arr
-// {
-// 	int		size;
-// 	int		capa;
-// 	char	**arr;
-// }	t_str_arr;
-
-
 	execute_commands(arr);
 	printf("=========\ndone\n");
 	delete_cmd_array(arr);
@@ -126,4 +78,19 @@ int	main(int argc, char *argv[], char *envp[])
 	free(line);
 }
 
+	// printf("t_cmd_arr\n");
+	// printf("size : %d capa : %d\n",arr->size , arr->capa);
+
+	// printf("t_command\n");
+	// printf("1. t_str_arr\n");
+	// printf("size : %d capa : %d\n",arr->arr->token->size , arr->arr->token->capa);
+	// printf("arr[][] = \n");
+	// for(int i = 0 ; i < arr->arr->token->size ; i++) {
+	// 	printf("%d : %s\n", i + 1 , arr->arr->token->arr[i]);
+	// }
+	// printf("2. t_io_arr\n");
+	// printf("size : %d capa : %d\n",arr->arr->io->size , arr->arr->io->capa);
+	// for(int i = 0 ; i < arr->arr->io->size ; i++) {
+	// 	printf("fd : %d : %s\n",arr->arr->io->arr->fd , arr->arr->io->arr->str);
+	// }
 

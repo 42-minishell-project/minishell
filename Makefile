@@ -38,7 +38,8 @@ SRCS =	\
 		utils/io_array.c \
 		utils/cmd_array.c \
 		utils/error.c \
-		utils/utils.c
+		utils/utils.c \
+		builtin/builtin.c 
 OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 
 
