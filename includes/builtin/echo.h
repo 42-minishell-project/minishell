@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   echo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 21:14:55 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/01 17:07:02 by hong-yeongh      ###   ########.fr       */
+/*   Created: 2023/09/01 17:02:16 by hong-yeongh       #+#    #+#             */
+/*   Updated: 2023/09/01 17:02:30 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ECHO_H
+# define ECHO_H
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
-
-# include "builtin/echo.h"
-
-int	init_builtin(char **argv);
+int	run_echo(char **argv);
+int find_n_index(char **argv, int *n_flag);
+int	check_n_option(char *str);
+int check_minus(char *str);
 
 #endif
