@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/30 21:42:43 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/01 16:20:49 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,41 @@ int	main(int argc, char *argv[], char *envp[])
 	// }
 	// printf("tail %p\n", *get_env_list_tail());
 	// printf("\n\n");
+
 	init_envp(envp);
 	init_paths(envp);
 	char *line = readline("> ");
 	printf("%s\n", line);
 	t_cmd_arr *arr = parse_line(line);
-	for (int i = 0; i < arr->size; i++)
-	{
-		t_command cmd = arr->arr[i];
-		printf("CMD %d:\n", i);
-		printf("    %d TOKENS:\n", cmd.token->size);
-		for (int j = 0; j < cmd.token->size; j++)
-		{
-			printf("        \"%s\"\n", cmd.token->arr[j]);
-		}
-		printf("    %d IO:\n", cmd.io->size);
-		for (int j = 0; j < cmd.io->size; j++)
-		{
-			char *name;
-			if (cmd.io->arr[j].type == IO_IN_FILE)
-				name = "infile";
-			else if (cmd.io->arr[j].type == IO_IN_HEREDOC)
-				name = "infile_heredoc";
-			else if (cmd.io->arr[j].type == IO_OUT_TRUNC)
-				name = "outfile";
-			else if (cmd.io->arr[j].type == IO_OUT_APPEND)
-				name = "outfile_append";
-			printf("        %s: \"%s\"\n", name, cmd.io->arr[j].str);
-		}
-	}
+	// for (int i = 0; i < arr->size; i++)
+	// {
+	// 	t_command cmd = arr->arr[i];
+	// 	printf("CMD %d:\n", i);
+	// 	printf("    %d TOKENS:\n", cmd.token->size);
+	// 	for (int j = 0; j < cmd.token->size; j++)
+	// 	{
+	// 		printf("        \"%s\"\n", cmd.token->arr[j]);
+	// 	}
+	// 	printf("    %d IO:\n", cmd.io->size);
+	// 	for (int j = 0; j < cmd.io->size; j++)
+	// 	{
+	// 		char *name;
+	// 		if (cmd.io->arr[j].type == IO_IN_FILE)
+	// 			name = "infile";
+	// 		else if (cmd.io->arr[j].type == IO_IN_HEREDOC)
+	// 			name = "infile_heredoc";
+	// 		else if (cmd.io->arr[j].type == IO_OUT_TRUNC)
+	// 			name = "outfile";
+	// 		else if (cmd.io->arr[j].type == IO_OUT_APPEND)
+	// 			name = "outfile_append";
+	// 		printf("        %s: \"%s\"\n", name, cmd.io->arr[j].str);
+	// 	}
+	// }
 	printf("\nstart execute\n=========\n");
 
-	// init_builtin(arr->arr->token->arr);
+	init_builtin(arr->arr->token->arr);
 	
-	execute_commands(arr);
+	// execute_commands(arr);
 	printf("=========\ndone\n");
 	delete_cmd_array(arr);
 	delete_paths();
