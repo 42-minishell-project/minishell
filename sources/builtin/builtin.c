@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:11:20 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/01 16:23:16 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/01 16:41:50 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ int	init_builtin(char **argv)
 int	run_echo(char **argv)
 {
 	int	i;
+	int	n_flag;
+
+	n_flag = 0;
 	if (!argv[1])
 	{
 		ft_putchar_fd('\n', 1);
 		return (1);
 	}
-	i = find_n_index(argv);
+	i = find_n_index(argv, &n_flag);
 	while (argv[i])
 	{
 		ft_putstr_fd(argv[i], 1);
@@ -37,11 +40,12 @@ int	run_echo(char **argv)
 		if (argv[i])
 			ft_putchar_fd(' ', 1);
 	}
-	ft_putchar_fd('\n', 1);
+	if (n_flag == 0)
+		ft_putchar_fd('\n', 1);
 	return (1);
 }
 
-int find_n_index(char **argv)
+int find_n_index(char **argv, int *n_flag)
 {
 	int	i;
 	int	result;
@@ -54,6 +58,8 @@ int find_n_index(char **argv)
 		result = check_n_option(argv[i]);
 		if (result == 0)
 			return (i);
+		if (*n_flag == 0 && result == 1)
+			*n_flag = 1;
 		i++;
 	}
 	return (i);
