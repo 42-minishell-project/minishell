@@ -6,12 +6,11 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:01:36 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/01 17:05:51 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/01 17:52:32 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin/echo.h"
-#include "libft/libft.h"
+#include "builtin/builtin.h"
 
 int	run_echo(char **argv)
 {

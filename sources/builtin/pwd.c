@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.h                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 17:02:16 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/01 17:02:30 by hong-yeongh      ###   ########.fr       */
+/*   Created: 2023/09/01 17:33:54 by hong-yeongh       #+#    #+#             */
+/*   Updated: 2023/09/01 17:59:40 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ECHO_H
-# define ECHO_H
+#include "builtin/builtin.h"
 
-int	run_echo(char **argv);
-int find_n_index(char **argv, int *n_flag);
-int	check_n_option(char *str);
-int check_minus(char *str);
+int	run_pwd(void)
+{
+    char	*path;
 
-#endif
+	path = getcwd(NULL, 0);
+	if (!path)
+		return (-1);
+    ft_putstr_fd(path, 1);
+    ft_putchar_fd('\n', 1);
+	free(path);
+	path = NULL;
+    return (1);
+}
