@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/02 14:33:02 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/02 15:07:15 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char *argv[], char *envp[])
 	init_envs(envp);
 	t_env *cur = get_env_list_head()->next;
 
-	printf("HOME : %s\n",find_env_by_name("HOME"));
+	printf("HOME : %s\n",find_env_by_name("123"));
 	printf("PWD : %s\n",find_env_by_name("PWD"));
 	printf("OLDPWD : %s\n",find_env_by_name("OLDPWD"));
 
@@ -55,7 +55,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_cmd_arr *arr = parse_line(line);
 	printf("\nstart execute\n=========\n");
 
-	// init_builtin(arr->arr->token->arr);
+	init_builtin(arr->arr->token->arr);
 	// execute_commands(arr);
 	
 	printf("=========\ndone\n");

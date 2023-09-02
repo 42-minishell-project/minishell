@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:14:55 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/01 17:56:40 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/02 16:05:40 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "libft/libft.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 int	init_builtin(char **argv);
 
