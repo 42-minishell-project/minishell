@@ -6,15 +6,15 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/01 17:05:08 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/02 14:26:08 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env/env.h"
 #include "env/env_utils.h"
 #include "libft/libft.h"
-
 #include <stdlib.h>
+
 void	add_new_env(char *name, char *value)
 {
 	t_env	*tail;

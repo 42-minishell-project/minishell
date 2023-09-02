@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_test.h                                         :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 14:34:31 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/02 14:07:39 by hong-yeongh      ###   ########.fr       */
+/*   Created: 2023/09/01 18:26:14 by hong-yeongh       #+#    #+#             */
+/*   Updated: 2023/09/02 13:56:46 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_TEST_H
-# define ENV_TEST_H
+#include "builtin/builtin.h"
 
-char	**get_envp(void);
-void	init_envp(char **envp);
 
-#endif
+
