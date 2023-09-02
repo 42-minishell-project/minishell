@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/02 17:35:20 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/03 01:42:54 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,20 @@ int change_dir(char *path)
 {
     char    *result;
     int     code;
-    
+    char    *prev_pwd;
+
     if (ft_strcmp(path, "HOME") == 0)
         result = find_env_by_name("HOME");
     else if (ft_strcmp(path, "OLDPWD") == 0)
         result = find_env_by_name("OLDPWD");
     else
         result = path;
+    prev_pwd = find_env_by_name("PWD");
     code = chdir(result);
-    return (change_result(path, code));
+    return (change_result(path, code, prev_pwd));
 }
 
-int change_result(char *path, int code)
+int change_result(char *path, int code, char *prev_pwd)
 {
     struct stat fileStat;
     char result[1024];
@@ -59,8 +61,8 @@ int change_result(char *path, int code)
     {
         // chdir 정상처리 -> OLDPWD ,PWD 수정
         getcwd(result, 1024);
-        change_env_value("OLDPWD", find_env_by_name("PWD"));
-        change_env_value("PWD", result);
+        update_env_value("OLDPWD", prev_pwd);
+        update_env_value("PWD", result);
         return (1);
     }
     else
@@ -76,4 +78,30 @@ int change_result(char *path, int code)
     }
 }
 
+int    update_env_value(char *name, char *value)
+{
+    t_env	*cur;
+
+    cur = find_previous_by_name(name);
+    cur = cur->next;
+    if (cur == NULL)
+        return (1);// 키값이 없으면 환경변수 추가
+    else
+    {
+        if (cur->value)
+		{
+			free(cur->value);
+			if (value)
+				cur->value = ft_strdup(value);
+			else
+				cur->value = 0;
+		}
+		else
+		{
+			if (value)
+				cur->value = ft_strdup(value);
+		}
+    }
+    return (1);
+}
 
