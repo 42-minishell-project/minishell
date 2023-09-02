@@ -6,15 +6,15 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/02 16:33:12 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/02 17:35:20 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
+#include <stdio.h>  
 
 int	run_cd(char **argv)
 {
-    char    *home_path;
     int     result;
 
     if (argv[1] && argv[2] && argv[3])
@@ -22,8 +22,12 @@ int	run_cd(char **argv)
         ft_putstr_fd("cd: too many arguments\n",2);
         return (1);
     }
-    else if (!argv[1] | ft_strcmp(argv[1], "--") == 0 | ft_strcmp(argv[1], "~") == 0)
+    else if (argv[1] && (ft_strcmp(argv[1], "--") == 0 || ft_strcmp(argv[1], "~") == 0))
         result = change_dir("HOME");
+    else if (!argv[1])
+        result = change_dir("HOME");
+    else if (argv[1] && ft_strcmp(argv[1], "-") == 0)
+        result = change_dir("OLDPWD");
     else
         result = change_dir(argv[1]);
     return (1);
@@ -44,17 +48,20 @@ int change_dir(char *path)
         result = path;
     code = chdir(result);
     return (change_result(path, code));
-    
 }
 
 int change_result(char *path, int code)
 {
     struct stat fileStat;
+    char result[1024];
 
     if (code == 0)
     {
         // chdir 정상처리 -> OLDPWD ,PWD 수정
-        
+        getcwd(result, 1024);
+        change_env_value("OLDPWD", find_env_by_name("PWD"));
+        change_env_value("PWD", result);
+        return (1);
     }
     else
     {
@@ -64,6 +71,7 @@ int change_result(char *path, int code)
         else if (S_ISREG(fileStat.st_mode))
             ft_putstr_fd("cd: not a directory: ",2);
         ft_putstr_fd(path, 2);
+        ft_putchar_fd('\n', 2);
         return (1); 
     }
 }

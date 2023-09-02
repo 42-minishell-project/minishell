@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/02 14:26:08 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/02 17:32:22 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,20 @@ void	init_envs(char **envp)
 	}
 }
 
+#include<stdio.h>
+void	change_env_value(char *name, char *value)
+{
+	t_env	*cur;
 
-
+	cur = get_env_list_head();
+	cur = cur->next;
+	while (cur->next)
+	{
+		if (ft_strcmp(name, cur->name) == 0)
+		{
+			cur->value = value;
+			break ;
+		}
+		cur = cur->next;
+	}
+}
