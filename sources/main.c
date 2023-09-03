@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/03 14:36:23 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/03 14:37:55 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	main(int argc, char *argv[], char *envp[])
 		line = readline("> ");
 		// printf("%s\n", line);
 		arr = parse_line(line);
-		printf("=========\nstart\n");
+		printf("=========start\n");
 		init_builtin(arr->arr->token->arr);
 		// execute_commands(arr);
-		printf("=========\ndone\n");
+		printf("=========done\n");
 	}
 	
 	delete_cmd_array(arr);

@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/03 14:36:21 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/03 14:43:02 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int change_result(char *path, int code, char *prev_pwd)
         getcwd(result, 1024);
         update_env_value("OLDPWD", prev_pwd);
         update_env_value("PWD", result);
-        // printf("\n현재 : %s\n이전 :%s\n", find_env_by_name("PWD"),find_env_by_name("OLDPWD"));
+        printf("\n현재 : %s\n이전 : %s\n", find_env_by_name("PWD"),find_env_by_name("OLDPWD"));
         return (1);
     }
     else
@@ -73,7 +73,7 @@ int change_result(char *path, int code, char *prev_pwd)
             ft_putstr_fd("cd: not a directory: ",2);
         ft_putstr_fd(path, 2);
         ft_putchar_fd('\n', 2);
-        // printf("\n현재 : %s\n이전 :%s\n", find_env_by_name("PWD"),find_env_by_name("OLDPWD"));
+        printf("\n현재 : %s\n이전 :%s\n", find_env_by_name("PWD"),find_env_by_name("OLDPWD"));
         return (1); 
     }
 }
