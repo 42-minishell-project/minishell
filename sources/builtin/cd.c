@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/03 01:42:54 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/03 14:36:21 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	run_cd(char **argv)
 {
     int     result;
-
+        
     if (argv[1] && argv[2] && argv[3])
     {
         ft_putstr_fd("cd: too many arguments\n",2);
@@ -32,8 +32,6 @@ int	run_cd(char **argv)
         result = change_dir(argv[1]);
     return (1);
 }
-// HOMe환경변수 없을때 보기
-// 옮기고 나서 PWD, OLDPWD확인
 
 int change_dir(char *path)
 {
@@ -63,6 +61,7 @@ int change_result(char *path, int code, char *prev_pwd)
         getcwd(result, 1024);
         update_env_value("OLDPWD", prev_pwd);
         update_env_value("PWD", result);
+        // printf("\n현재 : %s\n이전 :%s\n", find_env_by_name("PWD"),find_env_by_name("OLDPWD"));
         return (1);
     }
     else
@@ -74,18 +73,19 @@ int change_result(char *path, int code, char *prev_pwd)
             ft_putstr_fd("cd: not a directory: ",2);
         ft_putstr_fd(path, 2);
         ft_putchar_fd('\n', 2);
+        // printf("\n현재 : %s\n이전 :%s\n", find_env_by_name("PWD"),find_env_by_name("OLDPWD"));
         return (1); 
     }
 }
 
-int    update_env_value(char *name, char *value)
+void    update_env_value(char *name, char *value)
 {
     t_env	*cur;
 
     cur = find_previous_by_name(name);
     cur = cur->next;
     if (cur == NULL)
-        return (1);// 키값이 없으면 환경변수 추가
+        add_new_env(name, value);
     else
     {
         if (cur->value)
@@ -102,6 +102,5 @@ int    update_env_value(char *name, char *value)
 				cur->value = ft_strdup(value);
 		}
     }
-    return (1);
 }
 

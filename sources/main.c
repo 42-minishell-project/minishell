@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/02 17:00:38 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/03 14:36:23 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	main(int argc, char *argv[], char *envp[])
 	// 	cur = cur->next;
 	// 	idx++;
 	// }
-	
 	// printf("\n\n");
 
 	init_envs(envp);
@@ -48,20 +47,18 @@ int	main(int argc, char *argv[], char *envp[])
 	char *line;
 	t_cmd_arr *arr;
 
+
 	while(1)
 	{
 		line = readline("> ");
-		printf("%s\n", line);
+		// printf("%s\n", line);
 		arr = parse_line(line);
-
-		printf("\nstart execute\n=========\n");
+		printf("=========\nstart\n");
 		init_builtin(arr->arr->token->arr);
 		// execute_commands(arr);
 		printf("=========\ndone\n");
 	}
 	
-
-
 	delete_cmd_array(arr);
 	delete_paths();
 	free(line);

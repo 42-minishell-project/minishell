@@ -6,7 +6,7 @@
 /*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:14:55 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/03 01:40:37 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/03 14:14:56 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	run_pwd(void);
 int	    run_cd(char **argv);
 int     change_dir(char *path);
 int     change_result(char *path, int code, char *prev_pwd);
-int     update_env_value(char *name, char *value);
+void     update_env_value(char *name, char *value);
 
 
 
