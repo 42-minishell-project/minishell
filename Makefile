@@ -25,7 +25,6 @@ BUILD_DIR =	build
 SRCS =	\
 		main.c \
 		cursor.c \
-		env/env_test.c \
 		parser/parser.c \
 		parser/cursor.c \
 		command/command.c \
@@ -38,7 +37,15 @@ SRCS =	\
 		utils/io_array.c \
 		utils/cmd_array.c \
 		utils/error.c \
-		utils/utils.c
+		utils/utils.c \
+		builtin/builtin.c \
+		builtin/echo.c	\
+		builtin/pwd.c	\
+		builtin/cd.c	\
+		env/env_test.c \
+		env/env.c	\
+		env/env_utils.c \
+
 OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 
 

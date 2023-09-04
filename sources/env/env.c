@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 14:34:03 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/03 01:36:19 by hong-yeongh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env/env.h"
 #include "env/env_utils.h"
 #include "libft/libft.h"
-
 #include <stdlib.h>
+
 void	add_new_env(char *name, char *value)
 {
 	t_env	*tail;
@@ -78,6 +78,3 @@ void	init_envs(char **envp)
 		idx++;
 	}
 }
-
-
-
