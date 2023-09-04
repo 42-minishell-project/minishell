@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hong-yeonghwan <hong-yeonghwan@student.    +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/03 14:37:55 by hong-yeongh      ###   ########.fr       */
+/*   Updated: 2023/09/04 16:28:52 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char *argv[], char *envp[])
 		arr = parse_line(line);
 		printf("=========start\n");
 		init_builtin(arr->arr->token->arr);
-		// execute_commands(arr);
+		// execute_commands(arr);s
 		printf("=========done\n");
 	}
 	
