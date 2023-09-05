@@ -6,14 +6,54 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 15:00:48 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 15:09:13 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin/builtin.h"
 #include "libft/libft.h"
 #include "utils/builtin_error.h"
 #include "env/env.h"
+
+static int change_result(char *path, int code, char *prev_pwd)
+{
+    char result[1024];
+    int error_code;
+    
+    if (code == 0)
+    {
+        getcwd(result, 1024);
+        update_env("OLDPWD", prev_pwd);
+        update_env("PWD", result);
+        return (0);
+    }
+    else
+    {
+        if (access(path, F_OK) == -1)
+			error_code = print_cd_error(path, ": no such file or directory", 127);
+		else if (access(path, R_OK) == -1)
+			error_code = print_cd_error(path, ": permission denied", 126);
+		else
+			error_code = print_cd_error(path, ": not a directory", 127);
+        return (error_code); 
+    }
+}
+
+static int change_dir(char *path)
+{
+    char    *result;
+    int     code;
+    char    *prev_pwd;
+
+    if (ft_strcmp(path, "HOME") == 0)
+        result = find_env("HOME");
+    else if (ft_strcmp(path, "OLDPWD") == 0)
+        result = find_env("OLDPWD");
+    else
+        result = path;
+    prev_pwd = find_env("PWD");
+    code = chdir(result);
+    return (change_result(path, code, prev_pwd));
+}
 
 int	run_cd(char **argv)
 {
@@ -28,45 +68,4 @@ int	run_cd(char **argv)
     else
         result = change_dir(argv[1]);
     return (result);
-}
-
-static int change_dir(char *path)
-{
-    char    *result;
-    int     code;
-    char    *prev_pwd;
-
-    if (ft_strcmp(path, "HOME") == 0)
-        result = find_env_by_name("HOME");
-    else if (ft_strcmp(path, "OLDPWD") == 0)
-        result = find_env_by_name("OLDPWD");
-    else
-        result = path;
-    prev_pwd = find_env_by_name("PWD");
-    code = chdir(result);
-    return (change_result(path, code, prev_pwd));
-}
-
-static int change_result(char *path, int code, char *prev_pwd)
-{
-    char result[1024];
-    int error_code;
-    
-    if (code == 0)
-    {
-        getcwd(result, 1024);
-        update_env_value("OLDPWD", prev_pwd);
-        update_env_value("PWD", result);
-        return (0);
-    }
-    else
-    {
-        if (access(path, F_OK) == -1)
-			error_code = print_cd_error(path, ": no such file or directory", 127);
-		else if (access(path, R_OK) == -1)
-			error_code = print_cd_error(path, ": permission denied", 126);
-		else
-			error_code = print_cd_error(path, ": not a directory", 127);
-        return (error_code); 
-    }
 }
