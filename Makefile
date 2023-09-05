@@ -27,6 +27,9 @@ SRCS =	\
 		cursor.c \
 		parser/parser.c \
 		parser/cursor.c \
+		env/env.c \
+		env/env_utils.c \
+		env/env_utils2.c \
 		command/command.c \
 		command/execute.c \
 		command/env_path.c \
@@ -40,13 +43,13 @@ SRCS =	\
 		utils/utils.c \
 		utils/builtin_error.c \
 		builtin/builtin.c \
-		builtin/echo.c	\
-		builtin/pwd.c	\
-		builtin/cd.c	\
-		env/env_test.c \
-		env/env.c	\
-		env/env_utils.c \
-	
+		builtin/cd.c \
+		builtin/echo.c \
+		builtin/env_.c \
+		builtin/exit.c \
+		builtin/export.c \
+		builtin/pwd.c \
+		builtin/unset.c
 
 OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 

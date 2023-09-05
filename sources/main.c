@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 12:51:41 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 13:47:31 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 #include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+// #include "env.h"
+// #include "env_utils.h"
+// #include "env/env_test.h"
 #include "env/env.h"
-#include "env/env_utils.h"
-#include "env/env_test.h"
 #include "parser/parser.h"
 #include "command/env_path.h"
 #include "command/execute.h"
@@ -36,13 +37,8 @@ int	main(int argc, char *argv[], char *envp[])
 	// 	idx++;
 	// }
 	// printf("\n\n");
-
+	// init_envp(envp);
 	init_envs(envp);
-	printf("HOME : %s\n",find_env_by_name("HOME"));
-	printf("PWD : %s\n",find_env_by_name("PWD"));
-	printf("OLDPWD : %s\n",find_env_by_name("OLDPWD"));
-	
-	init_envp(envp);
 	init_paths(envp);
 	char *line;
 	t_cmd_arr *arr;
@@ -54,7 +50,8 @@ int	main(int argc, char *argv[], char *envp[])
 		// printf("%s\n", line);
 		arr = parse_line(line);
 		printf("=========start\n");
-		init_builtin(arr->arr->token->arr);
+		int a = init_builtin(arr->arr->token->arr);
+		printf("exit_code : %d\n", a);
 		// execute_commands(arr);s
 		printf("=========done\n");
 	}

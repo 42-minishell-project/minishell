@@ -6,11 +6,10 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:01:36 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 13:06:15 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 14:59:00 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin/builtin.h"
 #include "libft/libft.h"
 
 int	run_echo(char **argv)
@@ -80,4 +79,3 @@ static int check_minus(char *str)
 		return (1);
 	return (0);
 }
-

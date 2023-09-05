@@ -7,7 +7,7 @@
 #include "utils/utils.h"
 #include "parser/parser.h"
 #include "parser/cursor.h"
-// #include "env.h"
+#include "env/env.h"
 #include "command/command.h"
 
 #include "utils/chr_array.h"
@@ -24,21 +24,29 @@ void	expand_env(t_cursor *s)
 	char		*env_value;
 
 	forward_cursor(s);
-	name = new_chr_array();
-	while (1)
+	c = peek_cursor(s);
+	if (c == '?')
 	{
-		c = peek_cursor(s);
-		if (!c || !(c == '_' || ft_isalnum(c)))
-			break ;
-		push_chr_array(name, forward_cursor(s));
+		forward_cursor(s);
+		return ;
 	}
+	name = new_chr_array();
+	if (c == '_' || ft_isalpha(c))
+		while (1)
+		{
+			c = peek_cursor(s);
+			if (!c || !(c == '_' || ft_isalnum(c)))
+				break ;
+			push_chr_array(name, forward_cursor(s));
+		}
 	if (name->size == 0)
 		push_cursor(s, "$", 0);
 	else
 	{
 		// printf("env name %s\n", name->arr);
 		// env_value = find_env_by_name(name->arr);
-		env_value = getenv(name->arr);
+		// env_value = getenv(name->arr);
+		env_value = find_env(name->arr);
 		// printf("find env %s = \"%s\"\n", name->arr, env_value);
 		if (env_value)
 			push_cursor(s, env_value, 0);

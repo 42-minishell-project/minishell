@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 15:31:32 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:56:48 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include "command/env_path.h"
 #include "command/open_io.h"
 #include "command/exe_utils.h"
-#include "env/env_test.h"
+// #include "env/env_test.h"
+#include "env/env.h"
 #include "utils/utils.h"
 #include "utils/error.h"
 

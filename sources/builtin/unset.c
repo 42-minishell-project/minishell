@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 00:18:21 by jimlee            #+#    #+#             */
+/*   Created: 2023/09/05 13:05:39 by jimlee            #+#    #+#             */
 /*   Updated: 2023/09/05 13:40:54 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/libft.h"
-#include "utils/utils.h"
+#include "env/env.h"
 
-int	parse_identifier(char *s, char **name, char **value)
+int	unset(int argc, char **argv)
 {
-	int	idx;
+	int		idx;
+	int		valid;
+	char	*name;
+	char	*value;
 
-	if (name && value)
+	valid = 0;
+	idx = 1;
+	while (idx < argc)
 	{
-		*name = NULL;
-		*value = NULL;
-	}
-	if (!ft_isalpha(s[0]))
-		return (0);
-	idx = 0;
-	while (ft_isalnum(s[idx]) || (s[idx] == '_'))
-		idx++;
-	if (s[idx] == '\0')
-		return (1);
-	else if (s[idx] == '=')
-	{
-		if (name && value)
+		if (parse_identifier(argv[idx], NULL, NULL) == 1)
 		{
-			*name = ft_strndup(s, idx);
-			*value = ft_strdup(&s[idx + 1]);
+			delete_env(argv[idx]);
 		}
-		return (2);
+		else
+		{
+			ft_putstr_fd("env: `", STDERR_FILENO);
+			ft_putstr_fd(argv[idx], STDERR_FILENO);
+			ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
+			valid = 1;
+		}
+		idx++;
 	}
-	return (0);
+	return (valid);
 }
-
