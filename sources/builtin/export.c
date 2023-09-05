@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:46 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 13:40:54 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/05 15:31:35 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "env/env.h"
 #include "utils/utils.h"
 
-int	export(int argc, char **argv)
+int	run_export(int argc, char **argv)
 {
 	int		idx;
 	int		valid;

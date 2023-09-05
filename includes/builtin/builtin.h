@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:14:55 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 15:11:14 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 15:19:37 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-int	init_builtin(char **argv);
+int	init_builtin(int argc, char **argv);
 
 // echo.c
 int	run_echo(char **argv);
@@ -25,7 +25,12 @@ int	run_pwd(void);
 // cd.c
 int	run_cd(char **argv);
 
+// env_.c
+int	run_env(int argc, char **argv);
 
+// export.c
+int	run_export(int argc, char **argv);
 
-
+// unset.c
+int	run_unset(int argc, char **argv);
 #endif

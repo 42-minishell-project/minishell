@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:05:39 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 13:40:54 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/05 15:19:40 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft/libft.h"
 #include "env/env.h"
 
-int	unset(int argc, char **argv)
+int	run_unset(int argc, char **argv)
 {
 	int		idx;
 	int		valid;

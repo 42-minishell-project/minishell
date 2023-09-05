@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:01:27 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 13:21:33 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/05 15:18:37 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "env/env.h"
 #include "utils/utils.h"
 
-int	env(int argc, char **argv)
+int	run_env(int argc, char **argv)
 {
 	char	**envp;
 	int		idx;
