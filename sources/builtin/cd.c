@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 12:51:31 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 13:12:28 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	run_cd(char **argv)
         result = change_dir("OLDPWD");
     else
         result = change_dir(argv[1]);
-    return (1);
+    return (result);
 }
 
 static int change_dir(char *path)
@@ -60,7 +60,7 @@ static int change_result(char *path, int code, char *prev_pwd)
         getcwd(result, 1024);
         update_env_value("OLDPWD", prev_pwd);
         update_env_value("PWD", result);
-        return (1);
+        return (0);
     }
     else
     {
@@ -71,7 +71,7 @@ static int change_result(char *path, int code, char *prev_pwd)
             ft_putstr_fd("cd: not a directory: ",2);
         ft_putstr_fd(path, 2);
         ft_putchar_fd('\n', 2);
-        return (1); 
+        return (127); 
     }
 }
 
