@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:14:55 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/04 16:28:03 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 10:25:53 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-#include "libft/libft.h"
 #include "env/env.h"
 #include "env/env_utils.h"
 #include <unistd.h>
@@ -25,17 +24,17 @@ int	init_builtin(char **argv);
 
 // echo.c
 int	run_echo(char **argv);
-int find_n_index(char **argv, int *n_flag);
-int	check_n_option(char *str);
-int check_minus(char *str);
+static int find_n_index(char **argv, int *n_flag);
+static int	check_n_option(char *str);
+static int check_minus(char *str);
 
 // pwd.c
 int	run_pwd(void);
 
 // cd.c
 int	    run_cd(char **argv);
-int     change_dir(char *path);
-int     change_result(char *path, int code, char *prev_pwd);
+static int     change_dir(char *path);
+static int     change_result(char *path, int code, char *prev_pwd);
 void     update_env_value(char *name, char *value);
 
 

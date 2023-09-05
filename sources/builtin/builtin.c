@@ -6,11 +6,12 @@
 /*   By: yeohong <yeohong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:11:20 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/04 16:28:23 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 10:18:23 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
+#include "libft/libft.h"
 
 int	init_builtin(char **argv)
 {

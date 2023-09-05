@@ -6,12 +6,11 @@
 /*   By: yeohong <yeohong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/04 16:27:42 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 10:25:42 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
-#include <stdio.h>  
 
 int	run_cd(char **argv)
 {
@@ -33,7 +32,7 @@ int	run_cd(char **argv)
     return (1);
 }
 
-int change_dir(char *path)
+static int change_dir(char *path)
 {
     char    *result;
     int     code;
@@ -50,7 +49,7 @@ int change_dir(char *path)
     return (change_result(path, code, prev_pwd));
 }
 
-int change_result(char *path, int code, char *prev_pwd)
+static int change_result(char *path, int code, char *prev_pwd)
 {
     struct stat fileStat;
     char result[1024];
@@ -61,7 +60,6 @@ int change_result(char *path, int code, char *prev_pwd)
         getcwd(result, 1024);
         update_env_value("OLDPWD", prev_pwd);
         update_env_value("PWD", result);
-        printf("\n현재 : %s\n이전 : %s\n", find_env_by_name("PWD"),find_env_by_name("OLDPWD"));
         return (1);
     }
     else
@@ -73,10 +71,10 @@ int change_result(char *path, int code, char *prev_pwd)
             ft_putstr_fd("cd: not a directory: ",2);
         ft_putstr_fd(path, 2);
         ft_putchar_fd('\n', 2);
-        printf("\n현재 : %s\n이전 :%s\n", find_env_by_name("PWD"),find_env_by_name("OLDPWD"));
         return (1); 
     }
 }
+
 
 void    update_env_value(char *name, char *value)
 {

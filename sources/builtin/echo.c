@@ -6,11 +6,12 @@
 /*   By: yeohong <yeohong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:01:36 by hong-yeongh       #+#    #+#             */
-/*   Updated: 2023/09/04 16:27:44 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 10:24:50 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
+#include "libft/libft.h"
 
 int	run_echo(char **argv)
 {
@@ -36,7 +37,7 @@ int	run_echo(char **argv)
 	return (1);
 }
 
-int find_n_index(char **argv, int *n_flag)
+static int find_n_index(char **argv, int *n_flag)
 {
 	int	i;
 	int	result;
@@ -56,7 +57,7 @@ int find_n_index(char **argv, int *n_flag)
 	return (i);
 }
 
-int	check_n_option(char *str)
+static int	check_n_option(char *str)
 {
 	int	i;
 
@@ -73,7 +74,7 @@ int	check_n_option(char *str)
 	return (1);
 }
 
-int check_minus(char *str)
+static int check_minus(char *str)
 {
 	if (ft_strcmp(str, "-") == 0)
 		return (1);
