@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/24 18:33:37 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:10:26 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include <readline/history.h>
 // #include "env.h"
 // #include "env_utils.h"
-#include "env/env_test.h"
+// #include "env/env_test.h"
+#include "env/env.h"
 #include "parser/parser.h"
 #include "command/env_path.h"
 #include "command/execute.h"
@@ -36,7 +37,8 @@ int	main(int argc, char *argv[], char *envp[])
 	// }
 	// printf("tail %p\n", *get_env_list_tail());
 	// printf("\n\n");
-	init_envp(envp);
+	// init_envp(envp);
+	init_envs(envp);
 	init_paths(envp);
 	char *line = readline("> ");
 	t_cmd_arr *arr = parse_line(line);

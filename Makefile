@@ -25,7 +25,9 @@ BUILD_DIR =	build
 SRCS =	\
 		main.c \
 		cursor.c \
-		env/env_test.c \
+		env/env.c \
+		env/env_utils.c \
+		env/env_utils2.c \
 		parser/parser.c \
 		parser/cursor.c \
 		command/command.c \
