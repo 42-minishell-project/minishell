@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env_test.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:34:31 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 12:50:53 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/04 12:57:37 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_TEST_H
 # define ENV_TEST_H
 
-char	**get_envp(void);
-void	init_envp(char **envp);
+// char	**get_envp(void);
+// void	init_envp(char **envp);
 
 #endif

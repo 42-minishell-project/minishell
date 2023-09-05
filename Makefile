@@ -42,9 +42,9 @@ SRCS =	\
 		builtin/echo.c	\
 		builtin/pwd.c	\
 		builtin/cd.c	\
-		env/env_test.c \
 		env/env.c	\
 		env/env_utils.c \
+		env/env_utils2.c
 
 OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 
