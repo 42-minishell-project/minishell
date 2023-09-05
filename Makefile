@@ -13,6 +13,8 @@ LIB_FLAGS =	$(addprefix -L$(LIB_DIR)/, $(LIB_NAMES)) \
 			$(addprefix -l, $(subst lib,,$(LIB_NAMES))) \
 			-lreadline
 
+LINKING_FLAGS = -lreadline -L/opt/homebrew/opt/readline/lib
+COMFILE_FLAGS = -I/opt/homebrew/opt/readline/include
 
 INCLUDES =	includes \
 			libraries
@@ -57,10 +59,10 @@ OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 all: $(NAME)
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ $(COMFILE_FLAGS)
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/**/%.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ 
 
 echo:
 	@echo $(SRCS)
@@ -73,7 +75,7 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 $(NAME): $(OBJS) $(LIBS)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIB_FLAGS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIB_FLAGS) $(LINKING_FLAGS)
 
 clean:
 	$(foreach LIB,$(LIBS),$(MAKE) fclean -C $(dir $(LIB)))
