@@ -6,22 +6,19 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 13:12:28 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 14:31:54 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
+#include "libft/libft.h"
+#include "utils/builtin_error.h"
 
 int	run_cd(char **argv)
 {
     int     result;
         
-    if (argv[1] && argv[2] && argv[3])
-    {
-        ft_putstr_fd("cd: too many arguments\n",2);
-        return (1);
-    }
-    else if (argv[1] && (ft_strcmp(argv[1], "--") == 0 || ft_strcmp(argv[1], "~") == 0))
+    if (argv[1] && (ft_strcmp(argv[1], "--") == 0 || ft_strcmp(argv[1], "~") == 0))
         result = change_dir("HOME");
     else if (!argv[1])
         result = change_dir("HOME");
@@ -53,10 +50,10 @@ static int change_result(char *path, int code, char *prev_pwd)
 {
     struct stat fileStat;
     char result[1024];
-
+    int error_code;
+    
     if (code == 0)
     {
-        // chdir 정상처리 -> OLDPWD ,PWD 수정
         getcwd(result, 1024);
         update_env_value("OLDPWD", prev_pwd);
         update_env_value("PWD", result);
@@ -64,14 +61,15 @@ static int change_result(char *path, int code, char *prev_pwd)
     }
     else
     {
-        // chdir 오류 발생 -> 오류코드에 따라 출력
         if (stat(path, &fileStat) == -1)
-            ft_putstr_fd("cd: no such file or directory: ",2);
+            error_code = print_cd_error(path, ": no such file or directory", 127);
+        else if (!(fileStat.st_mode & S_IXUSR))
+            error_code = print_cd_error(path, ": permission denied", 126);
         else if (S_ISREG(fileStat.st_mode))
-            ft_putstr_fd("cd: not a directory: ",2);
-        ft_putstr_fd(path, 2);
-        ft_putchar_fd('\n', 2);
-        return (127); 
+            error_code = print_cd_error(path, ": not a directory", 127);
+        else
+            error_code = 1;
+        return (error_code); 
     }
 }
 

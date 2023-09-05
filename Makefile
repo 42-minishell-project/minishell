@@ -38,6 +38,7 @@ SRCS =	\
 		utils/cmd_array.c \
 		utils/error.c \
 		utils/utils.c \
+		utils/builtin_error.c \
 		builtin/builtin.c \
 		builtin/echo.c	\
 		builtin/pwd.c	\
@@ -45,6 +46,7 @@ SRCS =	\
 		env/env_test.c \
 		env/env.c	\
 		env/env_utils.c \
+	
 
 OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 
