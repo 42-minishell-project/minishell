@@ -6,58 +6,14 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 13:23:31 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/05 13:41:26 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft/libft.h"
 #include "env/env.h"
 #include "env/env_utils.h"
-#include <stdlib.h>
-/*
-void	add_new_env(char *name, char *value)
-{
-	t_env	*tail;
-	t_env	*node;
-
-	node = malloc(sizeof(t_env));
-	node->name = ft_strdup(name);
-	node->value = ft_strdup(value);
-	node->next = NULL;
-	tail = *get_env_list_tail();
-	tail->next = node;
-	*get_env_list_tail() = node;
-}
-
-void	delete_env_by_name(char *name)
-{
-	t_env	*prev;
-	t_env	*deleted;
-
-	prev = find_previous_by_name(name);
-	if (prev)
-	{
-		deleted = prev->next;
-		prev->next = deleted->next;
-		if (*get_env_list_tail() == deleted)
-			*get_env_list_tail() = prev;
-		free(deleted->name);
-		free(deleted->value);
-		free(deleted);
-	}
-}
-
-char	*find_env_by_name(char *name)
-{
-	t_env	*prev;
-
-	prev = find_previous_by_name(name);
-	if (prev)
-		return (prev->next->value);
-	else
-		return (NULL);
-}
-*/
 
 void	update_env(char *name, char *value)
 // add env (update value if exists)
@@ -124,16 +80,14 @@ void	init_envs(char **envp)
 	char	*name;
 	char	*value;
 
-	// *get_env_list_tail() = get_env_list_head();
 	idx = 0;
 	while (envp[idx])
 	{
 		name = NULL;
 		value = NULL;
-		split_envstr(envp[idx], &name, &value);
+		parse_identifier(envp[idx], &name, &value);
 		if (name && value)
 			update_env(name, value);
-			// add_new_env(name, value);
 		free(name);
 		free(value);
 		idx++;

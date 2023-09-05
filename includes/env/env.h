@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:34 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 13:16:37 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/05 13:42:51 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ char	*find_env(char *name);
 void	init_envs(char **envp);
 
 char	**get_envp(void);
-int		is_valid_identifier(char *s, char **name, char **value);
+int		parse_identifier(char *s, char **name, char **value);
 
 #endif
