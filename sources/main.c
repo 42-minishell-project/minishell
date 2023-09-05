@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/04 13:10:26 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/05 13:47:31 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 // #include "env_utils.h"
 // #include "env/env_test.h"
 #include "env/env.h"
-#include "env/env_utils.h"
-#include "env/env_test.h"
 #include "parser/parser.h"
 #include "command/env_path.h"
 #include "command/execute.h"
