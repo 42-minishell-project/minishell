@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:01:36 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 12:51:31 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 13:05:05 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	run_echo(char **argv)
 	if (!argv[1])
 	{
 		ft_putchar_fd('\n', 1);
-		return (1);
+		return (0);
 	}
 	i = find_n_index(argv, &n_flag);
 	while (argv[i])
@@ -34,7 +34,7 @@ int	run_echo(char **argv)
 	}
 	if (n_flag == 0)
 		ft_putchar_fd('\n', 1);
-	return (1);
+	return (0);
 }
 
 static int find_n_index(char **argv, int *n_flag)
