@@ -6,11 +6,12 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:33:54 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 12:51:32 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 13:02:43 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
+#include "libft/libft.h"
 
 int	run_pwd(void)
 {

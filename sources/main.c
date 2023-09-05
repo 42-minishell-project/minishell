@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 12:51:41 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 13:01:49 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	main(int argc, char *argv[], char *envp[])
 		// printf("%s\n", line);
 		arr = parse_line(line);
 		printf("=========start\n");
-		init_builtin(arr->arr->token->arr);
+		int a = init_builtin(arr->arr->token->arr);
+		printf("exit_code : %d\n", a);
 		// execute_commands(arr);s
 		printf("=========done\n");
 	}
