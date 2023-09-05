@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:33:54 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 13:04:50 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/05 13:10:35 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	run_pwd(void)
 
 	path = getcwd(NULL, 0);
 	if (!path)
-		return (-1);
+		return (1);
     ft_putstr_fd(path, 1);
     ft_putchar_fd('\n', 1);
 	free(path);
 	path = NULL;
-    return (1);
+    return (0);
 }
