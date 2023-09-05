@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 23:53:49 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/01 22:01:07 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/05 14:51:45 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <readline/readline.h>
 #include "command/open_io.h"
 #include "utils/error.h"
+#include "libft/libft.h"
 
 int	open_in_heredoc(char *eof)
 {
