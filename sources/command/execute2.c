@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:59:41 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 17:38:19 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:26:32 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "command/open_io.h"
 #include "env/env.h"
 #include "utils/io_array.h"
+#include "utils/error.h"
 
 void	prepare_io(t_io_arr *io, int *in_fd, int *out_fd)
 {

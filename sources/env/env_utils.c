@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 00:18:21 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 13:40:54 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 19:11:49 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	parse_identifier(char *s, char **name, char **value)
 		*name = NULL;
 		*value = NULL;
 	}
-	if (!ft_isalpha(s[0]))
+	if (!(ft_isalpha(s[0]) || s[0] == '_'))
 		return (0);
 	idx = 0;
 	while (ft_isalnum(s[idx]) || (s[idx] == '_'))

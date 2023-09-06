@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   io_array.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:43:56 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 15:22:29 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 19:03:41 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "utils/io_array.h"
-
 #include <stdlib.h>
+
 t_io_arr	*new_io_array(void)
 {
 	t_io_arr	*ret;

@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:01:36 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/06 15:43:49 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 17:36:53 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_n_option(char *str)
 	return (1);
 }
 
-static int check_minus(char *str)
+static int	check_minus(char *str)
 {
 	if (ft_strcmp(str, "-") == 0)
 		return (1);
@@ -40,7 +40,7 @@ static int	find_n_index(char **argv, int *n_flag)
 {
 	int	i;
 	int	result;
-	
+
 	i = 1;
 	if (check_minus(argv[i]))
 		return (i + 1);
