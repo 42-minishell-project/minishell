@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include "command/command.h"
@@ -26,10 +27,20 @@ int	execute_single(t_command *cmd)
 	int				pid;
 	int				status;
 
-	func = init_builtin(cmd);
+	func = NULL;
+	if (cmd->token->size > 0)
+		func = init_builtin(cmd->token->arr[0]);
 	if (func)
 	{
-		redirect_command_io(cmd);
+		pid = fork();
+		if (pid == 0)
+		{
+			redirect_command_io(cmd);
+			exit(0);
+		}
+		waitpid(pid, &status, 0);
+		if (WEXITSTATUS(status))
+			return (WEXITSTATUS(status));
 		return (func(cmd->token->size, cmd->token->arr));
 	}
 	else

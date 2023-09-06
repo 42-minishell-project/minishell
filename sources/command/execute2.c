@@ -72,11 +72,9 @@ void	run_non_builtin(t_command *cmd)
 	redirect_command_io(cmd);
 	if (cmd->token->size > 0)
 	{
-		// printf("%p: %s\n", cmd->token->arr[0], cmd->token->arr[0]);
 		exe = find_executable(cmd->token->arr[0]);
-		// printf("exe path: %s\n", exe);
 		if (execve(exe, cmd->token->arr, get_envp()) == -1)
 			fatal_error("execve failed");
 	}
-	exit(1);
+	exit(0);
 }

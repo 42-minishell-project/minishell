@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:06:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/04 13:07:50 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:12:35 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_env_node	*find_env_node(t_env_deque *envs, char *name)
 	return (NULL);
 }
 
-void		replace_env_node_value(t_env_node *node, char *value)
+void	replace_env_node_value(t_env_node *node, char *value)
 {
 	free(node->value);
 	node->value = ft_strdup(value);

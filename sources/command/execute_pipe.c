@@ -25,7 +25,9 @@ void	execute_pipe_single(t_command *cmd)
 {
 	t_builtin_func	func;
 
-	func = init_builtin(cmd);
+	func = NULL;
+	if (cmd->token->size > 0)
+		func = init_builtin(cmd->token->arr[0]);
 	if (func)
 	{
 		redirect_command_io(cmd);
