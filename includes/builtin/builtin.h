@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:14:55 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 15:19:37 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:12:19 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-int	init_builtin(int argc, char **argv);
+# include "command/command.h"
+
+typedef int (*t_builtin_func)(int, char **);
+
+t_builtin_func	init_builtin(t_command *cmd);
 
 // echo.c
 int	run_echo(char **argv);

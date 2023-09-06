@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 15:12:17 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:41:19 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static int change_dir(char *path)
     return (change_result(path, code, prev_pwd));
 }
 
-int	run_cd(char **argv)
+// int	run_cd(char **argv)
+int	run_cd(int argc, char **argv)
 {
     int     result;
         

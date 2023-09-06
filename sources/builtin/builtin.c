@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:11:20 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 15:19:52 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:01:31 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
 #include "libft/libft.h"
 
-int	init_builtin(int argc, char **argv)
+// int	init_builtin(int argc, char **argv)
+// int	init_builtin(t_command *cmd);
+int (*)(int, char **) check_builtin(char *)
 {
 	if (ft_strcmp(argv[0], "echo") == 0)
-		return (run_echo(argv));
+		// return (run_echo(argv));
+		return (run_echo);
 	else if (ft_strcmp(argv[0], "pwd") == 0)
 		return (run_pwd());
 	else if (ft_strcmp(argv[0], "cd") == 0)
@@ -29,5 +32,5 @@ int	init_builtin(int argc, char **argv)
 		return (run_export(argc, argv));
 	else if (ft_strcmp(argv[0], "unset") == 0)
 		return (run_unset(argc, argv));
-	return (0);
+	return (NULL);
 }
