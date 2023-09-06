@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:14:55 by yeohong           #+#    #+#             */
 /*   Updated: 2023/09/06 15:45:17 by yeohong          ###   ########.fr       */
