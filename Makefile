@@ -34,6 +34,8 @@ SRCS =	\
 		env/env_utils2.c \
 		command/command.c \
 		command/execute.c \
+		command/execute2.c \
+		command/execute_pipe.c \
 		command/env_path.c \
 		command/find_exe.c \
 		command/open_io.c \

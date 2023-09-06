@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:56:07 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:06:03 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 16:17:09 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "builtin/builtin.h"
 #include "utils/cmd_array.h"
 
+
+#include <stdio.h>
 int	execute_single(t_command *cmd)
 {
 	t_builtin_func	func;
@@ -32,6 +34,7 @@ int	execute_single(t_command *cmd)
 	}
 	else
 	{
+		printf("exe not builtin\n");
 		pid = fork();
 		if (pid == 0)
 			run_non_builtin(cmd);

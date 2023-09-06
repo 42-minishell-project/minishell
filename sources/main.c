@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 15:55:20 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 16:15:56 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 #include <signal.h>
 #include <string.h>
 #include "libft/libft.h"
+
+int g_child_pid;
 
 void sig_handler(int signal)
 {
@@ -59,10 +61,10 @@ int	main(int argc, char *argv[], char *envp[])
 	
 	
 	// 터미널 설정
-	struct termios term;
-	tcgetattr(STDIN_FILENO, &term);
-	term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	// struct termios term;
+	// tcgetattr(STDIN_FILENO, &term);
+	// term.c_lflag &= ~(ECHOCTL);
+	// tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	
 	signal(SIGINT, sig_handler); // CTRL + C
     signal(SIGQUIT, SIG_IGN);    // CTRL + /
@@ -85,14 +87,40 @@ int	main(int argc, char *argv[], char *envp[])
             exit(0);
         }
 		arr = parse_line(line);
+
+		
+	for (int i = 0; i < arr->size; i++)
+	{
+		t_command cmd = arr->arr[i];
+		printf("CMD %d:\n", i);
+		printf("    %d TOKENS:\n", cmd.token->size);
+		for (int j = 0; j < cmd.token->size; j++)
+		{
+			printf("        \"%s\"\n", cmd.token->arr[j]);
+		}
+		printf("    %d IO:\n", cmd.io->size);
+		for (int j = 0; j < cmd.io->size; j++)
+		{
+			char *name;
+			if (cmd.io->arr[j].type == IO_IN_FILE)
+				name = "infile";
+			else if (cmd.io->arr[j].type == IO_IN_HEREDOC)
+				name = "infile_heredoc";
+			else if (cmd.io->arr[j].type == IO_OUT_TRUNC)
+				name = "outfile";
+			else if (cmd.io->arr[j].type == IO_OUT_APPEND)
+				name = "outfile_append";
+			printf("        %s: \"%s\"\n", name, cmd.io->arr[j].str);
+		}
+	}
 	
 		printf("=========start\n");
 
-		t_builtin_func a = NULL;
-		a = init_builtin(arr->arr);
-		int c = a(arr->arr->token->arr);
+		// t_builtin_func a = NULL;
+		// a = init_builtin(arr->arr);
+		// int c = a(arr->arr->token->arr);
 		
-		printf("exit_code : %d\n", c);
+		// printf("exit_code : %d\n", c);
 		execute_commands(arr);
 		printf("=========done\n");
 	}

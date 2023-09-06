@@ -6,14 +6,16 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:59:41 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:03:13 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 16:20:20 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "command/command.h"
+#include "command/env_path.h"
 #include "command/open_io.h"
+#include "env/env.h"
 #include "utils/io_array.h"
 
 void	prepare_io(t_io_arr *io, int *in_fd, int *out_fd)
@@ -67,9 +69,12 @@ void	run_non_builtin(t_command *cmd)
 	char	*exe;
 
 	redirect_command_io(cmd);
+	printf("cmds %d\n", cmd->token->size);
 	if (cmd->token->size > 0)
 	{
+		printf("%p: %s\n", cmd->token->arr[0], cmd->token->arr[0]);
 		exe = find_executable(cmd->token->arr[0]);
+		printf("exe path: %s\n", exe);
 		if (execve(exe, cmd->token->arr, get_envp()) == -1)
 			fatal_error("execve failed");
 	}
