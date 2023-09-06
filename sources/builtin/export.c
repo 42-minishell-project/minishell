@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:46 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 17:28:22 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 18:36:10 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,81 @@
 #include "utils/utils.h"
 #include "utils/builtin_error.h"
 
-//#include <stdio.h>
+#include <stdio.h>
 
-//static int	print_export(char **argv)
-//{
-//	int i = 0;
-//	while (argv[i])
-//		printf("%s\n",argv[i]);
-//}
+
+static void	sorted_list(char **list, int size)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		j = 0;
+		while (j < size - 1 - i)
+		{
+			if (ft_strncmp(list[j], list[j + 1], ft_strlen(list[j])) > 0)
+			{
+				temp = list[j];
+				list[j] = list[j + 1];
+				list[j + 1] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	free_export(char *name, char *value, char **str)
+{
+	if (name)
+		free(name);
+	if (value)
+		free(value);
+	if (str)
+		free_2d_str_array(str);
+}
+
+static void	print_export(void)
+{
+	char	**str;
+	char	*name;
+	char	*value;
+	int		size;
+	int		i;
+
+	str = get_envp();
+	size = 0;
+	while (str[size])
+		size++;
+	i = 0;
+	sorted_list(str, size);
+	while (str[i])
+	{
+		parse_identifier(str[i], &name, &value);
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(name, 1);
+		ft_putstr_fd("=", 1);
+		ft_putchar_fd('\"', 1);
+		ft_putstr_fd(value, 1);
+		ft_putchar_fd('\"', 1);
+		ft_putchar_fd('\n', 1);
+		i++;
+	}
+	free_export(name, value, str);
+}
+
+static int	run_one_export(int argc)
+{
+	if (argc == 1)
+	{
+		print_export();
+		return (0);
+	}
+	return (1);
+}
 
 int	run_export(int argc, char **argv)
 {
@@ -34,21 +101,19 @@ int	run_export(int argc, char **argv)
 
 	valid = 0;
 	idx = 1;
-	//if (argc == 1)
-	//	print_export(argv);
+	if (run_one_export(argc) == 0)
+		return (0);
 	while (idx < argc)
 	{
 		if (parse_identifier(argv[idx], &name, &value))
 		{
 			if (name && value)
 				update_env(name, value);
-			free(name);
-			free(value);
+			free_export(name, value, 0);
 		}
 		else
 		{
-			print_builtin_error("export", argv[idx], \
-				": not a valid identifier", 1);
+			print_export_error(argv[idx]);
 			valid = 1;
 		}
 		idx++;

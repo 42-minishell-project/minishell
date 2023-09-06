@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/06 17:27:31 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 17:39:13 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	run_exit_number(char *str)
 	sum = ft_long_long_atoi(str, 0, &over);
 	if (over == 1)
 	{
-		result = print_builtin_error("exit", str, ": numeric argument required", 255);
+		result = builtin_error("exit", str, ": numeric argument required", 255);
 		exit(result);
 	}
 	else
@@ -126,7 +126,7 @@ int	run_exit(int argc, char **argv)
 	{
 		ft_putstr_fd("exit\n", 1);
 		if (!is_number(argv[1]))
-			exit(print_builtin_error("exit", argv[1], "numeric argument required", 255));
+			exit(builtin_error("exit", argv[1], "numeric argument required", 255));
 		else
 			run_exit_number(argv[1]);
 	}
@@ -134,8 +134,8 @@ int	run_exit(int argc, char **argv)
 	{
 		ft_putstr_fd("exit\n", 1);
 		if (!is_number(argv[1]))
-			exit(print_builtin_error("exit", argv[1], "numeric argument required", 255));
+			exit(builtin_error("exit", argv[1], "numeric argument required", 255));
 		else
-			print_builtin_error("exit", argv[1], "too many arguments", 1);
+			builtin_error("exit", argv[1], "too many arguments", 1);
 	}
 }

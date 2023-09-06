@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/06 17:27:08 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 17:36:30 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static int	change_result(char *path, int code, char *prev_pwd)
 	else
 	{
 		if (access(path, F_OK) == -1)
-			error_code = print_builtin_error("cd", path, \
+			error_code = builtin_error("cd", path, \
 			": no such file or directory", 127);
 		else if (access(path, R_OK) == -1)
-			error_code = print_builtin_error("cd", path, \
+			error_code = builtin_error("cd", path, \
 			": permission denied", 126);
 		else
-			error_code = print_builtin_error("cd", path, \
+			error_code = builtin_error("cd", path, \
 			": not a directory", 127);
 		return (error_code);
 	}
