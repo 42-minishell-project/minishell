@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/06 15:07:00 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:43:10 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static int change_dir(char *path)
     return (change_result(path, code, prev_pwd));
 }
 
-int	run_cd(char **argv)
+int	run_cd(int argc, char **argv)
 {
     int     result;
         
     if (argv[1] && (ft_strcmp(argv[1], "--") == 0 || ft_strcmp(argv[1], "~") == 0))
         result = change_dir("HOME");
-    else if (!argv[1])
+    else if (argc == 1)
         result = change_dir("HOME");
     else if (argv[1] && ft_strcmp(argv[1], "-") == 0)
         result = change_dir("OLDPWD");
