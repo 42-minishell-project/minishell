@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 15:40:22 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:55:20 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #include <stdbool.h>
 #include <signal.h>
 #include <string.h>
+#include "libft/libft.h"
 
 void sig_handler(int signal)
 {
@@ -57,10 +58,11 @@ int	main(int argc, char *argv[], char *envp[])
 	// init_envp(envp);
 	
 	
-	//struct termios term;
-    // tcgetattr(STDIN_FILENO, &term);
-    // term.c_lflag &= ~(ECHOCTL);
-    // tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	// 터미널 설정
+	struct termios term;
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	
 	signal(SIGINT, sig_handler); // CTRL + C
     signal(SIGQUIT, SIG_IGN);    // CTRL + /
@@ -77,9 +79,9 @@ int	main(int argc, char *argv[], char *envp[])
 		add_history(line);
 		if (!line)
         {
-			printf("\033[1A");
-            printf("\033[1C");
-            printf(" exit\n");
+			ft_putstr_fd("\033[1A",1);
+            ft_putstr_fd("\033[1C",1);
+            ft_putstr_fd(" exit\n",1);
             exit(0);
         }
 		arr = parse_line(line);
@@ -91,7 +93,7 @@ int	main(int argc, char *argv[], char *envp[])
 		int c = a(arr->arr->token->arr);
 		
 		printf("exit_code : %d\n", c);
-		// execute_commands(arr);
+		execute_commands(arr);
 		printf("=========done\n");
 	}
 	
