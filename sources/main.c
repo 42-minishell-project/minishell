@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 15:21:47 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:40:22 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,6 @@ void sig_handler(int signal)
     rl_redisplay();         // 프롬프트 커서가 움직이지 않게 해준다.
 }
 
- void print_parsing(t_cmd_arr *arr)
- {
- 	printf("t_cmd_arr\n");
- 	printf("size : %d capa : %d\n",arr->size , arr->capa);
-
- 	printf("t_command\n");
- 	printf("1. t_str_arr\n");
- 	printf("size : %d capa : %d\n",arr->arr->token->size , arr->arr->token->capa);
- 	printf("arr[][] = \n");
- 	for(int i = 0 ; i < arr->arr->token->size ; i++) {
- 		printf("%d : %s\n", i + 1 , arr->arr->token->arr[i]);
- 	}
- 	printf("2. t_io_arr\n");
- 	printf("size : %d capa : %d\n",arr->arr->io->size , arr->arr->io->capa);
- 	for(int i = 0 ; i < arr->arr->io->size ; i++) {
- 		printf("fd : %d : %s\n",arr->arr->io->arr->fd , arr->arr->io->arr->str);
- 	}
- }
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	// init_envs(envp);
@@ -89,8 +70,6 @@ int	main(int argc, char *argv[], char *envp[])
 	char *line;
 	t_cmd_arr *arr;
 
-	
-	
 	while(1)
 	{
 		line = readline("> ");
@@ -104,14 +83,14 @@ int	main(int argc, char *argv[], char *envp[])
             exit(0);
         }
 		arr = parse_line(line);
-		
-		//print_parsing(arr);
-		
+	
 		printf("=========start\n");
-		//int a = init_builtin(argc, arr->arr->token->arr);
-		t_command *b = arr->arr;
-		int a = init_builtin(b);
-		printf("exit_code : %d\n", a);
+
+		t_builtin_func a = NULL;
+		a = init_builtin(arr->arr);
+		int c = a(arr->arr->token->arr);
+		
+		printf("exit_code : %d\n", c);
 		// execute_commands(arr);
 		printf("=========done\n");
 	}

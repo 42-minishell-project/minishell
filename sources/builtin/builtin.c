@@ -6,33 +6,31 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:11:20 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/06 15:23:53 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:35:31 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
 #include "libft/libft.h"
 
-int	init_builtin(t_command *arr)
+t_builtin_func	init_builtin(t_command *arr)
 {
 	char **argv;
-	int	argc;
-	
-	argc = arr->token->size;
+
 	argv = arr->token->arr;
 	if (ft_strcmp(argv[0], "echo") == 0)
-		return (run_echo(argv));
+		return (run_echo);
 	else if (ft_strcmp(argv[0], "pwd") == 0)
-		return (run_pwd());
+		return (run_pwd);
 	else if (ft_strcmp(argv[0], "cd") == 0)
-		return (run_cd(argv));
+		return (run_cd);
 	else if (ft_strcmp(argv[0], "exit") == 0)
-		return (run_exit(argc, argv));
+		return (run_exit);
 	else if (ft_strcmp(argv[0], "env") == 0)
-		return (run_env(argc, argv));
+		return (run_env);
 	else if (ft_strcmp(argv[0], "export") == 0)
-		return (run_export(argc, argv));
+		return (run_export);
 	else if (ft_strcmp(argv[0], "unset") == 0)
-		return (run_unset(argc, argv));
+		return (run_unset);
 	return (0);
 }
