@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:14:55 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 22:52:03 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:23:49 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-int	init_builtin(int argc, char **argv);
+# include "command/command.h"
+//typedef int (*t_builtin_func)(int, char **);
+
+//t_builtin_func init_builtin(t_comm_);
+
+//int	init_builtin(int argc, char **argv);
+int	init_builtin(t_command *arr);
 
 // echo.c
 int	run_echo(char **argv);

@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 22:41:28 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:07:00 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int change_dir(char *path)
     else if (ft_strcmp(path, "OLDPWD") == 0)
         result = find_env("OLDPWD");
     else
-        result = path;
+		result = path;
     prev_pwd = find_env("PWD");
     code = chdir(result);
     return (change_result(path, code, prev_pwd));

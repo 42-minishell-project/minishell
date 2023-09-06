@@ -6,15 +6,20 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:11:20 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/05 22:48:40 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:23:53 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin/builtin.h"
 #include "libft/libft.h"
 
-int	init_builtin(int argc, char **argv)
+int	init_builtin(t_command *arr)
 {
+	char **argv;
+	int	argc;
+	
+	argc = arr->token->size;
+	argv = arr->token->arr;
 	if (ft_strcmp(argv[0], "echo") == 0)
 		return (run_echo(argv));
 	else if (ft_strcmp(argv[0], "pwd") == 0)
