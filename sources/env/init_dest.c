@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.h                                        :+:      :+:    :+:   */
+/*   init_dest.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 14:05:50 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:41:32 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/06 16:54:28 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/06 16:56:56 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_UTILS_H
-# define ENV_UTILS_H
+#include <stdlib.h>
+#include "env/env.h"
 
-# include "env/env_deque.h"
 
-t_env_node	*new_node(char *name, char *value);
-t_env_node	*delete_node(t_env_node *node);
+void	init_envs(char **envp)
+{
+	int		idx;
+	char	*name;
+	char	*value;
 
-t_env_deque	*get_env_deque(void);
-t_env_node	*find_env_node(t_env_deque *envs, char *name);
-void		replace_env_node_value(t_env_node *node, char *value);
-
-#endif
+	idx = 0;
+	while (envp[idx])
+	{
+		name = NULL;
+		value = NULL;
+		parse_identifier(envp[idx], &name, &value);
+		if (name && value)
+			update_env(name, value);
+		free(name);
+		free(value);
+		idx++;
+	}
+	update_env_path(find_env("PATH"));
+}

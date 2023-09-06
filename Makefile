@@ -32,6 +32,8 @@ SRCS =	\
 		env/env.c \
 		env/env_utils.c \
 		env/env_utils2.c \
+		env/init_dest.c \
+		env/state.c \
 		command/command.c \
 		command/execute.c \
 		command/execute2.c \

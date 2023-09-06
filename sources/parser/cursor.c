@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:31:51 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 13:32:11 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:49:48 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_cursor(t_cursor *cursor, char *s)
 	// printf("cursor->cur->ptr %s\n", cursor->cur->ptr);
 }
 
-void	delete_cursor(t_cursor *cursor)
+void	destruct_cursor(t_cursor *cursor)
 {
 	t_node	*cur;
 	t_node	*tmp;

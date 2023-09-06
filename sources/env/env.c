@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 13:41:26 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:12:27 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	update_env(char *name, char *value)
 		env->tail = node;
 		env->size++;
 	}
+	if (ft_strcmp(name, "PATH") == 0)
+		update_env_path(value);
 }
 
 void	delete_env(char *name)
@@ -47,7 +49,7 @@ void	delete_env(char *name)
 
 	env = get_env_deque();
 	node = find_env_node(env, name);
-	if (!node)
+	if (node)
 	{
 		if (node->prev)
 			node->prev->next = node->next;
@@ -60,6 +62,8 @@ void	delete_env(char *name)
 		env->size--;
 		delete_node(node);
 	}
+	if (ft_strcmp(name, "PATH") == 0)
+		update_env_path(NULL);
 }
 
 char	*find_env(char *name)
@@ -71,27 +75,6 @@ char	*find_env(char *name)
 		return (node->value);
 	else
 		return (NULL);
-}
-
-
-void	init_envs(char **envp)
-{
-	int		idx;
-	char	*name;
-	char	*value;
-
-	idx = 0;
-	while (envp[idx])
-	{
-		name = NULL;
-		value = NULL;
-		parse_identifier(envp[idx], &name, &value);
-		if (name && value)
-			update_env(name, value);
-		free(name);
-		free(value);
-		idx++;
-	}
 }
 
 char	**get_envp(void)

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.h                                        :+:      :+:    :+:   */
+/*   state.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 14:05:50 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:41:32 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/06 16:40:20 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/06 16:50:41 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_UTILS_H
-# define ENV_UTILS_H
+#ifndef STATE_H
+# define STATE_H
 
 # include "env/env_deque.h"
 
-t_env_node	*new_node(char *name, char *value);
-t_env_node	*delete_node(t_env_node *node);
-
-t_env_deque	*get_env_deque(void);
-t_env_node	*find_env_node(t_env_deque *envs, char *name);
-void		replace_env_node_value(t_env_node *node, char *value);
+typedef struct s_env_state
+{
+	t_env_deque	q;
+	char		**paths;
+	char		*exit_code_str;
+}	t_env_state;
 
 #endif
