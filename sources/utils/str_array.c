@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:43:56 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 14:13:32 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:43:27 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_str_arr	*new_str_array(void)
 	return (ret);
 }
 
-void	push_str_array(t_str_arr *arr, char *value)
+void	push_str_array(t_str_arr *arr, char *value/*moves onwership*/)
 {
 	char	**new_arr;
 

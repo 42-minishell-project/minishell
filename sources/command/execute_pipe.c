@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:06:18 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:53:06 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	execute_pipe_single(t_command *cmd)
 {
 	t_builtin_func	func;
 
-	func = init_builtin(cmd);
+	func = NULL;
+	if (cmd->token->size > 0)
+		func = init_builtin(cmd->token->arr[0]);
 	if (func)
 	{
 		redirect_command_io(cmd);

@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:57:53 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 13:01:37 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:35:46 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ typedef struct s_token
 {
 	char			*s;
 	t_special_type	type;
-	struct s_token	*next;
 }	t_token;
 
 typedef enum e_parse_result
 {
-	RES_ONGOING = 0,
+	RES_START = 0,
 	RES_END = 1,
-	RES_PIPE = 2
+	RES_PIPE = 2,
+	RES_ERROR = 3
 }	t_parse_result;
 
 // t_chr_arr	*parse_next_token(t_cursor *s);

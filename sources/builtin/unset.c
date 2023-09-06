@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:05:39 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 15:19:40 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 17:12:47 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	run_unset(int argc, char **argv)
 {
 	int		idx;
 	int		valid;
-	char	*name;
-	char	*value;
 
 	valid = 0;
 	idx = 1;

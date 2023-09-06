@@ -6,13 +6,14 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 13:53:42 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 15:21:52 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 16:53:33 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft/libft.h"
-#include "command/env_path.h"
+// #include "command/env_path.h"
+#include "env/env.h"
 #include "utils/error.h"
 
 char	*find_path_prefix(char *exe, char **paths)
@@ -53,7 +54,7 @@ char	*find_executable(char *exe)
 	}
 	else
 	{
-		exe_path = find_path_prefix(exe, get_paths());
+		exe_path = find_path_prefix(exe, get_env_path());
 		if (!exe_path)
 			command_not_found_error(exe);
 		if (access(exe_path, X_OK) == -1)
