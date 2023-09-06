@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:46 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 18:36:10 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 19:11:49 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,12 @@ static void	print_export(void)
 		size++;
 	i = 0;
 	sorted_list(str, size);
+	name = NULL;
+	value = NULL;
 	while (str[i])
 	{
 		parse_identifier(str[i], &name, &value);
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(name, 1);
-		ft_putstr_fd("=", 1);
-		ft_putchar_fd('\"', 1);
-		ft_putstr_fd(value, 1);
-		ft_putchar_fd('\"', 1);
-		ft_putchar_fd('\n', 1);
+		print_export_correct(name, value);
 		i++;
 	}
 	free_export(name, value, str);
