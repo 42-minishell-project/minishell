@@ -3,6 +3,7 @@
 #include <unistd.h>	// chdir header
 #include <stdlib.h>
 #include <sys/stat.h>
+
 int main(void)
 {
 
@@ -66,6 +67,4 @@ void print_env(char **envp)
 // 	for(int i = 0 ; i < arr->arr->io->size ; i++) {
 // 		printf("fd : %d : %s\n",arr->arr->io->arr->fd , arr->arr->io->arr->str);
 // 	}
-
-
 // }
