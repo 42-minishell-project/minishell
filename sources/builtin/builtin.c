@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:11:20 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/06 15:35:31 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/06 17:27:02 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_builtin_func	init_builtin(t_command *arr)
 {
-	char **argv;
+	char	**argv;
 
 	argv = arr->token->arr;
 	if (ft_strcmp(argv[0], "echo") == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:46 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:25:51 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:28:22 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include "libft/libft.h"
 #include "env/env.h"
 #include "utils/utils.h"
+#include "utils/builtin_error.h"
+
+//#include <stdio.h>
+
+//static int	print_export(char **argv)
+//{
+//	int i = 0;
+//	while (argv[i])
+//		printf("%s\n",argv[i]);
+//}
 
 int	run_export(int argc, char **argv)
 {
@@ -24,6 +34,8 @@ int	run_export(int argc, char **argv)
 
 	valid = 0;
 	idx = 1;
+	//if (argc == 1)
+	//	print_export(argv);
 	while (idx < argc)
 	{
 		if (parse_identifier(argv[idx], &name, &value))
@@ -35,9 +47,8 @@ int	run_export(int argc, char **argv)
 		}
 		else
 		{
-			ft_putstr_fd("export: `", STDERR_FILENO);
-			ft_putstr_fd(argv[idx], STDERR_FILENO);
-			ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
+			print_builtin_error("export", argv[idx], \
+				": not a valid identifier", 1);
 			valid = 1;
 		}
 		idx++;
