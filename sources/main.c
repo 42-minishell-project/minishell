@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/08 12:41:00 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:01:56 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@ void	sig_handler(int signal)
 	{
 		if (g_child_pid == 0)
 		{
-			printf(">\n");
-			// g_child_pid = 1;
+			ft_putstr_fd(">\n", 1);
+			// g_child_pid = 1; // ctrl - c 하고나서 echo $? 하면 1이 나와야함
 		}
 		else
 		{
 			kill(g_child_pid, SIGINT);
-			g_child_pid = 130;
 		}
 	}
 	if (rl_on_new_line() == -1)
@@ -56,9 +55,9 @@ void	sig_handler(int signal)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	struct termios	term;
 	char			*line;
 	t_cmd_arr		*arr;
+	struct termios	term;
 
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~(ECHOCTL);
