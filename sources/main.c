@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/07 00:21:10 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:37:40 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ void	sig_handler(int signal)
 		if (g_child_pid == 0)
 		{
 			printf(">\n");
-			// g_child_pid = 1;
+			update_last_exit_code(1);
 		}
 		else
 		{
 			kill(g_child_pid, SIGINT);
-			g_child_pid = 130;
 		}
 	}
 	if (rl_on_new_line() == -1)

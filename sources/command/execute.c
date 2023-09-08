@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:56:07 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/07 00:25:28 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:38:54 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ int	execute_single(t_command *cmd)
 		else
 			g_child_pid = pid;
 		waitpid(pid, &status, 0);
-		return (WEXITSTATUS(status));
+		g_child_pid = 0;
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+		else
+			return (WTERMSIG(status) + 128);
 	}
 }
 
@@ -68,7 +72,11 @@ int	execute_pipe(int n_cmds, t_command *cmds)
 	else
 		g_child_pid = pid;
 	waitpid(pid, &status, 0);
-	return (WEXITSTATUS(status));
+	g_child_pid = 0;
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else
+		return (WTERMSIG(status) + 128);
 }
 
 // TODO: exit code
