@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:56:07 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/07 00:25:28 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:40:46 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ int	execute_commands(t_cmd_arr *cmds)
 	int	pid;
 
 	if (cmds->size == 0)
+	{
+		g_child_pid = 0;
 		return (0);
+	}
 	else if (cmds->size == 1)
 	{
 		return (execute_single(&cmds->arr[0]));
