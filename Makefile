@@ -48,6 +48,7 @@ SRCS =	\
 		utils/error.c \
 		utils/utils.c \
 		utils/builtin_error.c \
+		utils/signal_utils.c \
 		builtin/builtin.c \
 		builtin/cd.c \
 		builtin/echo.c \
@@ -55,7 +56,7 @@ SRCS =	\
 		builtin/exit.c \
 		builtin/export.c \
 		builtin/pwd.c \
-		builtin/unset.c
+		builtin/unset.c	\
 
 OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 

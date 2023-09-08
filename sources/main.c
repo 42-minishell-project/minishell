@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/08 14:37:40 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/08 17:10:53 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,12 @@
 #include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-// #include "env.h"
-// #include "env_utils.h"
-// #include "env/env_test.h"
 #include "env/env.h"
 #include "parser/parser.h"
 #include "command/env_path.h"
 #include "command/execute.h"
 #include "builtin/builtin.h"
-
-#include <termios.h>
-#include <unistd.h>
-#include <stdbool.h>
-#include <signal.h>
+#include "utils/signal_utils.h"
 #include <string.h>
 #include "libft/libft.h"
 
@@ -36,35 +29,28 @@ int	g_child_pid;
 void	sig_handler(int signal)
 {
 	if (signal == SIGINT)
-	{
-		if (g_child_pid == 0)
-		{
-			printf(">\n");
-			update_last_exit_code(1);
-		}
-		else
-		{
-			kill(g_child_pid, SIGINT);
-		}
-	}
+		set_sigint();
+	else if (signal == SIGQUIT)
+		set_sigquit();
 	if (rl_on_new_line() == -1)
 		exit(1);
 	rl_replace_line("", 1);
 	rl_redisplay();
 }
 
+void	set_handler(void)
+{
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
-	struct termios	term;
 	char			*line;
 	t_cmd_arr		*arr;
 
-	tcgetattr(STDIN_FILENO, &term);
-	term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
+	set_term();
+	set_handler();
 
 	init_envs(envp);
 	while (1)
@@ -72,9 +58,7 @@ int	main(int argc, char *argv[], char *envp[])
 		line = readline("> ");
 		if (!line)
 		{
-			ft_putstr_fd("\033[1A",1);
-			ft_putstr_fd("\033[1C",1);
-			ft_putstr_fd(" exit\n",1);
+			print_prompt_cursor();
 			exit(0);
 		}
 		add_history(line);
