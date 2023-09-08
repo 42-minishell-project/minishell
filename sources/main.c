@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/08 14:01:56 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:41:16 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	sig_handler(int signal)
 	{
 		if (g_child_pid == 0)
 		{
-			ft_putstr_fd(">\n", 1);
-			// g_child_pid = 1; // ctrl - c 하고나서 echo $? 하면 1이 나와야함
+			printf(">\n");
+			update_last_exit_code(1);
 		}
 		else
 		{
