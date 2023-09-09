@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 17:26:48 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/09 03:06:44 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_io_fd	*alloc_io_array(int n_cmds)
 	return (ret);
 }
 
+#include <stdio.h>
 int	wait_subprocesses(int n_cmds, int *pids)
 {
 	int	pid;
@@ -69,6 +70,7 @@ int	wait_subprocesses(int n_cmds, int *pids)
 	while (idx < n_cmds)
 	{
 		pid = waitpid(0, &status, 0);
+		fprintf(stderr, "waitpid %d\n", pid);
 		if (pid < 0)
 			continue ;
 		if (pid == pids[n_cmds -1])
@@ -107,14 +109,29 @@ void	execute_pipe_internal(int n_cmds, t_command *cmds)
 	{
 		if (idx < n_cmds - 1)
 			open_pipe(io, idx);
+		fprintf(stderr, "%d: in %d, out %d\n", idx, io[idx].in, io[idx].out);
 		pids[idx] = fork();
 		if (pids[idx] == 0)
 		{
-			if (dup2(io[idx].in, STDIN_FILENO) == -1 
-				|| dup2(io[idx].out, STDOUT_FILENO) == -1)
-				fatal_error("dup2() failed");
+			// if (dup2(io[idx].in, STDIN_FILENO) == -1 
+			// 	|| dup2(io[idx].out, STDOUT_FILENO) == -1)
+			// 	fatal_error("dup2() failed");
+			if (io[idx].in != STDIN_FILENO)
+			{
+				dup2(io[idx].in, STDIN_FILENO);
+				close(io[idx].in);
+			}
+			if (io[idx].out != STDOUT_FILENO)
+			{
+				dup2(io[idx].out, STDOUT_FILENO);
+				close(io[idx].out);
+			}
+			if (idx < n_cmds - 1)
+				close(io[idx + 1].in);
+			// close(STDIN_FILENO);
 			execute_pipe_single(&cmds[idx]);
 		}
+		fprintf(stderr, "%d: pid %d\n", idx, pids[idx]);
 		close(io[idx].in);
 		close(io[idx].out);
 		idx++;
