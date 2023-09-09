@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/08 17:10:39 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/09 20:56:24 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "command/execute.h"
 #include "env/env.h"
 #include <termios.h>
-#include <stdbool.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -23,7 +22,7 @@ void	set_sigint(void)
 {
 	if (g_child_pid == 0)
 	{
-		ft_putstr_fd(">\n", 1);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		update_last_exit_code(1);
 	}
 	else
@@ -43,9 +42,9 @@ void	set_sigquit(void)
 
 void	print_prompt_cursor(void)
 {
-	ft_putstr_fd("\033[1A", 1);
-	ft_putstr_fd("\033[1C", 1);
-	ft_putstr_fd(" exit\n", 1);
+	ft_putstr_fd("\033[1A", STDOUT_FILENO);
+	ft_putstr_fd("\033[1C", STDOUT_FILENO);
+	ft_putstr_fd(" exit\n", STDOUT_FILENO);
 }
 
 void	set_term(void)
