@@ -6,6 +6,7 @@
 #include "libft/libft.h"
 #include "utils/utils.h"
 #include "parser/parser.h"
+#include "parser/token.h"
 #include "parser/cursor.h"
 #include "env/env.h"
 #include "command/command.h"
@@ -116,7 +117,7 @@ t_special_type	check_special_type(t_cursor *s)
 
 int	unexpected_eof_matching_error(char quote)
 {
-	ft_putstr_fd("unexpected EOF while looking for matching \'", STDERR_FILENO);
+	ft_putstr_fd("unexpected EOF while looking for matching `", STDERR_FILENO);
 	ft_putchar_fd(quote, STDERR_FILENO);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
 	// exit(1);
@@ -130,7 +131,7 @@ int	syntax_error_unexpected_eof(void)
 }
 int	syntax_error_unexpected_token(char *token)
 {
-	ft_putstr_fd("syntax error near unexpected token \'", STDERR_FILENO);
+	ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
 	// exit(1);
@@ -499,4 +500,18 @@ t_cmd_arr	*parse_line_(char *line)
 	}
 	destruct_cursor(&s);
 	return (cmds);
+}
+
+int	check_command_nonempty(char *line)
+{
+	int	idx;
+
+	idx = 0;
+	while (line[idx] != '\0')
+	{
+		if (!ft_isspace(line[idx]))
+			return (1);
+		idx++;
+	}
+	return (0);
 }

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/08 17:10:53 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/09 21:03:49 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "env/env.h"
@@ -61,18 +62,20 @@ int	main(int argc, char *argv[], char *envp[])
 			print_prompt_cursor();
 			exit(0);
 		}
-		add_history(line);
-		arr = parse_line(line);
+		if (check_command_nonempty(line))
+		{
+			add_history(line);
+			arr = parse_line(line);
+			if (!arr)
+				continue;
+			printf("=========start\n");
+			int ret = execute_commands(arr);
+			update_last_exit_code(ret);
+			delete_cmd_array(arr);
+			printf("=========done\n");
+		}
 		free(line);
-		if (!arr)
-			continue;
-		printf("=========start\n");
-		int ret = execute_commands(arr);
-		update_last_exit_code(ret);
-		delete_cmd_array(arr);
-		printf("=========done\n");
 	}
-	free(line);
 }
 
 

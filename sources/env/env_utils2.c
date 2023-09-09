@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:06:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 17:12:35 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 20:52:04 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_env_node	*new_node(char *name, char *value)
 	return (ret);
 }
 
-t_env_node	*delete_node(t_env_node *node)
+void	delete_node(t_env_node *node)
 {
 	free(node->name);
 	free(node->value);

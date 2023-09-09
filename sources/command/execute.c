@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:56:07 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/09 20:45:02 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 20:52:25 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	execute_single(t_command *cmd)
 		pid = fork();
 		if (pid == 0)
 		{
-			prepare_io(cmd);
+			prepare_io(cmd->io);
 			exit(0);
 		}
 		waitpid(pid, &status, 0);
@@ -82,8 +82,6 @@ int	execute_pipe(int n_cmds, t_command *cmds)
 // TODO: exit code
 int	execute_commands(t_cmd_arr *cmds)
 {
-	int	pid;
-
 	if (cmds->size == 0)
 		return (0);
 	else if (cmds->size == 1)

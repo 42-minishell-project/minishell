@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/09 03:06:44 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 20:50:02 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	execute_pipe_single(t_command *cmd)
 		func = init_builtin(cmd->token->arr[0]);
 	if (func)
 	{
-		redirect_command_io(cmd);
+		prepare_io(cmd->io);
 		exit(func(cmd->token->size, cmd->token->arr));
 	}
 	else
