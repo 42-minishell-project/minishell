@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:56:07 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/08 15:59:21 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/09 20:45:02 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	execute_single(t_command *cmd)
 		pid = fork();
 		if (pid == 0)
 		{
-			redirect_command_io(cmd);
+			prepare_io(cmd);
 			exit(0);
 		}
 		waitpid(pid, &status, 0);
