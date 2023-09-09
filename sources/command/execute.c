@@ -51,7 +51,11 @@ int	execute_single(t_command *cmd)
 		else
 			g_child_pid = pid;
 		waitpid(pid, &status, 0);
-		return (WEXITSTATUS(status));
+		g_child_pid = 0;
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+		else
+			return (WTERMSIG(status) + 128);
 	}
 }
 
@@ -68,7 +72,11 @@ int	execute_pipe(int n_cmds, t_command *cmds)
 	else
 		g_child_pid = pid;
 	waitpid(pid, &status, 0);
-	return (WEXITSTATUS(status));
+	g_child_pid = 0;
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else
+		return (WTERMSIG(status) + 128);
 }
 
 // TODO: exit code
@@ -77,10 +85,7 @@ int	execute_commands(t_cmd_arr *cmds)
 	int	pid;
 
 	if (cmds->size == 0)
-	{
-		g_child_pid = 0;
 		return (0);
-	}
 	else if (cmds->size == 1)
 	{
 		return (execute_single(&cmds->arr[0]));
