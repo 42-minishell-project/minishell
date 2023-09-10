@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 13:14:41 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 13:18:45 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ void	set_sigquit(void)
 	if (g_child_pid != 0)
 	{
 		ft_putstr_fd("Quit: 3\n", 1);
-		update_last_exit_code(1);
+		// update_last_exit_code(1);
 	}
 }
 
 void	print_prompt_cursor(void)
 {
 	// ft_putstr_fd("\033[1A\033[1Cexit", STDOUT_FILENO);
-	ft_putstr_fd("\033[1A\033[1C\nexit\n", STDOUT_FILENO);
+	// ft_putstr_fd("\033[1A\033[1C\nexit\n", STDOUT_FILENO);
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	// ft_putstr_fd("", STDOUT_FILENO);
 	// ft_putstr_fd(" \n", STDOUT_FILENO);
 }
