@@ -6,17 +6,18 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 00:56:20 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 13:14:41 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include <signal.h>
-#include "command/execute.h"
-#include "env/env.h"
 #include <termios.h>
+#include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "libft/libft.h"
+#include "env/env.h"
+#include "command/execute.h"
 
 void	set_sigint(void)
 {
