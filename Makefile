@@ -41,6 +41,7 @@ SRCS =	\
 		command/env_path.c \
 		command/find_exe.c \
 		command/open_io.c \
+		command/open_io2.c \
 		utils/str_array.c \
 		utils/chr_array.c \
 		utils/io_array.c \
@@ -84,8 +85,7 @@ $(NAME): $(OBJS) $(LIBS)
 
 clean:
 	$(foreach LIB,$(LIBS),$(MAKE) fclean -C $(dir $(LIB)))
-	rm -f $(OBJS)
-	rmdir $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
 	rm -f $(NAME)

@@ -1,25 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute2.c                                         :+:      :+:    :+:   */
+/*   open_io2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 15:59:41 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 11:54:33 by jimlee           ###   ########.fr       */
+/*   Created: 2023/08/22 23:53:49 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/10 13:13:19 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
-#include "command/command.h"
-#include "command/env_path.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <readline/readline.h>
+#include "libft/libft.h"
 #include "command/open_io.h"
-#include "env/env.h"
 #include "utils/io_array.h"
 #include "utils/error.h"
 
-void	prepare_io(t_io_arr *io)
+int	open_in_file_noerror(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	return (fd);
+}
+
+int	open_out_file_noerror(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	return (fd);
+}
+
+int	open_out_file_append_noerror(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	return (fd);
+}
+
+int	print_open_error_noexcept(char *filename)
+{
+	perror(filename);
+	return (-1);
+}
+
+int	prepare_io_noexcept(t_io_arr *io)
 {
 	int			idx;
 	t_io_type	type;
@@ -35,6 +65,8 @@ void	prepare_io(t_io_arr *io)
 				fd = open_in_file(io->arr[idx].str);
 			else
 				fd = io->arr[idx].fd;
+			if (fd < 0)
+				return (print_open_error_noexcept(io->arr[idx].str));
 			if (dup2(fd, STDIN_FILENO) == -1)
 				fatal_error("dup2() failed");
 			close(fd);
@@ -45,24 +77,13 @@ void	prepare_io(t_io_arr *io)
 				fd = open_out_file(io->arr[idx].str);
 			else
 				fd = open_out_file_append(io->arr[idx].str);
+			if (fd < 0)
+				return (print_open_error_noexcept(io->arr[idx].str));
 			if (dup2(fd, STDOUT_FILENO) == -1)
 				fatal_error("dup2() failed");
 			close(fd);
 		}
 		idx++;
 	}
-}
-
-void	run_non_builtin(t_command *cmd)
-{
-	char	*exe;
-
-	prepare_io(cmd->io);
-	if (cmd->token->size > 0)
-	{
-		exe = find_executable(cmd->token->arr[0]);
-		if (execve(exe, cmd->token->arr, get_envp()) == -1)
-			fatal_error("execve failed");
-	}
-	exit(0);
+	return (0);
 }

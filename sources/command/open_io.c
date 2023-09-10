@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   open_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 23:53:49 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/05 14:51:45 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/10 13:13:26 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <readline/readline.h>
 #include "command/open_io.h"
 #include "utils/error.h"
