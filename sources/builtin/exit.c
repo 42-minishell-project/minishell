@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/06 17:39:13 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/10 14:38:50 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static int	is_number(char *str)
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
+	if (!str[i])
+		return (0);
 	while (str[i])
 	{
 		if (!('0' <= str[i] && str[i] <= '9'))
@@ -82,6 +84,14 @@ static int	is_number(char *str)
 		i++;
 	}
 	return (1);
+}
+
+void	exit_error_numeric(char *arg)
+{
+	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+	exit(255);
 }
 
 static void	run_exit_number(char *str)
@@ -94,8 +104,7 @@ static void	run_exit_number(char *str)
 	sum = ft_long_long_atoi(str, 0, &over);
 	if (over == 1)
 	{
-		result = builtin_error("exit", str, ": numeric argument required", 255);
-		exit(result);
+		exit_error_numeric(str);
 	}
 	else
 	{
@@ -117,25 +126,31 @@ int	run_exit(int argc, char **argv)
 	int	over;
 
 	over = 0;
+	ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (argc == 1)
 	{
-		ft_putstr_fd("exit\n", 1);
+		// ft_putstr_fd("exit\n", 1);
 		exit(0);
 	}
 	else if (argc == 2)
 	{
-		ft_putstr_fd("exit\n", 1);
+		// ft_putstr_fd("exit\n", 1);
 		if (!is_number(argv[1]))
-			exit(builtin_error("exit", argv[1], "numeric argument required", 255));
+		{
+			exit_error_numeric(argv[1]);
+		}
+			// exit(builtin_error("exit", argv[1], "numeric argument required", 255));
 		else
 			run_exit_number(argv[1]);
 	}
 	else
 	{
-		ft_putstr_fd("exit\n", 1);
 		if (!is_number(argv[1]))
-			exit(builtin_error("exit", argv[1], "numeric argument required", 255));
+			exit_error_numeric(argv[1]);
 		else
-			builtin_error("exit", argv[1], "too many arguments", 1);
+		{
+			ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+			exit(1);
+		}
 	}
 }

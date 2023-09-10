@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 11:43:25 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 13:56:39 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int	main(int argc, char *argv[], char *envp[])
 	set_handler();
 
 	init_envs(envp);
-	// while (1)
-	for (int i = 0; i < 10; i++)
+	while (1)
+	// for (int i = 0; i < 10; i++)
 	{
-		line = readline("> ");
+		line = readline("minishell$ ");
 		if (!line)
 		{
 			print_prompt_cursor();
@@ -69,11 +69,11 @@ int	main(int argc, char *argv[], char *envp[])
 			arr = parse_line(line);
 			if (!arr)
 				continue;
-			printf("=========start\n");
+			// printf("=========start\n");
 			int ret = execute_commands(arr);
 			update_last_exit_code(ret);
 			delete_cmd_array(arr);
-			printf("=========done\n");
+			// printf("=========done\n");
 		}
 		free(line);
 	}

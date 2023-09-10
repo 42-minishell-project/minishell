@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 13:20:08 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 13:47:59 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ void	set_sigint(void)
 {
 	if (g_child_pid == 0)
 	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		update_last_exit_code(1);
+		// ft_putstr_fd("\n", STDOUT_FILENO);
 	}
 	else
 	{
-		kill(g_child_pid, SIGINT);
+		// kill(g_child_pid, SIGINT);
+
 	}
+		update_last_exit_code(1);
+	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
 void	set_sigquit(void)
@@ -43,9 +45,9 @@ void	set_sigquit(void)
 
 void	print_prompt_cursor(void)
 {
-	// ft_putstr_fd("\033[1A\033[1Cexit", STDOUT_FILENO);
-	// ft_putstr_fd("\033[1A\033[1Cexit\n", STDOUT_FILENO);
-	ft_putstr_fd("\033[1Aexit\n", STDOUT_FILENO);
+	// ft_putstr_fd("\033[1A\033[1C exit\n", STDOUT_FILENO);
+	ft_putstr_fd("\033[1Aminishell$ exit\n", STDOUT_FILENO);
+	// ft_putstr_fd("exit\n", STDOUT_FILENO);
 	// ft_putstr_fd("exit\n", STDOUT_FILENO);
 	// ft_putstr_fd("", STDOUT_FILENO);
 	// ft_putstr_fd(" \n", STDOUT_FILENO);
