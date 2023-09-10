@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 13:18:45 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 13:19:22 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	set_sigquit(void)
 void	print_prompt_cursor(void)
 {
 	// ft_putstr_fd("\033[1A\033[1Cexit", STDOUT_FILENO);
-	// ft_putstr_fd("\033[1A\033[1C\nexit\n", STDOUT_FILENO);
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	ft_putstr_fd("\033[1A\033[1Cexit\n", STDOUT_FILENO);
+	// ft_putstr_fd("exit\n", STDOUT_FILENO);
 	// ft_putstr_fd("", STDOUT_FILENO);
 	// ft_putstr_fd(" \n", STDOUT_FILENO);
 }
