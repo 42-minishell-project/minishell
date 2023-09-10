@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:43:56 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:10:38 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/10 16:16:06 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	push_str_array(t_str_arr *arr, char *value)
 	if (arr->size == arr->capa)
 	{
 		new_arr = calloc(2 * arr->capa + 1, sizeof(char *));
-		ft_memcpy(new_arr, arr->arr, arr->size * sizeof(char*));
+		ft_memcpy(new_arr, arr->arr, arr->size * sizeof(char *));
 		free(arr->arr);
 		arr->arr = new_arr;
 		arr->capa *= 2;

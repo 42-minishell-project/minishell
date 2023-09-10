@@ -6,13 +6,14 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 16:01:59 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/10 16:25:48 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "utils/builtin_error.h"
 #include "utils/utils.h"
+#include "builtin/builtin_exit.h"
 
 static int	check_long_long_atoi(char *str, long long sum, int i, int sign)
 {
@@ -21,13 +22,8 @@ static int	check_long_long_atoi(char *str, long long sum, int i, int sign)
 	standard = 922337203685477580;
 	if (sign == 1)
 	{
-		if (i == 17 && str[i + 1])
-		{
-			if (sum > standard && (str[i + 1] >= '0' && str[i + 1] <= '9'))
-				return (1);
-			if (sum == standard && (str[i + 1] > '7' && str[i + 1] <= '9'))
-				return (1);
-		}
+		if (check_long_num(str, standard, i, sum) == 1)
+			return (1);
 		if (i == 19)
 			return (1);
 	}
