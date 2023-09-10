@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:45:18 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 14:39:11 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:48:56 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,5 @@ void	print_export_error(char *str)
 
 void	print_export_correct(char *name, char *value)
 {
-	// ft_putstr_fd("declare -x ", 1);
-	// ft_putstr_fd(name, 1);
-	// ft_putstr_fd("=", 1);
-	// ft_putchar_fd('\"', 1);
-	// ft_putstr_fd(value, 1);
-	// ft_putchar_fd('\"', 1);
-	// ft_putchar_fd('\n', 1);
 	printf("declare -x %s=\"%s\"\n", name, value);
 }
