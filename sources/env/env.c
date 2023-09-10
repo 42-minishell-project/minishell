@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 17:12:27 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 16:04:55 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "env/env_utils.h"
 
 void	update_env(char *name, char *value)
-// add env (update value if exists)
 {
 	t_env_deque	*env;
 	t_env_node	*node;

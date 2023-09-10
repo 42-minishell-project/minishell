@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/10 16:05:38 by yeohong           #+#    #+#             */
+/*   Updated: 2023/09/10 16:07:19 by yeohong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,16 +20,12 @@
 #include "parser/cursor.h"
 #include "env/env.h"
 #include "command/command.h"
-
 #include "utils/chr_array.h"
 #include "utils/str_array.h"
 #include "utils/io_array.h"
 #include "utils/cmd_array.h"
 #include "parser/cursor.h"
-
 #include "command/open_io.h"
-
-
 
 void	expand_env(t_cursor *s)
 {
@@ -48,11 +54,7 @@ void	expand_env(t_cursor *s)
 		push_cursor(s, "$", 0);
 	else
 	{
-		// printf("env name %s\n", name->arr);
-		// env_value = find_env_by_name(name->arr);
-		// env_value = getenv(name->arr);
 		env_value = find_env(name->arr);
-		// printf("find env %s = \"%s\"\n", name->arr, env_value);
 		if (env_value)
 			push_cursor(s, env_value, 0);
 	}
@@ -120,13 +122,11 @@ int	unexpected_eof_matching_error(char quote)
 	ft_putstr_fd("unexpected EOF while looking for matching `", STDERR_FILENO);
 	ft_putchar_fd(quote, STDERR_FILENO);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
-	// exit(1);
 	return (-1);
 }
 int	syntax_error_unexpected_eof(void)
 {
 	printf("syntax error: unexpected end of file\n");
-	// exit(1);
 	return (-1);
 }
 int	syntax_error_unexpected_token(char *token)
@@ -134,7 +134,6 @@ int	syntax_error_unexpected_token(char *token)
 	ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
-	// exit(1);
 	return (-1);
 }
 
@@ -226,7 +225,6 @@ t_token	*parse_next_token(t_cursor *s)
 		else
 			push_chr_array(token, forward_cursor(s));
 	}
-	// printf("parsed: pushed %d, token raw \"%s\"\n", pushed, token->arr);
 	if (pushed)
 		ret->s = copy_chr_arr_to_string(token);
 	else
@@ -235,7 +233,6 @@ t_token	*parse_next_token(t_cursor *s)
 		ret = NULL;
 	}
 	delete_chr_array(token);
-	// printf("parsed token \"%s\"\n", ret->s);
 	return (ret);
 }
 
@@ -281,7 +278,6 @@ int	parse_next_token_internal(t_token *ret, t_cursor *s)
 		else
 			push_chr_array(token, forward_cursor(s));
 	}
-	// printf("parsed: pushed %d, token raw \"%s\"\n", pushed, token->arr);
 	if (!ended)
 		ret->s = copy_chr_arr_to_string(token);
 	delete_chr_array(token);
@@ -303,9 +299,6 @@ t_io_file	make_io_file(t_special_type type, char *s/*move ownership*/)
 	{
 		ret.type = IO_IN_HEREDOC;
 		ret.fd = open_in_heredoc(ret.str);
-		// free(ret.str);
-		// ret.str = NULL;
-		// printf("unimplemented: heredoc\n");
 	}
 	else if (type == SP_OUT)
 	{
@@ -339,10 +332,7 @@ t_parse_result	parse_single_command_(t_cursor *s, t_str_arr *args, t_io_arr *io)
 			tmp = parse_next_token(s);
 			if (tmp->type != SP_NONE)
 				syntax_error_unexpected_token("");
-			// printf("io: filename %s\n", tmp->s);
 			t_io_file tmpfile = make_io_file(token->type, tmp->s);
-			// printf("io file %d, name %s\n", (int)tmpfile.type, tmpfile.str);
-			// push_io_array(io, prepare_io_type(tmp->type, tmp->s));
 			push_io_array(io, tmpfile);
 			free(tmp);
 			free(token);
@@ -401,7 +391,6 @@ t_parse_result	parse_single_command(t_cursor *s, t_str_arr *args, t_io_arr *io)
 				syntax_error_unexpected_token(token_type_to_str(tmp.type));
 				return (RES_ERROR);
 			}
-			// printf("io: filename %s\n", tmp->s);
 			push_io_array(io, make_io_file(token.type, tmp.s));
 		}
 		else
@@ -420,7 +409,6 @@ int	parse_line_internal(t_cmd_arr *cmds, t_cursor *s)
 	while (1)
 	{
 		init_command(&tmp_cmd);
-		// printf("new command\n");
 		parse_result = parse_single_command(s, tmp_cmd.token, tmp_cmd.io);
 		if (parse_result == RES_ERROR)
 		{
@@ -476,7 +464,6 @@ t_cmd_arr	*parse_line_(char *line)
 	while (1)
 	{
 		init_command(&tmp_cmd);
-		// printf("new command\n");
 		parse_result = parse_single_command(&s, tmp_cmd.token, tmp_cmd.io);
 		if (last_result == RES_PIPE
 			&& tmp_cmd.io->size == 0 && tmp_cmd.token->size == 0)
@@ -494,7 +481,6 @@ t_cmd_arr	*parse_line_(char *line)
 		last_result = parse_result;
 		if (parse_result == RES_END)
 		{
-			// destruct_command(&tmp_cmd);
 			break ;
 		}
 	}

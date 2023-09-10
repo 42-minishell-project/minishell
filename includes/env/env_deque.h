@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_deque.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:35:58 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:36:17 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:53:39 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_env_deque
 {
 	t_env_node	*head;
 	t_env_node	*tail;
-	int		size;
+	int			size;
 }	t_env_deque;
 
 #endif

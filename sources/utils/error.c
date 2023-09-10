@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 23:58:44 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 14:55:43 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 16:07:57 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 void	fatal_error(const char *message)
 {
-	// ft_putstr_fd(info()->exe, STDERR_FILENO);
-	// ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	perror(message);
 	exit(1);
@@ -25,8 +23,6 @@ void	fatal_error(const char *message)
 
 void	command_find_error(const char *message)
 {
-	// ft_putstr_fd(info()->exe, STDERR_FILENO);
-	// ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	perror(message);
 	exit(127);
@@ -34,8 +30,6 @@ void	command_find_error(const char *message)
 
 void	command_permission_error(const char *message)
 {
-	// ft_putstr_fd(info()->exe, STDERR_FILENO);
-	// ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	perror(message);
 	exit(126);
@@ -43,8 +37,6 @@ void	command_permission_error(const char *message)
 
 void	command_not_found_error(const char *command)
 {
-	// ft_putstr_fd(info()->exe, STDERR_FILENO);
-	// ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd((char *)command, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);

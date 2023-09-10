@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chr_array.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:42:06 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/21 03:35:57 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:54:37 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_chr_arr	*new_chr_array(void);
 void		delete_chr_array(t_chr_arr *arr);
 void		push_chr_array(t_chr_arr *arr, char value);
 void		pop_chr_array(t_chr_arr *arr);
-
 char		*copy_chr_arr_to_string(t_chr_arr *arr);
 
 #endif

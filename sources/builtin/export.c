@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:46 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 19:11:49 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/10 16:02:12 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 #include "env/env.h"
 #include "utils/utils.h"
 #include "utils/builtin_error.h"
-
 #include <stdio.h>
-
 
 static void	sorted_list(char **list, int size)
 {

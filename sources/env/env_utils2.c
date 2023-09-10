@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:06:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/09 20:52:04 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 16:04:45 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_env_deque	*get_env_deque(void)
 	return (&env);
 }
 
-#include <stdlib.h>
 t_env_node	*new_node(char *name, char *value)
 {
 	t_env_node	*ret;
@@ -59,6 +58,3 @@ void	replace_env_node_value(t_env_node *node, char *value)
 	free(node->value);
 	node->value = ft_strdup(value);
 }
-
-
-

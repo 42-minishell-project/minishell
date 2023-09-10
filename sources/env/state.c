@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:41:47 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 14:02:07 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 16:05:07 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	**get_env_path(void)
 	return (get_env_state()->paths);
 }
 
-#include <stdio.h>
 void	update_env_path(char *path_str)
 {
 	t_env_state	*s;
@@ -40,16 +39,6 @@ void	update_env_path(char *path_str)
 	}
 	if (path_str)
 		s->paths = ft_split(path_str, ':');
-
-	// if (s->paths)
-	// {
-	// 	printf("[PATH]:\n");
-	// 	for (int idx = 0; s->paths[idx]; idx++)
-	// 		printf("  %s\n", s->paths[idx]);
-	// 	printf("\n");
-	// }
-	// else
-	// 	printf("[PATH] is null\n");
 }
 
 char	*get_last_exit_code(void)

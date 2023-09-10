@@ -3,25 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 14:38:50 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 16:01:59 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "utils/builtin_error.h"
+#include "utils/utils.h"
 
 static int	check_long_long_atoi(char *str, long long sum, int i, int sign)
 {
+	long long	standard;
+
+	standard = 922337203685477580;
 	if (sign == 1)
 	{
 		if (i == 17 && str[i + 1])
 		{
-			if (sum > 922337203685477580 && (str[i + 1] >= '0' && str[i + 1] <= '9'))
+			if (sum > standard && (str[i + 1] >= '0' && str[i + 1] <= '9'))
 				return (1);
-			if (sum == 922337203685477580 && (str[i + 1] > '7' && str[i + 1] <= '9'))
+			if (sum == standard && (str[i + 1] > '7' && str[i + 1] <= '9'))
 				return (1);
 		}
 		if (i == 19)
@@ -31,9 +35,9 @@ static int	check_long_long_atoi(char *str, long long sum, int i, int sign)
 	{
 		if (i == 18 && str[i + 1])
 		{
-			if (sum > 922337203685477580 && (str[i + 1] >= '0' && str[i + 1] <= '9'))
+			if (sum > standard && (str[i + 1] >= '0' && str[i + 1] <= '9'))
 				return (1);
-			if (sum == 922337203685477580 && (str[i + 1] > '8' && str[i + 1] <= '9'))
+			if (sum == standard && (str[i + 1] > '8' && str[i + 1] <= '9'))
 				return (1);
 		}
 		if (i == 20)
@@ -68,24 +72,6 @@ static long long	ft_long_long_atoi(char *str, int i, int *over)
 	return ((long long)(sign * result));
 }
 
-static int	is_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (!('0' <= str[i] && str[i] <= '9'))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 void	exit_error_numeric(char *arg)
 {
 	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
@@ -109,9 +95,7 @@ static void	run_exit_number(char *str)
 	else
 	{
 		if (sum > 0)
-		{
 			exit(sum % 256);
-		}
 		else
 		{
 			sum = sum % 256;
@@ -128,18 +112,11 @@ int	run_exit(int argc, char **argv)
 	over = 0;
 	ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (argc == 1)
-	{
-		// ft_putstr_fd("exit\n", 1);
 		exit(0);
-	}
 	else if (argc == 2)
 	{
-		// ft_putstr_fd("exit\n", 1);
 		if (!is_number(argv[1]))
-		{
 			exit_error_numeric(argv[1]);
-		}
-			// exit(builtin_error("exit", argv[1], "numeric argument required", 255));
 		else
 			run_exit_number(argv[1]);
 	}
@@ -149,7 +126,8 @@ int	run_exit(int argc, char **argv)
 			exit_error_numeric(argv[1]);
 		else
 		{
-			ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+			ft_putstr_fd("minishell: exit: too many arguments\n", \
+				STDERR_FILENO);
 			exit(1);
 		}
 	}

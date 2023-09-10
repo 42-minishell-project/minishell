@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:56:07 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 12:06:38 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 16:03:39 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@
 #include "builtin/builtin.h"
 #include "utils/cmd_array.h"
 #include "utils/error.h"
-
-
 #include <stdio.h>
+
 int	execute_single(t_command *cmd)
 {
 	t_builtin_func	func;
@@ -40,7 +39,8 @@ int	execute_single(t_command *cmd)
 			status = 1;
 		else
 			status = func(cmd->token->size, cmd->token->arr);
-		if (dup2(old_std[0], STDIN_FILENO) == -1 || dup2(old_std[1], STDOUT_FILENO) == -1)
+		if (dup2(old_std[0], STDIN_FILENO) == -1 || dup2(old_std[1], \
+			STDOUT_FILENO) == -1)
 			fatal_error("dup2() failed");
 		close(old_std[0]);
 		close(old_std[1]);
@@ -82,7 +82,6 @@ int	execute_pipe(int n_cmds, t_command *cmds)
 		return (WTERMSIG(status) + 128);
 }
 
-// TODO: exit code
 int	execute_commands(t_cmd_arr *cmds)
 {
 	if (cmds->size == 0)
