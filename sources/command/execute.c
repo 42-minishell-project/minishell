@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:56:07 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/09 20:52:25 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 12:06:38 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "command/exe_utils.h"
 #include "builtin/builtin.h"
 #include "utils/cmd_array.h"
+#include "utils/error.h"
 
 
 #include <stdio.h>
@@ -26,22 +27,24 @@ int	execute_single(t_command *cmd)
 	t_builtin_func	func;
 	int				pid;
 	int				status;
+	int				old_std[2];
 
 	func = NULL;
 	if (cmd->token->size > 0)
 		func = init_builtin(cmd->token->arr[0]);
 	if (func)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			prepare_io(cmd->io);
-			exit(0);
-		}
-		waitpid(pid, &status, 0);
-		if (WEXITSTATUS(status))
-			return (WEXITSTATUS(status));
-		return (func(cmd->token->size, cmd->token->arr));
+		old_std[0] = dup(STDIN_FILENO);
+		old_std[1] = dup(STDOUT_FILENO);
+		if (prepare_io_noexcept(cmd->io) == -1)
+			status = 1;
+		else
+			status = func(cmd->token->size, cmd->token->arr);
+		if (dup2(old_std[0], STDIN_FILENO) == -1 || dup2(old_std[1], STDOUT_FILENO) == -1)
+			fatal_error("dup2() failed");
+		close(old_std[0]);
+		close(old_std[1]);
+		return (status);
 	}
 	else
 	{
