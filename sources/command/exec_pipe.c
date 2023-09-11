@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:34:46 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:57:29 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 #include "command/execute.h"
 #include "command/command.h"
 #include "command/redirect.h"
@@ -80,10 +81,7 @@ int	wait_subprocesses(int n_cmds, int *pids)
 			continue ;
 		if (pid == pids[n_cmds - 1])
 		{
-			if (WIFEXITED(status))
-				exit_code = WEXITSTATUS(status);
-			else
-				exit_code = WTERMSIG(status) + 128;
+			exit_code = status_to_exit_code(status);
 		}
 		idx++;
 	}

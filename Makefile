@@ -28,8 +28,14 @@ SRCS =	\
 		main.c \
 		cursor.c \
 		parser/parser.c \
+		parser/parser2.c \
 		parser/cursor.c \
 		parser/cursor2.c \
+		parser/parse_utils.c \
+		parser/parse_io.c \
+		parser/heredoc.c \
+		parser/expand.c \
+		parser/parse_error.c \
 		env/env.c \
 		env/env_utils.c \
 		env/env_node.c \
@@ -59,6 +65,8 @@ SRCS =	\
 		builtin/export.c \
 		builtin/pwd.c \
 		builtin/unset.c	\
+		signal/signal.c \
+		signal/signal_utils.c \
 
 OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 
@@ -69,7 +77,7 @@ $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ $(COMFILE_FLAGS)
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/*/%.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ $(COMFILE_FLAGS)
 
 $(LIB_DIR)/%.a:
 	$(MAKE) all -C $(dir $@)

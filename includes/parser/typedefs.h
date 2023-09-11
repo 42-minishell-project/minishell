@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:50:16 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 16:24:39 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 19:06:50 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
+#ifndef TYPEDEFS_H
+# define TYPEDEFS_H
 
 typedef enum e_special_type
 {
@@ -34,7 +34,7 @@ typedef enum e_command_end
 	CMD_START = 0,
 	CMD_END = 1,
 	CMD_PIPE = 2,
-	CMD_ERROR = 3
+	CMD_ERROR = 3,
 }	t_command_end;
 
 typedef enum e_parse_result

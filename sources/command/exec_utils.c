@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:59:41 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 13:12:19 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:07:43 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,12 @@ void	run_non_builtin(t_command *cmd)
 			fatal_error("execve failed");
 	}
 	exit(0);
+}
+
+int	status_to_exit_code(int status)
+{
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else
+		return (WTERMSIG(status) + 128);
 }

@@ -1,12 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 15:53:49 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 15:53:51 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/11 18:33:15 by yeohong           #+#    #+#             */
+/*   Updated: 2023/09/11 18:33:38 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SIGNAL_H
+# define SIGNAL_H
+
+void	sig_handler(int signal);
+void	set_handler(void);
+
+#endif

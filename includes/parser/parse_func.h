@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_io.h                                          :+:      :+:    :+:   */
+/*   parse_func.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 23:52:52 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:23:55 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/11 19:03:14 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 19:36:28 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPEN_IO_H
-# define OPEN_IO_H
+#ifndef PARSE_FUNC_H
+# define PARSE_FUNC_H
 
-int	open_in_file(char *file);
-int	open_out_file(char *file);
-int	open_out_file_append(char *file);
+# include "parser/cursor.h"
+# include "parser/typedefs.h"
+# include "utils/io_array.h"
+
+int				parse_io_file(t_cursor *s, t_io_type type, t_io_arr *io);
+t_parse_result	parse_next_token(t_token *ret, t_cursor *s);
 
 #endif
