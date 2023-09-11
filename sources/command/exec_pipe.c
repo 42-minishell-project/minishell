@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:17:45 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:34:46 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "command/redirect.h"
 #include "command/exec_utils.h"
 #include "builtin/builtin.h"
-
 
 void	execute_pipe_single(t_command *cmd, int in_fd, int out_fd)
 {
@@ -122,19 +121,6 @@ void	execute_pipe_internal(int n_cmds, t_command *cmds)
 		pids[idx] = fork();
 		if (pids[idx] == 0)
 		{
-			// if (io[idx].in != STDIN_FILENO)
-			// {
-			// 	dup2(io[idx].in, STDIN_FILENO);
-			// 	close(io[idx].in);
-			// }
-			// if (io[idx].out != STDOUT_FILENO)
-			// {
-			// 	dup2(io[idx].out, STDOUT_FILENO);
-			// 	close(io[idx].out);
-			// }
-			// if (idx < n_cmds - 1)
-			// 	close(io[idx + 1].in);
-			// execute_pipe_single(&cmds[idx]);
 			if (idx < n_cmds - 1)
 				close(io[idx + 1].in);
 			execute_pipe_single(&cmds[idx], io[idx].in, io[idx].out);

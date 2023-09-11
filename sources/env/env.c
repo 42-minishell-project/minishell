@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:20:19 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:34:01 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft/libft.h"
 #include "env/env.h"
 #include "env/env_utils.h"
-
 
 void	update_env(const char *name, const char *value)
 {

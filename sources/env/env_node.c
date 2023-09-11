@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:06:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:19:58 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:33:55 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_env_deque	*get_env_deque(void)
 
 	return (&env);
 }
-
 
 t_env_node	*new_node(const char *name, const char *value)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:10:11 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 11:44:56 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 12:25:36 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "command/exec_utils.h"
 #include "command/redirect.h"
 #include "builtin/builtin.h"
+#include "utils/error.h"
 
 int	execute_single_builtin(t_command *cmd, t_builtin_func func)
 {
@@ -58,8 +59,6 @@ int	execute_single_non_builtin(t_command *cmd)
 int	execute_single(t_command *cmd)
 {
 	t_builtin_func	func;
-	int				pid;
-	int				status;
 
 	func = NULL;
 	if (cmd->token->size > 0)
