@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_error.h                                      :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 18:43:32 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 19:38:57 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/11 18:33:15 by yeohong           #+#    #+#             */
+/*   Updated: 2023/09/11 18:33:38 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_ERROR_H
-# define PARSE_ERROR_H
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-int	unexpected_eof_matching_error(char quote);
-int	syntax_error_unexpected_eof(void);
-int	syntax_error_unexpected_token(char *token);
+void	sig_handler(int signal);
+void	set_handler(void);
 
 #endif

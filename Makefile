@@ -65,6 +65,8 @@ SRCS =	\
 		builtin/export.c \
 		builtin/pwd.c \
 		builtin/unset.c	\
+		signal/signal.c \
+		signal/signal_utils.c \
 
 OBJS =	$(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.c=.o)))
 

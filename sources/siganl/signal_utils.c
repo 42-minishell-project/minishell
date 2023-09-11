@@ -6,15 +6,13 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 16:12:53 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 19:16:11 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <termios.h>
 #include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "libft/libft.h"
 #include "env/env.h"
 #include "command/execute.h"
@@ -22,14 +20,17 @@
 void	set_sigint(void)
 {
 	update_last_exit_code(1);
-	ft_putstr_fd("\n", STDOUT_FILENO);
+	if (g_child_pid != 0)
+		ft_putstr_fd("^C\n", STDOUT_FILENO);
+	else
+		ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
 void	set_sigquit(void)
 {
 	if (g_child_pid != 0)
 	{
-		ft_putstr_fd("Quit: 3\n", 1);
+		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
 	}
 }
 
