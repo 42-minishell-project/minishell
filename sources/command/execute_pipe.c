@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 13:26:56 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 16:17:19 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ void	execute_pipe_internal(int n_cmds, t_command *cmds)
 			// if (dup2(io[idx].in, STDIN_FILENO) == -1 
 			// 	|| dup2(io[idx].out, STDOUT_FILENO) == -1)
 			// 	fatal_error("dup2() failed");
+			if (idx < n_cmds - 1)
+				close(io[idx + 1].in);
 			if (io[idx].in != STDIN_FILENO)
 			{
 				dup2(io[idx].in, STDIN_FILENO);
@@ -126,8 +128,6 @@ void	execute_pipe_internal(int n_cmds, t_command *cmds)
 				dup2(io[idx].out, STDOUT_FILENO);
 				close(io[idx].out);
 			}
-			if (idx < n_cmds - 1)
-				close(io[idx + 1].in);
 			// close(STDIN_FILENO);
 			execute_pipe_single(&cmds[idx]);
 		}
