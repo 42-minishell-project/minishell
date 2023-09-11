@@ -6,12 +6,13 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:24:44 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:57:29 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 #include "command/execute.h"
 #include "command/command.h"
 #include "command/redirect.h"

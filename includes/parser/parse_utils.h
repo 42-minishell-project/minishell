@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   io_file.h                                          :+:      :+:    :+:   */
+/*   parse_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 03:50:14 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:52:54 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/11 19:08:32 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 19:36:23 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IO_FILE_H
-# define IO_FILE_H
+#ifndef PARSE_UTILS_H
+# define PARSE_UTILS_H
 
-typedef enum e_io_type
-{
-	IO_NONE = 0,
-	IO_IN_FILE = 1,
-	IO_IN_HEREDOC = 2,
-	IO_OUT_TRUNC = 3,
-	IO_OUT_APPEND = 4
-}	t_io_type;
+# include "parser/typedefs.h"
+# include "parser/cursor.h"
 
-typedef struct s_io_file
-{
-	int			fd;
-	char		*str;
-	t_io_type	type;
-}	t_io_file;
+int				is_special(t_cursor *s, char c);
+t_special_type	check_special_type(t_cursor *s);
+char			*io_token_type_to_str(t_special_type type);
+void			trim_whitespace(t_cursor *s, int expand_env);
 
 #endif
