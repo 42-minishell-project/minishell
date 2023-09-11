@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:32:09 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/11 19:18:54 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 19:32:16 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,5 @@ void	sig_handler(int signal)
 void	set_handler(void)
 {
 	signal(SIGINT, sig_handler);
-	if (g_child_pid == 0)
-		signal(SIGQUIT, SIG_IGN);
-	else
-		signal(SIGQUIT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

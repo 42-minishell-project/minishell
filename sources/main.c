@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 19:10:02 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 19:31:34 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int	main(int argc, char *argv[], char *envp[])
 			add_history(line);
 			arr = new_cmd_array();
 			ret = parse_line(line, arr);
+			signal(SIGQUIT, sig_handler);
 			if (ret == 0)
 				ret = execute_commands(arr);
+			signal(SIGQUIT, SIG_IGN);
 			update_last_exit_code(ret);
 			delete_cmd_array(arr);
 		}
