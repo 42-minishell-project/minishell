@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 16:12:53 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:24:30 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 void	set_sigint(void)
 {
 	update_last_exit_code(1);
-	ft_putstr_fd("\n", STDOUT_FILENO);
+	if (g_child_pid != 0)
+		ft_putstr_fd("^C\n", STDOUT_FILENO);
+	else
+		ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
 void	set_sigquit(void)

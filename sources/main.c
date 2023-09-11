@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 16:53:20 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:28:42 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,19 @@ int	g_child_pid;
 void	sig_handler(int signal)
 {
 	if (signal == SIGINT)
-		set_sigint();
-	else if (signal == SIGQUIT)
-		set_sigquit();
-	if (!(signal == SIGINT && g_child_pid != 0))
 	{
-		if (rl_on_new_line() == -1)
-			exit(1);
-		rl_replace_line("", 1);
-		rl_redisplay();
+		set_sigint();
+		if (g_child_pid == 0)
+		{
+			if (rl_on_new_line() == -1)
+				exit(1);
+			rl_replace_line("", 1);
+			rl_redisplay();
+		}
+	}
+	else if (signal == SIGQUIT)
+	{
+		set_sigquit();
 	}
 }
 
