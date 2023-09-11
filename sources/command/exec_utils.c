@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:59:41 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 11:44:29 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 11:51:25 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "libft/libft.h"
 #include "command/command.h"
 #include "command/exec_utils.h"
+#include "command/redirect.h"
+#include "env/env.h"
 #include "utils/error.h"
 
 char	*find_path_prefix(char *exe, char **paths)

@@ -31,8 +31,8 @@ SRCS =	\
 		parser/cursor.c \
 		env/env.c \
 		env/env_utils.c \
-		env/env_utils2.c \
-		env/init_dest.c \
+		env/env_node.c \
+		env/env_init.c \
 		env/state.c \
 		command/command.c \
 		command/execute.c \

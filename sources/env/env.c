@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 17:12:27 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 12:00:11 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include "env/env.h"
 #include "env/env_utils.h"
 
-void	update_env(char *name, char *value)
-// add env (update value if exists)
+void	update_env(const char *name, const char *value)
 {
 	t_env_deque	*env;
 	t_env_node	*node;
@@ -42,7 +41,7 @@ void	update_env(char *name, char *value)
 		update_env_path(value);
 }
 
-void	delete_env(char *name)
+void	delete_env(const char *name)
 {
 	t_env_deque	*env;
 	t_env_node	*node;
@@ -66,7 +65,7 @@ void	delete_env(char *name)
 		update_env_path(NULL);
 }
 
-char	*find_env(char *name)
+char	*find_env(const char *name)
 {
 	t_env_node	*node;
 
@@ -101,4 +100,3 @@ char	**get_envp(void)
 	}
 	return (ret);
 }
-

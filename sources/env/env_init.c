@@ -6,13 +6,12 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:54:28 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:56:56 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 11:56:02 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "env/env.h"
-
 
 void	init_envs(char **envp)
 {

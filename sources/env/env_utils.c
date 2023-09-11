@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 00:18:21 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 19:15:18 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:59:58 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ int	parse_identifier(char *s, char **name, char **value)
 	}
 	return (0);
 }
-
