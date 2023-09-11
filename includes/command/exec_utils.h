@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe_utils.h                                        :+:      :+:    :+:   */
+/*   exec_utils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:47:01 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 12:06:32 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 11:43:54 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXE_UTILS_H
-# define EXE_UTILS_H
+#ifndef EXEC_UTILS_H
+# define EXEC_UTILS_H
 
 # include "command/command.h"
 
@@ -21,10 +21,8 @@ typedef struct s_io_fd
 	int	out;
 }	t_io_fd;
 
-void	prepare_io(t_io_arr *cmd);
-void	run_non_builtin(t_command *cmd);
 void	execute_pipe_internal(int n_cmds, t_command *cmds);
-
-int		prepare_io_noexcept(t_io_arr *io);
+int		execute_single(t_command *cmd);
+void	run_non_builtin(t_command *cmd);
 
 #endif

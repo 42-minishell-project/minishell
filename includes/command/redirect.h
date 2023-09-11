@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_path.h                                         :+:      :+:    :+:   */
+/*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 13:56:07 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/06 16:52:58 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/11 11:17:04 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 11:25:58 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_PATH_H
-# define ENV_PATH_H
+#ifndef REDIRECT_H
+# define REDIRECT_H
 
-// char	**get_paths(void);
-// void	init_paths(char **envp);
-// void	delete_paths(void);
-char	*find_executable(char *exe);
+# include "utils/io_array.h"
+
+void	prepare_io(t_io_arr *io);
+int		prepare_io_noexcept(t_io_arr *io);
 
 #endif
