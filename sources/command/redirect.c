@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:15:30 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 11:25:00 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 13:30:38 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,21 @@ void	prepare_io(t_io_arr *io)
 		fd = open_io_type(&io->arr[idx], &redirect_to);
 		if (fd < 0)
 			fatal_error(io->arr[idx].str);
-		if (dup2(fd, STDIN_FILENO) == -1)
+		if (dup2(fd, redirect_to) == -1)
 			fatal_error("dup2() failed");
 		close(fd);
 		idx++;
 	}
+}
+
+void	fatal_error_noexcept(const char *message)
+{
+	// ft_putstr_fd(info()->exe, STDERR_FILENO);
+	// ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	if (ft_strlen(message) == 0)
+		ft_putstr_fd(": ", STDERR_FILENO);
+	perror(message);
 }
 
 int	prepare_io_noexcept(t_io_arr *io)
@@ -72,11 +82,14 @@ int	prepare_io_noexcept(t_io_arr *io)
 		fd = open_io_type(&io->arr[idx], &redirect_to);
 		if (fd < 0)
 		{
-			perror(io->arr[idx].str);
+			fatal_error_noexcept(io->arr[idx].str);
 			return (-1);
 		}
-		if (dup2(fd, STDIN_FILENO) == -1)
-			fatal_error("dup2() failed");
+		if (dup2(fd, redirect_to) == -1)
+		{
+			close(fd);
+			return (-1);
+		}
 		close(fd);
 		idx++;
 	}

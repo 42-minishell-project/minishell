@@ -48,11 +48,7 @@ void	expand_env(t_cursor *s)
 		push_cursor(s, "$", 0);
 	else
 	{
-		// printf("env name %s\n", name->arr);
-		// env_value = find_env_by_name(name->arr);
-		// env_value = getenv(name->arr);
 		env_value = find_env(name->arr);
-		// printf("find env %s = \"%s\"\n", name->arr, env_value);
 		if (env_value)
 			push_cursor(s, env_value, 0);
 	}
@@ -193,6 +189,7 @@ void	trim_whitespace(t_cursor *s, int expand_env)
 	}
 }
 
+/*
 t_token	*parse_next_token(t_cursor *s)
 {
 	t_token		*ret;
@@ -238,6 +235,7 @@ t_token	*parse_next_token(t_cursor *s)
 	// printf("parsed token \"%s\"\n", ret->s);
 	return (ret);
 }
+*/
 
 
 int	parse_next_token_internal(t_token *ret, t_cursor *s)
@@ -318,6 +316,7 @@ t_io_file	make_io_file(t_special_type type, char *s/*move ownership*/)
 	return (ret);
 }
 
+/*
 t_parse_result	parse_single_command_(t_cursor *s, t_str_arr *args, t_io_arr *io)
 {
 	t_token	*token;
@@ -355,6 +354,7 @@ t_parse_result	parse_single_command_(t_cursor *s, t_str_arr *args, t_io_arr *io)
 	}
 	return (RES_ERROR);
 }
+*/
 
 char	*token_type_to_str(t_special_type type)
 {
@@ -410,8 +410,31 @@ t_parse_result	parse_single_command(t_cursor *s, t_str_arr *args, t_io_arr *io)
 	return (RES_ERROR);
 }
 
+int	handle_parsed_output(t_parse_result result, t_command *cmd)
+{
+	if (result == RES_ERROR)
+	{
+		// destruct_command(&tmp_cmd);
+		return (-1);
+	}
+	else if (cmd->io->size == 0 && cmd->token->size == 0)
+	{
+		// destruct_command(&tmp_cmd);
+		if (result == RES_PIPE)
+			return (syntax_error_unexpected_token("|"));
+		else if (result == RES_PIPE)
+			return (syntax_error_unexpected_eof());
+		// break ;
+		return (1);
+	}
+	// else
+	// 	push_cmd_array(cmds, tmp_cmd);
+	return (0);
+}
+
 int	parse_line_internal(t_cmd_arr *cmds, t_cursor *s)
 {
+	int				interpreted;
 	t_command		tmp_cmd;
 	t_parse_result	parse_result;
 	t_parse_result	last_result;
@@ -420,7 +443,6 @@ int	parse_line_internal(t_cmd_arr *cmds, t_cursor *s)
 	while (1)
 	{
 		init_command(&tmp_cmd);
-		// printf("new command\n");
 		parse_result = parse_single_command(s, tmp_cmd.token, tmp_cmd.io);
 		if (parse_result == RES_ERROR)
 		{
@@ -438,6 +460,15 @@ int	parse_line_internal(t_cmd_arr *cmds, t_cursor *s)
 		}
 		else
 			push_cmd_array(cmds, tmp_cmd);
+		// interpreted = handle_parsed_output(parse_result, &tmp_cmd);
+		// if (interpreted)
+		// {
+		// 	destruct_command(&tmp_cmd);
+		// 	if (interpreted == -1)
+		// 		return (-1);
+		// 	break ;
+		// }
+		// push_cmd_array(cmds, tmp_cmd);
 		last_result = parse_result;
 		if (parse_result == RES_END)
 			break ;
@@ -462,6 +493,7 @@ t_cmd_arr	*parse_line(char *line)
 	return (cmds);
 }
 
+/*
 t_cmd_arr	*parse_line_(char *line)
 {
 	t_cursor		s;
@@ -501,6 +533,7 @@ t_cmd_arr	*parse_line_(char *line)
 	destruct_cursor(&s);
 	return (cmds);
 }
+*/
 
 int	check_command_nonempty(char *line)
 {

@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 23:58:44 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 14:55:43 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 13:28:41 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	fatal_error(const char *message)
 	// ft_putstr_fd(info()->exe, STDERR_FILENO);
 	// ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	if (ft_strlen(message) == 0)
+		ft_putstr_fd(": ", STDERR_FILENO);
 	perror(message);
 	exit(1);
 }
@@ -28,6 +30,8 @@ void	command_find_error(const char *message)
 	// ft_putstr_fd(info()->exe, STDERR_FILENO);
 	// ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	if (ft_strlen(message) == 0)
+		ft_putstr_fd(": ", STDERR_FILENO);
 	perror(message);
 	exit(127);
 }
