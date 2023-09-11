@@ -6,14 +6,16 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:15:30 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 16:48:24 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:27:11 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 #include "command/open_io.h"
 #include "command/redirect.h"
 #include "utils/error.h"
+#include "libft/libft.h"
 
 int	open_io_type(t_io_file *file, int *redirect_to)
 {

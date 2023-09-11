@@ -6,15 +6,13 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:26:14 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 15:40:53 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/10 16:11:03 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "utils/builtin_error.h"
 #include "env/env.h"
-
-
 
 static int	change_result(char *path, int code, char *prev_pwd)
 {
@@ -31,15 +29,6 @@ static int	change_result(char *path, int code, char *prev_pwd)
 	else
 	{
 		builtin_error("cd", path);
-		// if (access(path, F_OK) == -1)
-		// 	error_code = builtin_error("cd", path, \
-		// 	": no such file or directory", 127);
-		// else if (access(path, R_OK) == -1)
-		// 	error_code = builtin_error("cd", path, \
-		// 	": permission denied", 126);
-		// else
-		// 	error_code = builtin_error("cd", path, \
-		// 	": not a directory", 127);
 		return (1);
 	}
 }
@@ -50,12 +39,6 @@ static int	change_dir(char *path)
 	int		code;
 	char	*prev_pwd;
 
-	// if (ft_strcmp(path, "HOME") == 0)
-	// 	result = find_env("HOME");
-	// else if (ft_strcmp(path, "OLDPWD") == 0)
-	// 	result = find_env("OLDPWD");
-	// else
-	// 	result = path;
 	prev_pwd = find_env("PWD");
 	code = chdir(path);
 	return (change_result(path, code, prev_pwd));
@@ -82,8 +65,6 @@ int	run_cd(int argc, char **argv)
 		result = change_dir_home();
 	else if (ft_strcmp(argv[1], "--") == 0 || ft_strcmp(argv[1], "~") == 0)
 		result = change_dir_home();
-	// else if (argv[1] && ft_strcmp(argv[1], "-") == 0)
-	// 	result = change_dir("OLDPWD");
 	else
 		result = change_dir(argv[1]);
 	return (result);

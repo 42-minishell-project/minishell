@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:10:11 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 17:09:16 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:25:03 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "command/exec_utils.h"
 #include "command/redirect.h"
 #include "builtin/builtin.h"
+#include "utils/error.h"
 
 int	execute_single_builtin(t_command *cmd, t_builtin_func func)
 {
@@ -55,8 +56,6 @@ int	execute_single_non_builtin(t_command *cmd)
 int	execute_single(t_command *cmd)
 {
 	t_builtin_func	func;
-	int				pid;
-	int				status;
 
 	func = NULL;
 	if (cmd->token->size > 0)

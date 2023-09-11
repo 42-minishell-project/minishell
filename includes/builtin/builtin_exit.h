@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_.c                                             :+:      :+:    :+:   */
+/*   builtin_exit.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 13:01:27 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 15:56:11 by yeohong          ###   ########.fr       */
+/*   Created: 2023/09/10 16:23:57 by yeohong           #+#    #+#             */
+/*   Updated: 2023/09/10 16:26:36 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "env/env.h"
-#include "utils/utils.h"
+#ifndef BUILTIN_EXIT_H
+# define BUILTIN_EXIT_H
 
-int	run_env(int argc, char **argv)
-{
-	char	**envp;
-	int		idx;
+// exit_func.c
+int				is_number(char *str);
+int				check_long_num(char *str, int standard, int i, int sum);
 
-	if (argc > 1)
-	{
-		ft_putstr_fd("env: too many arguments\n", STDERR_FILENO);
-		return (1);
-	}
-	envp = get_envp();
-	idx = 0;
-	while (envp[idx])
-	{
-		printf("%s\n", envp[idx]);
-		idx++;
-	}
-	free_2d_str_array(envp);
-	return (0);
-}
+#endif

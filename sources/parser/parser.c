@@ -6,11 +6,9 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:48 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:13:59 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:27:01 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,16 +20,12 @@
 #include "parser/cursor.h"
 #include "env/env.h"
 #include "command/command.h"
-
 #include "utils/chr_array.h"
 #include "utils/str_array.h"
 #include "utils/io_array.h"
 #include "utils/cmd_array.h"
 #include "parser/cursor.h"
-
 #include "command/open_io.h"
-
-
 
 void	expand_env(t_cursor *s)
 {

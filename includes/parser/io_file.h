@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   io_file.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 03:50:14 by jimlee            #+#    #+#             */
 /*   Updated: 2023/09/11 17:15:43 by jimlee           ###   ########.fr       */

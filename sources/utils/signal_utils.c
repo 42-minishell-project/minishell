@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 15:47:22 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/10 16:12:53 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 #include "libft/libft.h"
 #include "env/env.h"
 #include "command/execute.h"
-
-void	print_signal_d(void)
-{
-	print_prompt_cursor();
-	exit(0);
-}
 
 void	set_sigint(void)
 {
@@ -42,6 +36,12 @@ void	set_sigquit(void)
 void	print_prompt_cursor(void)
 {
 	ft_putstr_fd("\033[1Aminishell$ exit\n", STDOUT_FILENO);
+}
+
+void	print_signal_d(void)
+{
+	print_prompt_cursor();
+	exit(0);
 }
 
 void	set_term(void)
