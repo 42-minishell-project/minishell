@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:05:17 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:18:00 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:40:03 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
+#include <stdio.h>
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include "libft/libft.h"
 #include "command/exec_utils.h"
 #include "utils/error.h"
-#include "utils/signal_utils.h"
+#include "signal/signal.h"
 
 void	get_heredoc_content(const char *eof, int write_fd)
 {
@@ -40,7 +41,7 @@ void	get_heredoc_content(const char *eof, int write_fd)
 	}
 	close(write_fd);
 }
-void	sig_handler(int signal);
+
 int	open_heredoc(const char *eof, int *exit_code)
 {
 	int	pipe_fd[2];
@@ -54,8 +55,6 @@ int	open_heredoc(const char *eof, int *exit_code)
 	pid = fork();
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
 		printf("%d: get input - heredoc\n", getpid());
 		close(pipe_fd[0]);
 		get_heredoc_content(eof, pipe_fd[1]);
