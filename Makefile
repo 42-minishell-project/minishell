@@ -4,7 +4,7 @@ CC =		cc
 # CFLAGS =	-Wall -Wextra
 CFLAGS =	-Wall -Wextra -fsanitize=address
 
-NAME =	test
+NAME =	minishell
 
 LIB_DIR =	libraries
 LIB_NAMES =	libft
