@@ -30,6 +30,7 @@ SRCS =	\
 		parser/parser.c \
 		parser/cursor.c \
 		parser/cursor2.c \
+		parser/heredoc.c \
 		env/env.c \
 		env/env_utils.c \
 		env/env_node.c \
@@ -69,7 +70,7 @@ $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ $(COMFILE_FLAGS)
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/*/%.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ $(COMFILE_FLAGS)
 
 $(LIB_DIR)/%.a:
 	$(MAKE) all -C $(dir $@)

@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 03:50:14 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 16:02:03 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:15:43 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ typedef struct s_io_file
 	char		*str;
 	t_io_type	type;
 }	t_io_file;
+
+int	open_heredoc(const char *eof, int *exit_code);
 
 #endif

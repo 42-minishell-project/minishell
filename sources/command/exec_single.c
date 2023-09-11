@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:10:11 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:25:36 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:25:03 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@
 
 int	execute_single_builtin(t_command *cmd, t_builtin_func func)
 {
-	int	status;
+	int	exit_code;
 	int	old_stdin;
 	int	old_stdout;
 
 	old_stdin = dup(STDIN_FILENO);
 	old_stdout = dup(STDOUT_FILENO);
 	if (prepare_io_noexcept(cmd->io) == -1)
-		status = 1;
+		exit_code = 1;
 	else
-		status = func(cmd->token->size, cmd->token->arr);
+		exit_code = func(cmd->token->size, cmd->token->arr);
 	if (dup2(old_stdin, STDIN_FILENO) == -1
 		|| dup2(old_stdout, STDOUT_FILENO) == -1)
 		fatal_error("dup2() failed");
 	close(old_stdin);
 	close(old_stdout);
-	return (status);
+	return (exit_code);
 }
 
 int	execute_single_non_builtin(t_command *cmd)
@@ -50,10 +50,7 @@ int	execute_single_non_builtin(t_command *cmd)
 	g_child_pid = pid;
 	waitpid(pid, &status, 0);
 	g_child_pid = 0;
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else
-		return (WTERMSIG(status) + 128);
+	return (status_to_exit_code(status));
 }
 
 int	execute_single(t_command *cmd)

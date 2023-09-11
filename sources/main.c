@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 16:53:20 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:24:25 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "command/execute.h"
 #include "builtin/builtin.h"
 #include "utils/signal_utils.h"
+#include "utils/cmd_array.h"
 #include <string.h>
 #include "libft/libft.h"
 
@@ -64,13 +65,14 @@ int	main(int argc, char *argv[], char *envp[])
 		if (check_command_nonempty(line))
 		{
 			add_history(line);
-			arr = parse_line(line);
-			if (arr)
+			arr = new_cmd_array();
+			ret = parse_line(line, arr);
+			if (ret == 0)
 			{
 				ret = execute_commands(arr);
-				update_last_exit_code(ret);
-				delete_cmd_array(arr);
 			}
+			update_last_exit_code(ret);
+			delete_cmd_array(arr);
 		}
 		free(line);
 	}
