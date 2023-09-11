@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 11:43:59 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:08:38 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,7 @@ int	wait_subprocesses(int n_cmds, int *pids)
 			continue ;
 		if (pid == pids[n_cmds - 1])
 		{
-			if (WIFEXITED(status))
-				exit_code = WEXITSTATUS(status);
-			else
-				exit_code = WTERMSIG(status) + 128;
+			exit_code = status_to_exit_code(status);
 		}
 		idx++;
 	}

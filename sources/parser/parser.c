@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:48 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 16:36:37 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:04:46 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "libft/libft.h"
 #include "utils/utils.h"
 #include "parser/parser.h"
-#include "parser/token.h"
+#include "parser/utils.h"
 #include "parser/cursor.h"
 #include "env/env.h"
 #include "command/command.h"
@@ -128,13 +128,11 @@ int	unexpected_eof_matching_error(char quote)
 	ft_putstr_fd("unexpected EOF while looking for matching `", STDERR_FILENO);
 	ft_putchar_fd(quote, STDERR_FILENO);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
-	// exit(1);
 	return (-1);
 }
 int	syntax_error_unexpected_eof(void)
 {
 	printf("syntax error: unexpected end of file\n");
-	// exit(1);
 	return (-1);
 }
 int	syntax_error_unexpected_token(char *token)
@@ -142,7 +140,6 @@ int	syntax_error_unexpected_token(char *token)
 	ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
-	// exit(1);
 	return (-1);
 }
 
@@ -201,12 +198,38 @@ void	trim_whitespace(t_cursor *s, int expand_env)
 	}
 }
 
+t_parse_result	parse_next_token_internal(t_chr_arr *token, t_cursor *s)
+{
+	char			c;
+	t_parse_result	ended;
 
-t_parse_result	parse_next_token_internal(t_token *ret, t_cursor *s)
+	ended = RES_END;
+	while (1)
+	{
+		c = peek_cursor_with_env(s);
+		if (!c || ft_isspace(c) || is_special(s, c))
+			break ;
+		ended = RES_OK;
+		if (c == '\'')
+		{
+			if (parse_single_quote(s, token) == -1)
+				return (RES_ERROR);
+		}
+		else if (c == '\"')
+		{
+			if (parse_double_quote(s, token) == -1)
+				return (RES_ERROR);
+		}
+		else
+			push_chr_array(token, forward_cursor(s));
+	}
+	return (ended);
+}
+
+t_parse_result	parse_next_token(t_token *ret, t_cursor *s)
 {
 	t_chr_arr		*token;
 	char			c;
-	t_parse_result	ended;
 
 	ret->type = SP_NONE;
 	ret->s = NULL;
@@ -219,33 +242,7 @@ t_parse_result	parse_next_token_internal(t_token *ret, t_cursor *s)
 		return (RES_OK);
 	}
 	token = new_chr_array();
-	ended = RES_END;
-	while (1)
-	{
-		c = peek_cursor_with_env(s);
-		if (!c || ft_isspace(c) || is_special(s, c))
-			break ;
-		ended = RES_OK;
-		if (c == '\'')
-		{
-			if (parse_single_quote(s, token) == -1)
-			{
-				delete_chr_array(token);
-				return (RES_ERROR);
-			}
-		}
-		else if (c == '\"')
-		{
-			if (parse_double_quote(s, token) == -1)
-			{
-				delete_chr_array(token);
-				return (RES_ERROR);
-			}
-		}
-		else
-			push_chr_array(token, forward_cursor(s));
-	}
-	if (ended == RES_OK)
+	if (parse_next_token_internal(token, s) == RES_OK)
 		ret->s = copy_chr_arr_to_string(token);
 	delete_chr_array(token);
 	return (ended);
@@ -293,15 +290,33 @@ char	*token_type_to_str(t_special_type type)
 	return ("");
 }
 
+t_parse_result	parse_io_file(t_cursor *s, t_io_type type, t_io_arr *io)
+{
+	t_parse_result	ret;
+	t_token			tmp;
+
+	tmp.s = NULL;
+	tmp.type = SP_NONE;
+	ret = parse_next_token(&tmp, s);
+	if (ret == RES_ERROR)
+		return (RES_ERROR);
+	else if (ret == RES_END || tmp.type != SP_NONE)
+	{
+		syntax_error_unexpected_token(token_type_to_str(tmp.type));
+		return (RES_ERROR);
+	}
+	push_io_array(io, make_io_file(type, tmp.s));
+	return (RES_OK);
+}
+
 t_command_end	parse_single_command(t_cursor *s, t_str_arr *args, t_io_arr *io)
 {
 	t_parse_result	ret;
 	t_token			token;
-	t_token			tmp;
 
 	while (1)
 	{
-		ret = parse_next_token_internal(&token, s);
+		ret = parse_next_token(&token, s);
 		if (ret == RES_END)
 			return (CMD_END);
 		else if (ret == RES_ERROR)
@@ -311,17 +326,8 @@ t_command_end	parse_single_command(t_cursor *s, t_str_arr *args, t_io_arr *io)
 		else if (token.type == SP_IN || token.type == SP_IN_HEREDOC
 			|| token.type == SP_OUT || token.type == SP_OUT_APPEND)
 		{
-			tmp.s = NULL;
-			tmp.type = SP_NONE;
-			ret = parse_next_token_internal(&tmp, s);
-			if (ret == RES_ERROR)
+			if (parse_io_file(s, token.type, io) == RES_ERROR)
 				return (CMD_ERROR);
-			else if (ret == RES_END || tmp.type != SP_NONE)
-			{
-				syntax_error_unexpected_token(token_type_to_str(tmp.type));
-				return (CMD_ERROR);
-			}
-			push_io_array(io, make_io_file(token.type, tmp.s));
 		}
 		else
 			push_str_array(args, token.s);
@@ -381,20 +387,24 @@ int	parse_line_internal(t_cmd_arr *cmds, t_cursor *s)
 	return (0);
 }
 
-t_cmd_arr	*parse_line(char *line)
+// t_cmd_arr	*parse_line(char *line)
+int	parse_line(char *line, t_cmd_arr *cmds)
 {
 	t_cursor	s;
-	t_cmd_arr	*cmds;
+	int			exit_code;
+	// t_cmd_arr	*cmds;
 
 	init_cursor(&s, line);
-	cmds = new_cmd_array();
+	exit_code = 0;
+	// cmds = new_cmd_array();
 	if (parse_line_internal(cmds, &s) == -1)
 	{
-		delete_cmd_array(cmds);
-		cmds = NULL;
+		exit_code = 1;
+		// delete_cmd_array(cmds);
+		// cmds = NULL;
 	}
 	destruct_cursor(&s);
-	return (cmds);
+	return (exit_code);
 }
 
 int	check_command_nonempty(char *line)

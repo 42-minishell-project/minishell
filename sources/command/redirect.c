@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:15:30 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 13:30:38 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 16:48:24 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	prepare_io(t_io_arr *io)
 
 void	fatal_error_noexcept(const char *message)
 {
-	// ft_putstr_fd(info()->exe, STDERR_FILENO);
-	// ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (ft_strlen(message) == 0)
 		ft_putstr_fd(": ", STDERR_FILENO);
