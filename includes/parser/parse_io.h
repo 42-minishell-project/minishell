@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   io_file.h                                          :+:      :+:    :+:   */
+/*   parse_io.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 03:50:14 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:52:54 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/11 18:52:28 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 19:07:33 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IO_FILE_H
-# define IO_FILE_H
+#ifndef PARSE_IO_H
+# define PARSE_IO_H
 
-typedef enum e_io_type
-{
-	IO_NONE = 0,
-	IO_IN_FILE = 1,
-	IO_IN_HEREDOC = 2,
-	IO_OUT_TRUNC = 3,
-	IO_OUT_APPEND = 4
-}	t_io_type;
+# include "parser/io_file.h"
+# include "parser/typedefs.h"
 
-typedef struct s_io_file
-{
-	int			fd;
-	char		*str;
-	t_io_type	type;
-}	t_io_file;
+int			open_heredoc(const char *eof, int *exit_code);
+t_io_file	make_io_file(t_special_type type, char *s);
+t_io_file	make_heredoc_from_token(t_token *token, int *exit_code);
 
 #endif

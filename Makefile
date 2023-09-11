@@ -28,9 +28,14 @@ SRCS =	\
 		main.c \
 		cursor.c \
 		parser/parser.c \
+		parser/parser2.c \
 		parser/cursor.c \
 		parser/cursor2.c \
+		parser/parse_utils.c \
+		parser/parse_io.c \
 		parser/heredoc.c \
+		parser/expand.c \
+		parser/parse_error.c \
 		env/env.c \
 		env/env_utils.c \
 		env/env_node.c \

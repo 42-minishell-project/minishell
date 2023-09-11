@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:54:28 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:03:10 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:58:35 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "env/env.h"
 
-void	init_envs(const char **envp)
+void	init_envs(char **envp)
 {
 	int		idx;
 	char	*name;

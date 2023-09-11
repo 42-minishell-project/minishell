@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   io_file.h                                          :+:      :+:    :+:   */
+/*   parse_func.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 03:50:14 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:52:54 by jimlee           ###   ########.fr       */
+/*   Created: 2023/09/11 19:03:14 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 19:36:28 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IO_FILE_H
-# define IO_FILE_H
+#ifndef PARSE_FUNC_H
+# define PARSE_FUNC_H
 
-typedef enum e_io_type
-{
-	IO_NONE = 0,
-	IO_IN_FILE = 1,
-	IO_IN_HEREDOC = 2,
-	IO_OUT_TRUNC = 3,
-	IO_OUT_APPEND = 4
-}	t_io_type;
+# include "parser/cursor.h"
+# include "parser/typedefs.h"
+# include "utils/io_array.h"
 
-typedef struct s_io_file
-{
-	int			fd;
-	char		*str;
-	t_io_type	type;
-}	t_io_file;
+int				parse_io_file(t_cursor *s, t_io_type type, t_io_arr *io);
+t_parse_result	parse_next_token(t_token *ret, t_cursor *s);
 
 #endif

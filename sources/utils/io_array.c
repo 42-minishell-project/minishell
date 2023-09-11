@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_array.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:43:56 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:08:01 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:37:57 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	delete_io_array(t_io_arr *arr)
 	while (idx < arr->size)
 	{
 		free(arr->arr[idx].str);
+		if (arr->arr[idx].type == IO_IN_HEREDOC)
+			close(arr->arr[idx].fd);
 		idx++;
 	}
 	free(arr->arr);
