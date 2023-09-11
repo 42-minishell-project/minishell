@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:15:30 by jimlee            #+#    #+#             */
 /*   Updated: 2023/09/11 13:30:38 by jimlee           ###   ########.fr       */
@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 #include "command/open_io.h"
 #include "command/redirect.h"
 #include "utils/error.h"

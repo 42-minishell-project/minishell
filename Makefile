@@ -4,7 +4,7 @@ CC =		cc
 # CFLAGS =	-Wall -Wextra
 CFLAGS =	-Wall -Wextra -fsanitize=address
 
-NAME =	test
+NAME =	minishell
 
 LIB_DIR =	libraries
 LIB_NAMES =	libft
@@ -55,6 +55,7 @@ SRCS =	\
 		builtin/echo.c \
 		builtin/env_.c \
 		builtin/exit.c \
+		builtin/exit_func.c \
 		builtin/export.c \
 		builtin/pwd.c \
 		builtin/unset.c	\

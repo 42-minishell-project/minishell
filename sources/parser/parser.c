@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,16 +20,12 @@
 #include "parser/cursor.h"
 #include "env/env.h"
 #include "command/command.h"
-
 #include "utils/chr_array.h"
 #include "utils/str_array.h"
 #include "utils/io_array.h"
 #include "utils/cmd_array.h"
 #include "parser/cursor.h"
-
 #include "command/open_io.h"
-
-
 
 void	expand_env(t_cursor *s)
 {
@@ -128,13 +122,11 @@ int	unexpected_eof_matching_error(char quote)
 	ft_putstr_fd("unexpected EOF while looking for matching `", STDERR_FILENO);
 	ft_putchar_fd(quote, STDERR_FILENO);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
-	// exit(1);
 	return (-1);
 }
 int	syntax_error_unexpected_eof(void)
 {
 	printf("syntax error: unexpected end of file\n");
-	// exit(1);
 	return (-1);
 }
 int	syntax_error_unexpected_token(char *token)
@@ -142,7 +134,6 @@ int	syntax_error_unexpected_token(char *token)
 	ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
-	// exit(1);
 	return (-1);
 }
 
@@ -202,6 +193,45 @@ void	trim_whitespace(t_cursor *s, int expand_env)
 }
 
 
+// 	trim_whitespace(s, 1);
+// 	if (!peek_cursor(s))
+// 		return (NULL);
+// 	ret = malloc(sizeof(t_token));
+// 	ret->s = NULL;
+// 	ret->type = SP_NONE;
+// 	if (is_special(s, peek_cursor(s)))
+// 	{
+// 		ret->type = check_special_type(s);
+// 		return (ret);
+// 	}
+// 	token = new_chr_array();
+// 	pushed = 0;
+// 	while (1)
+// 	{
+// 		c = peek_cursor_with_env(s);
+// 		if (!c || ft_isspace(c) || is_special(s, c))
+// 			break ;
+// 		pushed = 1;
+// 		if (c == '\'')
+// 			parse_single_quote(s, token);
+// 		else if (c == '\"')
+// 			parse_double_quote(s, token);
+// 		else
+// 			push_chr_array(token, forward_cursor(s));
+// 	}
+// 	if (pushed)
+// 		ret->s = copy_chr_arr_to_string(token);
+// 	else
+// 	{
+// 		free(ret);
+// 		ret = NULL;
+// 	}
+// 	delete_chr_array(token);
+// 	return (ret);
+// }
+
+
+// int	parse_next_token_internal(t_token *ret, t_cursor *s)
 t_parse_result	parse_next_token_internal(t_token *ret, t_cursor *s)
 {
 	t_chr_arr		*token;
@@ -245,6 +275,7 @@ t_parse_result	parse_next_token_internal(t_token *ret, t_cursor *s)
 		else
 			push_chr_array(token, forward_cursor(s));
 	}
+
 	if (ended == RES_OK)
 		ret->s = copy_chr_arr_to_string(token);
 	delete_chr_array(token);

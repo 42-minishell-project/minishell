@@ -3,43 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:14:55 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/06 17:51:51 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 16:24:47 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
 # include "command/command.h"
 
-// typedef int (*t_builtin_func)(t_command *);
-typedef int (*t_builtin_func)(int, char **);
+typedef int	(*t_builtin_func)(int, char **);
 
-t_builtin_func init_builtin(const char *arr);
+t_builtin_func	init_builtin(const char *arr);
 
 // echo.c
-int	run_echo(int argc, char **argv);
+int				run_echo(int argc, char **argv);
 
 // pwd.c
-int	run_pwd(int argc, char **argv);
+int				run_pwd(int argc, char **argv);
 
 // cd.c
-int	run_cd(int argc, char **argv);
+int				run_cd(int argc, char **argv);
 
 // env_.c
-int	run_env(int argc, char **argv);
+int				run_env(int argc, char **argv);
 
 // export.c
-int	run_export(int argc, char **argv);
+int				run_export(int argc, char **argv);
 
 // unset.c
-int	run_unset(int argc, char **argv);
+int				run_unset(int argc, char **argv);
 
 // exit.c
-int run_exit(int argc, char **argv);
+int				run_exit(int argc, char **argv);
 
 #endif
