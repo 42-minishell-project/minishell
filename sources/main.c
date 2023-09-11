@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 11:45:47 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 16:19:08 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	set_handler(void)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char			*line;
-	t_cmd_arr		*arr;
-	int				ret;
+	char		*line;
+	t_cmd_arr	*arr;
+	int			ret;
 
 	set_term();
 	set_handler();
@@ -65,11 +65,12 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			add_history(line);
 			arr = parse_line(line);
-			if (!arr)
-				continue ;
-			ret = execute_commands(arr);
-			update_last_exit_code(ret);
-			delete_cmd_array(arr);
+			if (arr)
+			{
+				ret = execute_commands(arr);
+				update_last_exit_code(ret);
+				delete_cmd_array(arr);
+			}
 		}
 		free(line);
 	}
