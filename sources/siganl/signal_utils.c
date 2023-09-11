@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/11 18:42:45 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 19:16:11 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_sigquit(void)
 {
 	if (g_child_pid != 0)
 	{
-		ft_putstr_fd("Quit: 3\n", 1);
+		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
 	}
 }
 
