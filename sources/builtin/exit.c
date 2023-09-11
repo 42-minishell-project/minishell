@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/11 13:43:59 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:21:05 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ int	run_exit(int argc, char **argv)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", \
 				STDERR_FILENO);
-			exit(1);
 		}
 	}
 }
