@@ -13,8 +13,8 @@ LIB_FLAGS =	$(addprefix -L$(LIB_DIR)/, $(LIB_NAMES)) \
 			$(addprefix -l, $(subst lib,,$(LIB_NAMES))) \
 			-lreadline
 
-# LINKING_FLAGS = -lreadline -L/opt/homebrew/opt/readline/lib
-# COMFILE_FLAGS = -I/opt/homebrew/opt/readline/include
+LINKING_FLAGS = -lreadline -L/opt/homebrew/opt/readline/lib
+COMFILE_FLAGS = -I/opt/homebrew/opt/readline/include
 
 INCLUDES =	includes \
 			libraries
