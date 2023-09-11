@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe.c                                     :+:      :+:    :+:   */
+/*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:17:19 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 11:43:59 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
+#include <stdlib.h>
+#include "command/execute.h"
 #include "command/command.h"
-#include "command/exe_utils.h"
+#include "command/redirect.h"
+#include "command/exec_utils.h"
 #include "builtin/builtin.h"
-#include "utils/cmd_array.h"
-#include "utils/error.h"
 
-
-
-void	execute_pipe_single(t_command *cmd)
+void	execute_pipe_single(t_command *cmd, int in_fd, int out_fd)
 {
 	t_builtin_func	func;
 
+	if (in_fd != STDIN_FILENO)
+	{
+		dup2(in_fd, STDIN_FILENO);
+		close(in_fd);
+	}
+	if (out_fd != STDOUT_FILENO)
+	{
+		dup2(out_fd, STDOUT_FILENO);
+		close(out_fd);
+	}
 	func = NULL;
 	if (cmd->token->size > 0)
 		func = init_builtin(cmd->token->arr[0]);
@@ -57,7 +64,6 @@ t_io_fd	*alloc_io_array(int n_cmds)
 	return (ret);
 }
 
-#include <stdio.h>
 int	wait_subprocesses(int n_cmds, int *pids)
 {
 	int	pid;
@@ -70,11 +76,15 @@ int	wait_subprocesses(int n_cmds, int *pids)
 	while (idx < n_cmds)
 	{
 		pid = waitpid(0, &status, 0);
-		// fprintf(stderr, "waitpid %d\n", pid);
 		if (pid < 0)
 			continue ;
-		if (pid == pids[n_cmds -1])
-			exit_code = WEXITSTATUS(status);
+		if (pid == pids[n_cmds - 1])
+		{
+			if (WIFEXITED(status))
+				exit_code = WEXITSTATUS(status);
+			else
+				exit_code = WTERMSIG(status) + 128;
+		}
 		idx++;
 	}
 	if (exit_code < 0)
@@ -96,7 +106,6 @@ void	open_pipe(t_io_fd *io, int idx)
 }
 
 void	execute_pipe_internal(int n_cmds, t_command *cmds)
-// no return
 {
 	int		*pids;
 	t_io_fd	*io;
@@ -109,29 +118,13 @@ void	execute_pipe_internal(int n_cmds, t_command *cmds)
 	{
 		if (idx < n_cmds - 1)
 			open_pipe(io, idx);
-		// fprintf(stderr, "%d: in %d, out %d\n", idx, io[idx].in, io[idx].out);
 		pids[idx] = fork();
 		if (pids[idx] == 0)
 		{
-			// if (dup2(io[idx].in, STDIN_FILENO) == -1 
-			// 	|| dup2(io[idx].out, STDOUT_FILENO) == -1)
-			// 	fatal_error("dup2() failed");
 			if (idx < n_cmds - 1)
 				close(io[idx + 1].in);
-			if (io[idx].in != STDIN_FILENO)
-			{
-				dup2(io[idx].in, STDIN_FILENO);
-				close(io[idx].in);
-			}
-			if (io[idx].out != STDOUT_FILENO)
-			{
-				dup2(io[idx].out, STDOUT_FILENO);
-				close(io[idx].out);
-			}
-			// close(STDIN_FILENO);
-			execute_pipe_single(&cmds[idx]);
+			execute_pipe_single(&cmds[idx], io[idx].in, io[idx].out);
 		}
-		// fprintf(stderr, "%d: pid %d\n", idx, pids[idx]);
 		close(io[idx].in);
 		close(io[idx].out);
 		idx++;

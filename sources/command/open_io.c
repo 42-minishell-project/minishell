@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 23:53:49 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 13:13:26 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 11:25:27 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	open_in_file(char *file)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		fatal_error(file);
 	return (fd);
 }
 
@@ -58,8 +56,6 @@ int	open_out_file(char *file)
 	int	fd;
 
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-		fatal_error(file);
 	return (fd);
 }
 
@@ -68,7 +64,5 @@ int	open_out_file_append(char *file)
 	int	fd;
 
 	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (fd == -1)
-		fatal_error(file);
 	return (fd);
 }

@@ -36,12 +36,11 @@ SRCS =	\
 		env/state.c \
 		command/command.c \
 		command/execute.c \
-		command/execute2.c \
-		command/execute_pipe.c \
-		command/env_path.c \
-		command/find_exe.c \
+		command/exec_single.c \
+		command/exec_pipe.c \
+		command/exec_utils.c \
 		command/open_io.c \
-		command/open_io2.c \
+		command/redirect.c \
 		utils/str_array.c \
 		utils/chr_array.c \
 		utils/io_array.c \

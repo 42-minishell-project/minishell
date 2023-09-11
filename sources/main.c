@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 15:46:50 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:45:47 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <readline/history.h>
 #include "env/env.h"
 #include "parser/parser.h"
-#include "command/env_path.h"
 #include "command/execute.h"
 #include "builtin/builtin.h"
 #include "utils/signal_utils.h"
