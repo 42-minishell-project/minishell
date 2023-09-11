@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils2.c                                       :+:      :+:    :+:   */
+/*   env_node.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:06:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:04:45 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:19:58 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft/libft.h"
 #include "env/env_utils.h"
 
@@ -20,7 +21,8 @@ t_env_deque	*get_env_deque(void)
 	return (&env);
 }
 
-t_env_node	*new_node(char *name, char *value)
+
+t_env_node	*new_node(const char *name, const char *value)
 {
 	t_env_node	*ret;
 
@@ -39,7 +41,7 @@ void	delete_node(t_env_node *node)
 	free(node);
 }
 
-t_env_node	*find_env_node(t_env_deque *envs, char *name)
+t_env_node	*find_env_node(t_env_deque *envs, const char *name)
 {
 	t_env_node	*cur;
 
@@ -53,7 +55,7 @@ t_env_node	*find_env_node(t_env_deque *envs, char *name)
 	return (NULL);
 }
 
-void	replace_env_node_value(t_env_node *node, char *value)
+void	replace_env_node_value(t_env_node *node, const char *value)
 {
 	free(node->value);
 	node->value = ft_strdup(value);

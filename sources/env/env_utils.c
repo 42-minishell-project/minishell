@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 00:18:21 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:04:32 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:20:06 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ int	parse_identifier(char *s, char **name, char **value)
 	}
 	return (0);
 }
-

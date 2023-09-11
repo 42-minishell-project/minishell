@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:41:47 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:05:07 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:20:27 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,3 @@ void	update_last_exit_code(int exit_code)
 		free(s->exit_code_str);
 	s->exit_code_str = ft_itoa(exit_code);
 }
-

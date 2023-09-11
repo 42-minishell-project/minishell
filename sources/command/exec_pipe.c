@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe.c                                     :+:      :+:    :+:   */
+/*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:02:50 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:17:45 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
+#include <stdlib.h>
+#include "command/execute.h"
 #include "command/command.h"
-#include "command/exe_utils.h"
+#include "command/redirect.h"
+#include "command/exec_utils.h"
 #include "builtin/builtin.h"
-#include "utils/cmd_array.h"
-#include "utils/error.h"
 
-void	execute_pipe_single(t_command *cmd)
+
+void	execute_pipe_single(t_command *cmd, int in_fd, int out_fd)
 {
 	t_builtin_func	func;
 
+	if (in_fd != STDIN_FILENO)
+	{
+		dup2(in_fd, STDIN_FILENO);
+		close(in_fd);
+	}
+	if (out_fd != STDOUT_FILENO)
+	{
+		dup2(out_fd, STDOUT_FILENO);
+		close(out_fd);
+	}
 	func = NULL;
 	if (cmd->token->size > 0)
 		func = init_builtin(cmd->token->arr[0]);
@@ -69,8 +79,13 @@ int	wait_subprocesses(int n_cmds, int *pids)
 		pid = waitpid(0, &status, 0);
 		if (pid < 0)
 			continue ;
-		if (pid == pids[n_cmds -1])
-			exit_code = WEXITSTATUS(status);
+		if (pid == pids[n_cmds - 1])
+		{
+			if (WIFEXITED(status))
+				exit_code = WEXITSTATUS(status);
+			else
+				exit_code = WTERMSIG(status) + 128;
+		}
 		idx++;
 	}
 	if (exit_code < 0)
@@ -107,19 +122,22 @@ void	execute_pipe_internal(int n_cmds, t_command *cmds)
 		pids[idx] = fork();
 		if (pids[idx] == 0)
 		{
-			if (io[idx].in != STDIN_FILENO)
-			{
-				dup2(io[idx].in, STDIN_FILENO);
-				close(io[idx].in);
-			}
-			if (io[idx].out != STDOUT_FILENO)
-			{
-				dup2(io[idx].out, STDOUT_FILENO);
-				close(io[idx].out);
-			}
+			// if (io[idx].in != STDIN_FILENO)
+			// {
+			// 	dup2(io[idx].in, STDIN_FILENO);
+			// 	close(io[idx].in);
+			// }
+			// if (io[idx].out != STDOUT_FILENO)
+			// {
+			// 	dup2(io[idx].out, STDOUT_FILENO);
+			// 	close(io[idx].out);
+			// }
+			// if (idx < n_cmds - 1)
+			// 	close(io[idx + 1].in);
+			// execute_pipe_single(&cmds[idx]);
 			if (idx < n_cmds - 1)
 				close(io[idx + 1].in);
-			execute_pipe_single(&cmds[idx]);
+			execute_pipe_single(&cmds[idx], io[idx].in, io[idx].out);
 		}
 		close(io[idx].in);
 		close(io[idx].out);

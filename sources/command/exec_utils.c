@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_exe.c                                         :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 13:53:42 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:04:19 by yeohong          ###   ########.fr       */
+/*   Created: 2023/09/06 15:59:41 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 12:18:10 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "libft/libft.h"
+#include "command/command.h"
+#include "command/exec_utils.h"
+#include "command/redirect.h"
 #include "env/env.h"
 #include "utils/error.h"
 
 char	*find_path_prefix(char *exe, char **paths)
 {
-	int		idx;
 	char	*full_path;
-	size_t	exec_len;
-	size_t	path_len;
+	int		exec_len;
+	int		path_len;
+	int		idx;
 
 	idx = 0;
 	exec_len = ft_strlen(exe);
@@ -47,9 +51,7 @@ char	*find_executable(char *exe)
 	struct stat	buf;
 
 	if ((ft_strlen(exe) == 0) || ft_strchr(exe, '/'))
-	{
 		exe = ft_strdup(exe);
-	}
 	else
 	{
 		exe_path = find_path_prefix(exe, get_env_path());
@@ -66,4 +68,18 @@ char	*find_executable(char *exe)
 	if (S_ISDIR(buf.st_mode))
 		command_directory_error(exe);
 	return (exe);
+}
+
+void	run_non_builtin(t_command *cmd)
+{
+	char	*exe;
+
+	prepare_io(cmd->io);
+	if (cmd->token->size > 0)
+	{
+		exe = find_executable(cmd->token->arr[0]);
+		if (execve(exe, cmd->token->arr, get_envp()) == -1)
+			fatal_error("execve failed");
+	}
+	exit(0);
 }

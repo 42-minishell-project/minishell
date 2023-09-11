@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_dest.c                                        :+:      :+:    :+:   */
+/*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 16:54:28 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:04:57 by yeohong          ###   ########.fr       */
+/*   Created: 2023/08/23 13:56:07 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 12:15:48 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "env/env.h"
+#ifndef REDIRECT_H
+# define REDIRECT_H
 
-void	init_envs(char **envp)
-{
-	int		idx;
-	char	*name;
-	char	*value;
+// char	*find_executable(char *exe);
+# include "utils/io_array.h"
 
-	idx = 0;
-	while (envp[idx])
-	{
-		name = NULL;
-		value = NULL;
-		parse_identifier(envp[idx], &name, &value);
-		if (name && value)
-			update_env(name, value);
-		free(name);
-		free(value);
-		idx++;
-	}
-	update_env_path(find_env("PATH"));
-}
+void	prepare_io(t_io_arr *io);
+int		prepare_io_noexcept(t_io_arr *io);
+
+#endif

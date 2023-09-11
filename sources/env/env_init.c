@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe_utils.h                                        :+:      :+:    :+:   */
+/*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 14:47:01 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 15:53:29 by yeohong          ###   ########.fr       */
+/*   Created: 2023/09/06 16:54:28 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 12:19:45 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXE_UTILS_H
-# define EXE_UTILS_H
+#include <stdlib.h>
+#include "env/env.h"
 
-# include "command/command.h"
-
-typedef struct s_io_fd
+void	init_envs(char **envp)
 {
-	int	in;
-	int	out;
-}	t_io_fd;
+	int		idx;
+	char	*name;
+	char	*value;
 
-void	prepare_io(t_io_arr *cmd);
-void	run_non_builtin(t_command *cmd);
-void	execute_pipe_internal(int n_cmds, t_command *cmds);
-int		prepare_io_noexcept(t_io_arr *io);
-
-#endif
+	idx = 0;
+	while (envp[idx])
+	{
+		name = NULL;
+		value = NULL;
+		parse_identifier(envp[idx], &name, &value);
+		if (name && value)
+			update_env(name, value);
+		free(name);
+		free(value);
+		idx++;
+	}
+	update_env_path(find_env("PATH"));
+}
