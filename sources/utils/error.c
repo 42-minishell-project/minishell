@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 23:58:44 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:07:57 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 13:28:41 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 void	fatal_error(const char *message)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	if (ft_strlen(message) == 0)
+		ft_putstr_fd(": ", STDERR_FILENO);
 	perror(message);
 	exit(1);
 }
@@ -24,6 +26,8 @@ void	fatal_error(const char *message)
 void	command_find_error(const char *message)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	if (ft_strlen(message) == 0)
+		ft_putstr_fd(": ", STDERR_FILENO);
 	perror(message);
 	exit(127);
 }

@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:59:41 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:18:10 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 13:12:19 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ char	*find_executable(char *exe)
 	char		*exe_path;
 	struct stat	buf;
 
-	if ((ft_strlen(exe) == 0) || ft_strchr(exe, '/'))
+	if (ft_strlen(exe) == 0)
+		command_not_found_error(exe);
+	else if (ft_strchr(exe, '/'))
 		exe = ft_strdup(exe);
 	else
 	{

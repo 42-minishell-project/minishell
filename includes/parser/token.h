@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:50:16 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 15:54:30 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:24:39 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,19 @@ typedef struct s_token
 	t_special_type	type;
 }	t_token;
 
+typedef enum e_command_end
+{
+	CMD_START = 0,
+	CMD_END = 1,
+	CMD_PIPE = 2,
+	CMD_ERROR = 3
+}	t_command_end;
+
 typedef enum e_parse_result
 {
-	RES_START = 0,
+	RES_OK = 0,
 	RES_END = 1,
-	RES_PIPE = 2,
-	RES_ERROR = 3
+	RES_ERROR = 2
 }	t_parse_result;
 
 #endif

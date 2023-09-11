@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 16:05:38 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/11 12:32:42 by yeohong          ###   ########.fr       */
+/*   Created: 2023/09/11 16:11:48 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/11 16:36:37 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,79 +192,76 @@ void	trim_whitespace(t_cursor *s, int expand_env)
 	}
 }
 
-t_token	*parse_next_token(t_cursor *s)
-{
-	t_token		*ret;
-	t_chr_arr	*token;
-	char		c;
-	int			pushed;
 
-	trim_whitespace(s, 1);
-	if (!peek_cursor(s))
-		return (NULL);
-	ret = malloc(sizeof(t_token));
-	ret->s = NULL;
+// 	trim_whitespace(s, 1);
+// 	if (!peek_cursor(s))
+// 		return (NULL);
+// 	ret = malloc(sizeof(t_token));
+// 	ret->s = NULL;
+// 	ret->type = SP_NONE;
+// 	if (is_special(s, peek_cursor(s)))
+// 	{
+// 		ret->type = check_special_type(s);
+// 		return (ret);
+// 	}
+// 	token = new_chr_array();
+// 	pushed = 0;
+// 	while (1)
+// 	{
+// 		c = peek_cursor_with_env(s);
+// 		if (!c || ft_isspace(c) || is_special(s, c))
+// 			break ;
+// 		pushed = 1;
+// 		if (c == '\'')
+// 			parse_single_quote(s, token);
+// 		else if (c == '\"')
+// 			parse_double_quote(s, token);
+// 		else
+// 			push_chr_array(token, forward_cursor(s));
+// 	}
+// 	if (pushed)
+// 		ret->s = copy_chr_arr_to_string(token);
+// 	else
+// 	{
+// 		free(ret);
+// 		ret = NULL;
+// 	}
+// 	delete_chr_array(token);
+// 	return (ret);
+// }
+
+
+// int	parse_next_token_internal(t_token *ret, t_cursor *s)
+t_parse_result	parse_next_token_internal(t_token *ret, t_cursor *s)
+{
+	t_chr_arr		*token;
+	char			c;
+	t_parse_result	ended;
+
 	ret->type = SP_NONE;
-	if (is_special(s, peek_cursor(s)))
-	{
-		ret->type = check_special_type(s);
-		return (ret);
-	}
-	token = new_chr_array();
-	pushed = 0;
-	while (1)
-	{
-		c = peek_cursor_with_env(s);
-		if (!c || ft_isspace(c) || is_special(s, c))
-			break ;
-		pushed = 1;
-		if (c == '\'')
-			parse_single_quote(s, token);
-		else if (c == '\"')
-			parse_double_quote(s, token);
-		else
-			push_chr_array(token, forward_cursor(s));
-	}
-	if (pushed)
-		ret->s = copy_chr_arr_to_string(token);
-	else
-	{
-		free(ret);
-		ret = NULL;
-	}
-	delete_chr_array(token);
-	return (ret);
-}
-
-
-int	parse_next_token_internal(t_token *ret, t_cursor *s)
-{
-	t_chr_arr	*token;
-	char		c;
-	int			ended;
-
+	ret->s = NULL;
 	trim_whitespace(s, 1);
 	if (!peek_cursor(s))
-		return (1);
+		return (RES_END);
 	if (is_special(s, peek_cursor(s)))
 	{
 		ret->type = check_special_type(s);
-		return (0);
+		return (RES_OK);
 	}
 	token = new_chr_array();
-	ended = 1;
+	ended = RES_END;
 	while (1)
 	{
 		c = peek_cursor_with_env(s);
 		if (!c || ft_isspace(c) || is_special(s, c))
 			break ;
-		ended = 0;
+		ended = RES_OK;
 		if (c == '\'')
 		{
 			if (parse_single_quote(s, token) == -1)
 			{
 				delete_chr_array(token);
-				return (-1);
+				return (RES_ERROR);
 			}
 		}
 		else if (c == '\"')
@@ -272,13 +269,14 @@ int	parse_next_token_internal(t_token *ret, t_cursor *s)
 			if (parse_double_quote(s, token) == -1)
 			{
 				delete_chr_array(token);
-				return (-1);
+				return (RES_ERROR);
 			}
 		}
 		else
 			push_chr_array(token, forward_cursor(s));
 	}
-	if (!ended)
+
+	if (ended == RES_OK)
 		ret->s = copy_chr_arr_to_string(token);
 	delete_chr_array(token);
 	return (ended);
@@ -311,41 +309,6 @@ t_io_file	make_io_file(t_special_type type, char *s/*move ownership*/)
 	return (ret);
 }
 
-t_parse_result	parse_single_command_(t_cursor *s, t_str_arr *args, t_io_arr *io)
-{
-	t_token	*token;
-	t_token	*tmp;
-
-	while (1)
-	{
-		token = parse_next_token(s);
-		if (!token)
-			return (RES_END);
-		if (token->type == SP_PIPE)
-		{
-			free(token);
-			return (RES_PIPE) ;
-		}
-		else if (token->type == SP_IN || token->type == SP_IN_HEREDOC
-			|| token->type == SP_OUT || token->type == SP_OUT_APPEND)
-		{
-			tmp = parse_next_token(s);
-			if (tmp->type != SP_NONE)
-				syntax_error_unexpected_token("");
-			t_io_file tmpfile = make_io_file(token->type, tmp->s);
-			push_io_array(io, tmpfile);
-			free(tmp);
-			free(token);
-		}
-		else
-		{
-			push_str_array(args, token->s);
-			free(token);
-		}
-	}
-	return (RES_ERROR);
-}
-
 char	*token_type_to_str(t_special_type type)
 {
 	if (type == SP_IN)
@@ -361,78 +324,93 @@ char	*token_type_to_str(t_special_type type)
 	return ("");
 }
 
-t_parse_result	parse_single_command(t_cursor *s, t_str_arr *args, t_io_arr *io)
+t_command_end	parse_single_command(t_cursor *s, t_str_arr *args, t_io_arr *io)
 {
-	int		ret;
-	t_token	token;
-	t_token	tmp;
+	t_parse_result	ret;
+	t_token			token;
+	t_token			tmp;
 
 	while (1)
 	{
-		token.s = NULL;
-		token.type = SP_NONE;
 		ret = parse_next_token_internal(&token, s);
-		if (ret == 1)
-			return (RES_END);
-		else if (ret == -1)
-			return (RES_ERROR);
+		if (ret == RES_END)
+			return (CMD_END);
+		else if (ret == RES_ERROR)
+			return (CMD_ERROR);
 		if (token.type == SP_PIPE)
-			return (RES_PIPE);
+			return (CMD_PIPE);
 		else if (token.type == SP_IN || token.type == SP_IN_HEREDOC
 			|| token.type == SP_OUT || token.type == SP_OUT_APPEND)
 		{
 			tmp.s = NULL;
 			tmp.type = SP_NONE;
 			ret = parse_next_token_internal(&tmp, s);
-			if (ret == -1)
-				return (RES_ERROR);
-			else if (ret == 1 || tmp.type != SP_NONE)
+			if (ret == RES_ERROR)
+				return (CMD_ERROR);
+			else if (ret == RES_END || tmp.type != SP_NONE)
 			{
 				syntax_error_unexpected_token(token_type_to_str(tmp.type));
-				return (RES_ERROR);
+				return (CMD_ERROR);
 			}
 			push_io_array(io, make_io_file(token.type, tmp.s));
 		}
 		else
 			push_str_array(args, token.s);
 	}
-	return (RES_ERROR);
+	return (CMD_ERROR);
+}
+
+t_parse_result	interpret_command_parsed(
+	t_command *cmd, t_command_end result, t_command_end last_result)
+{
+	if (result == CMD_ERROR)
+	{
+		return (RES_ERROR);
+	}
+	else if (cmd->io->size == 0 && cmd->token->size == 0)
+	{
+		if (result == CMD_PIPE)
+		{
+			syntax_error_unexpected_token("|");
+			return (RES_ERROR);
+		}
+		else if (last_result == CMD_PIPE)
+		{
+			syntax_error_unexpected_eof();
+			return (RES_ERROR);
+		}
+		return (RES_END);
+	}
+	return (RES_OK);
 }
 
 int	parse_line_internal(t_cmd_arr *cmds, t_cursor *s)
 {
 	t_command		tmp_cmd;
-	t_parse_result	parse_result;
-	t_parse_result	last_result;
+	t_command_end	parse_result;
+	t_command_end	last_result;
+	t_parse_result	result;
 
-	last_result = RES_START;
+	last_result = CMD_START;
 	while (1)
 	{
 		init_command(&tmp_cmd);
 		parse_result = parse_single_command(s, tmp_cmd.token, tmp_cmd.io);
-		if (parse_result == RES_ERROR)
+		result = interpret_command_parsed(&tmp_cmd, parse_result, last_result);
+		if (result != RES_OK)
 		{
 			destruct_command(&tmp_cmd);
-			return (-1);
-		}
-		else if (tmp_cmd.io->size == 0 && tmp_cmd.token->size == 0)
-		{
-			destruct_command(&tmp_cmd);
-			if (parse_result == RES_PIPE)
-				return (syntax_error_unexpected_token("|"));
-			else if (last_result == RES_PIPE)
-				return (syntax_error_unexpected_eof());
+			if (result == RES_ERROR)
+				return (-1);
 			break ;
 		}
-		else
-			push_cmd_array(cmds, tmp_cmd);
+		push_cmd_array(cmds, tmp_cmd);
 		last_result = parse_result;
-		if (parse_result == RES_END)
+		if (parse_result == CMD_END)
 			break ;
 	}
 	return (0);
 }
-
 
 t_cmd_arr	*parse_line(char *line)
 {
@@ -445,44 +423,6 @@ t_cmd_arr	*parse_line(char *line)
 	{
 		delete_cmd_array(cmds);
 		cmds = NULL;
-	}
-	destruct_cursor(&s);
-	return (cmds);
-}
-
-t_cmd_arr	*parse_line_(char *line)
-{
-	t_cursor		s;
-	t_cmd_arr		*cmds;
-	t_command		tmp_cmd;
-	t_parse_result	parse_result;
-	t_parse_result	last_result;
-
-	init_cursor(&s, line);
-	cmds = new_cmd_array();
-	last_result = RES_START;
-	while (1)
-	{
-		init_command(&tmp_cmd);
-		parse_result = parse_single_command(&s, tmp_cmd.token, tmp_cmd.io);
-		if (last_result == RES_PIPE
-			&& tmp_cmd.io->size == 0 && tmp_cmd.token->size == 0)
-		{
-			if (parse_result == RES_END)
-				syntax_error_unexpected_eof();
-			else
-				syntax_error_unexpected_token("|");
-		}
-		else if (last_result == RES_END
-			&& tmp_cmd.io->size == 0 && tmp_cmd.token->size == 0)
-			;
-		else
-			push_cmd_array(cmds, tmp_cmd);
-		last_result = parse_result;
-		if (parse_result == RES_END)
-		{
-			break ;
-		}
 	}
 	destruct_cursor(&s);
 	return (cmds);

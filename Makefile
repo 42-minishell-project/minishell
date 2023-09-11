@@ -13,8 +13,8 @@ LIB_FLAGS =	$(addprefix -L$(LIB_DIR)/, $(LIB_NAMES)) \
 			$(addprefix -l, $(subst lib,,$(LIB_NAMES))) \
 			-lreadline
 
-LINKING_FLAGS = -lreadline -L/opt/homebrew/opt/readline/lib
-COMFILE_FLAGS = -I/opt/homebrew/opt/readline/include
+# LINKING_FLAGS = -lreadline -L/opt/homebrew/opt/readline/lib
+# COMFILE_FLAGS = -I/opt/homebrew/opt/readline/include
 
 INCLUDES =	includes \
 			libraries
@@ -29,6 +29,7 @@ SRCS =	\
 		cursor.c \
 		parser/parser.c \
 		parser/cursor.c \
+		parser/cursor2.c \
 		env/env.c \
 		env/env_utils.c \
 		env/env_node.c \
@@ -67,12 +68,8 @@ all: $(NAME)
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ $(COMFILE_FLAGS)
 
-$(BUILD_DIR)/%.o: $(SRCS_DIR)/**/%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRCS_DIR)/*/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@ 
-
-echo:
-	@echo $(SRCS)
-	@echo $(OBJS)
 
 $(LIB_DIR)/%.a:
 	$(MAKE) all -C $(dir $@)
