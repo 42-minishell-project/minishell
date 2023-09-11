@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/11 10:50:38 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:55:00 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static long long	ft_long_long_atoi(char *str, int i, int *over)
 
 	sign = 1;
 	result = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i++] == '-')

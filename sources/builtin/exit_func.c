@@ -6,9 +6,14 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 16:19:12 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 16:26:28 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:56:49 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+static int	is_space(int c)
+{
+	return ((9 <= c && c <= 13) || (c == 32));
+}
 
 int	is_number(char *str)
 {
@@ -19,9 +24,11 @@ int	is_number(char *str)
 		i++;
 	if (!str[i])
 		return (0);
+	while (str[i] && is_space(str[i]))
+		i++;
 	while (str[i])
 	{
-		if (!('0' <= str[i] && str[i] <= '9'))
+		if (!('0' <= str[i] && str[i] <= '9') && !is_space(str[i]))
 			return (0);
 		i++;
 	}
