@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:05:17 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:47:18 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/11 19:41:31 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
-#include <stdio.h>
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include "libft/libft.h"
 #include "command/exec_utils.h"
-#include "utils/error.h"
 #include "signal/signal.h"
+#include "utils/error.h"
 
 void	get_heredoc_content(const char *eof, int write_fd)
 {
@@ -51,22 +50,17 @@ int	open_heredoc(const char *eof, int *exit_code)
 	if (pipe(pipe_fd) == -1)
 		fatal_error("pipe() failed");
 	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{
-		printf("%d: get input - heredoc\n", getpid());
 		close(pipe_fd[0]);
 		get_heredoc_content(eof, pipe_fd[1]);
 		exit(0);
 	}
-	printf("heredoc: child %d\n", pid);
 	close(pipe_fd[1]);
 	waitpid(pid, &status, 0);
 	*exit_code = status_to_exit_code(status);
 	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
-	printf("heredoc: child exit %d\n", *exit_code);
 	if (*exit_code != 0)
 	{
 		close(pipe_fd[0]);
@@ -74,4 +68,3 @@ int	open_heredoc(const char *eof, int *exit_code)
 	}
 	return (pipe_fd[0]);
 }
-
