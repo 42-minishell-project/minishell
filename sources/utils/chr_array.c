@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chr_array.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:43:56 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 13:12:49 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:48:54 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,6 @@ char	*copy_chr_arr_to_string(t_chr_arr *arr)
 {
 	char	*s;
 
-	// s = malloc((arr->size + 1) * sizeof(char));
-	// for (int i = 0; i < arr->size; i++)
-	// 	s[i] = arr->arr[i];
-	// s[arr->size] = '\0';
 	s = ft_strdup(arr->arr);
 	return (s);
 }

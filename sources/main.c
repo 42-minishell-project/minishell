@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 11:43:25 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:46:50 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,13 @@ void	sig_handler(int signal)
 		set_sigint();
 	else if (signal == SIGQUIT)
 		set_sigquit();
-	if (rl_on_new_line() == -1)
-		exit(1);
-	rl_replace_line("", 1);
-	rl_redisplay();
+	if (!(signal == SIGINT && g_child_pid != 0))
+	{
+		if (rl_on_new_line() == -1)
+			exit(1);
+		rl_replace_line("", 1);
+		rl_redisplay();
+	}
 }
 
 void	set_handler(void)
@@ -49,60 +52,26 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	char			*line;
 	t_cmd_arr		*arr;
+	int				ret;
 
 	set_term();
 	set_handler();
-
 	init_envs(envp);
-	// while (1)
-	for (int i = 0; i < 10; i++)
+	while (1)
 	{
-		line = readline("> ");
+		line = readline("minishell$ ");
 		if (!line)
-		{
-			print_prompt_cursor();
-			exit(0);
-		}
+			print_signal_d();
 		if (check_command_nonempty(line))
 		{
 			add_history(line);
 			arr = parse_line(line);
 			if (!arr)
-				continue;
-			printf("=========start\n");
-			int ret = execute_commands(arr);
+				continue ;
+			ret = execute_commands(arr);
 			update_last_exit_code(ret);
 			delete_cmd_array(arr);
-			printf("=========done\n");
 		}
 		free(line);
 	}
 }
-
-
-	// for (int i = 0; i < arr->size; i++)
-	// {
-	// 	t_command cmd = arr->arr[i];
-	// 	printf("CMD %d:\n", i);
-	// 	printf("    %d TOKENS:\n", cmd.token->size);
-	// 	for (int j = 0; j < cmd.token->size; j++)
-	// 	{
-	// 		printf("        \"%s\"\n", cmd.token->arr[j]);
-	// 	}
-	// 	printf("    %d IO:\n", cmd.io->size);
-	// 	for (int j = 0; j < cmd.io->size; j++)
-	// 	{
-	// 		char *name;
-	// 		if (cmd.io->arr[j].type == IO_IN_FILE)
-	// 			name = "infile";
-	// 		else if (cmd.io->arr[j].type == IO_IN_HEREDOC)
-	// 			name = "infile_heredoc";
-	// 		else if (cmd.io->arr[j].type == IO_OUT_TRUNC)
-	// 			name = "outfile";
-	// 		else if (cmd.io->arr[j].type == IO_OUT_APPEND)
-	// 			name = "outfile_append";
-	// 		printf("        %s: \"%s\"\n", name, cmd.io->arr[j].str);
-	// 	}
-	// }
-
-	

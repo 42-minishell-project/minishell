@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_array.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:43:56 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 15:22:23 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:48:52 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "utils/cmd_array.h"
-
 #include <stdlib.h>
+
 t_cmd_arr	*new_cmd_array(void)
 {
 	t_cmd_arr	*ret;

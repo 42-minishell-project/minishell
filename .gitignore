@@ -7,5 +7,6 @@
 *.in
 *.out
 
+minishell_tester/
 build/
 .vscode/

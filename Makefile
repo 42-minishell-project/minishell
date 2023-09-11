@@ -85,8 +85,7 @@ $(NAME): $(OBJS) $(LIBS)
 
 clean:
 	$(foreach LIB,$(LIBS),$(MAKE) fclean -C $(dir $(LIB)))
-	rm -f $(OBJS)
-	rmdir $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
 	rm -f $(NAME)

@@ -70,7 +70,7 @@ int	wait_subprocesses(int n_cmds, int *pids)
 	while (idx < n_cmds)
 	{
 		pid = waitpid(0, &status, 0);
-		fprintf(stderr, "waitpid %d\n", pid);
+		// fprintf(stderr, "waitpid %d\n", pid);
 		if (pid < 0)
 			continue ;
 		if (pid == pids[n_cmds -1])
@@ -109,7 +109,7 @@ void	execute_pipe_internal(int n_cmds, t_command *cmds)
 	{
 		if (idx < n_cmds - 1)
 			open_pipe(io, idx);
-		fprintf(stderr, "%d: in %d, out %d\n", idx, io[idx].in, io[idx].out);
+		// fprintf(stderr, "%d: in %d, out %d\n", idx, io[idx].in, io[idx].out);
 		pids[idx] = fork();
 		if (pids[idx] == 0)
 		{
@@ -131,7 +131,7 @@ void	execute_pipe_internal(int n_cmds, t_command *cmds)
 			// close(STDIN_FILENO);
 			execute_pipe_single(&cmds[idx]);
 		}
-		fprintf(stderr, "%d: pid %d\n", idx, pids[idx]);
+		// fprintf(stderr, "%d: pid %d\n", idx, pids[idx]);
 		close(io[idx].in);
 		close(io[idx].out);
 		idx++;

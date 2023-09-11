@@ -6,11 +6,11 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 02:40:21 by jimlee            #+#    #+#             */
-/*   Updated: 2023/08/23 15:18:23 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/10 14:02:34 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UITLS_H
+#ifndef UTILS_H
 # define UTILS_H
 
 # include <stdlib.h>
