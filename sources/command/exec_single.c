@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:10:11 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 19:19:44 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 09:31:43 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	execute_single(t_command *cmd)
 
 	func = NULL;
 	if (cmd->token->size > 0)
-		func = init_builtin(cmd->token->arr[0]);
+		func = find_builtin_func(cmd->token->arr[0]);
 	if (func)
 	{
 		return (execute_single_builtin(cmd, func));
