@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:11:36 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:57:29 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 09:31:43 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_pipe_single(t_command *cmd, int in_fd, int out_fd)
 	}
 	func = NULL;
 	if (cmd->token->size > 0)
-		func = init_builtin(cmd->token->arr[0]);
+		func = find_builtin_func(cmd->token->arr[0]);
 	if (func)
 	{
 		prepare_io(cmd->io);

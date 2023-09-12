@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:05:39 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:02:17 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 09:50:58 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/libft.h"
+#include "builtin/builtin_utils.h"
 #include "env/env.h"
 
 int	run_unset(int argc, char **argv)
 {
 	int		idx;
-	int		valid;
+	int		exit_code;
 
-	valid = 0;
+	exit_code = 0;
 	idx = 1;
 	while (idx < argc)
 	{
@@ -29,12 +30,10 @@ int	run_unset(int argc, char **argv)
 		}
 		else
 		{
-			ft_putstr_fd("env: `", STDERR_FILENO);
-			ft_putstr_fd(argv[idx], STDERR_FILENO);
-			ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
-			valid = 1;
+			print_identifier_error("unset", argv[idx]);
+			exit_code = 1;
 		}
 		idx++;
 	}
-	return (valid);
+	return (exit_code);
 }

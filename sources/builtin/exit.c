@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/11 17:21:05 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 09:56:19 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include "utils/builtin_error.h"
+#include "builtin/builtin_utils.h"
 #include "utils/utils.h"
-#include "builtin/builtin_exit.h"
 
 static int	check_long_long_atoi(char *str, long long sum, int i, int sign)
 {

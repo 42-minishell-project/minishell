@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 21:11:20 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 15:55:28 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 09:44:33 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin/builtin.h"
 #include "libft/libft.h"
+#include "builtin/builtin.h"
+#include "builtin/builtin_func.h"
 
-t_builtin_func	init_builtin(const char *name)
+t_builtin_func	find_builtin_func(const char *name)
 {
-	char	**argv;
-
 	if (!name)
 		return (NULL);
 	if (ft_strcmp(name, "echo") == 0)
@@ -33,5 +32,5 @@ t_builtin_func	init_builtin(const char *name)
 		return (run_export);
 	else if (ft_strcmp(name, "unset") == 0)
 		return (run_unset);
-	return (0);
+	return (NULL);
 }

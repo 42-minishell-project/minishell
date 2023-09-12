@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_func.c                                        :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 16:19:12 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/11 11:56:49 by yeohong          ###   ########.fr       */
+/*   Created: 2023/09/12 09:49:10 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/12 09:56:28 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	is_space(int c)
+#include <unistd.h>
+#include "libft/libft.h"
+
+void	print_identifier_error(char *type, char *str)
 {
-	return ((9 <= c && c <= 13) || (c == 32));
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(type, STDERR_FILENO);
+	ft_putstr_fd("`", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
 }
 
 int	is_number(char *str)
@@ -24,11 +31,11 @@ int	is_number(char *str)
 		i++;
 	if (!str[i])
 		return (0);
-	while (str[i] && is_space(str[i]))
+	while (str[i] && ft_isdigit(str[i]))
 		i++;
 	while (str[i])
 	{
-		if (!('0' <= str[i] && str[i] <= '9') && !is_space(str[i]))
+		if (!('0' <= str[i] && str[i] <= '9') && !ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}
