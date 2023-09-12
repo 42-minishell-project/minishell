@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/12 09:56:19 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 10:01:03 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ static void	run_exit_number(char *str)
 {
 	long long	sum;
 	int			over;
-	int			result;
 
 	over = 0;
 	sum = ft_long_long_atoi(str, 0, &over);
@@ -104,9 +103,6 @@ static void	run_exit_number(char *str)
 
 int	run_exit(int argc, char **argv)
 {
-	int	over;
-
-	over = 0;
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (argc == 1)
 		exit(0);
@@ -127,4 +123,5 @@ int	run_exit(int argc, char **argv)
 				STDERR_FILENO);
 		}
 	}
+	return (0);
 }
