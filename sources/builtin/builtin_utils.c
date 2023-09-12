@@ -6,17 +6,12 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 09:49:10 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/12 13:12:58 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:59:01 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft/libft.h"
-
-static int	is_space(int c)
-{
-	return ((9 <= c && c <= 13) || (c == 32));
-}
 
 void	print_identifier_error(char *type, char *str)
 {
@@ -34,7 +29,7 @@ int	is_number(char *str)
 
 	flag = 0;
 	i = 0;
-	while (str[i] && is_space(str[i]))
+	while (str[i] && ft_isspace(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -45,11 +40,11 @@ int	is_number(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (flag == 1 && is_space(str[i]))
+		if (flag == 1 && ft_isspace(str[i]))
 			return (0);
 		else
 			flag = 0;
-		if (!('0' <= str[i] && str[i] <= '9') && !is_space(str[i]))
+		if (!('0' <= str[i] && str[i] <= '9') && !ft_isspace(str[i]))
 			return (0);
 		i++;
 	}
