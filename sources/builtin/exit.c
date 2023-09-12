@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/12 10:01:03 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 10:03:45 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int	run_exit(int argc, char **argv)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", \
 				STDERR_FILENO);
+			return (1);
 		}
 	}
 	return (0);
