@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:01:27 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 15:56:11 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 10:00:06 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	run_env(int argc, char **argv)
 	char	**envp;
 	int		idx;
 
+	(void)argv;
 	if (argc > 1)
 	{
 		ft_putstr_fd("env: too many arguments\n", STDERR_FILENO);
