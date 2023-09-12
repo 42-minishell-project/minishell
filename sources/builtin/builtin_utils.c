@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 09:49:10 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/12 09:56:28 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 10:12:17 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_identifier_error(char *type, char *str)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(type, STDERR_FILENO);
-	ft_putstr_fd("`", STDERR_FILENO);
+	ft_putstr_fd(": `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
 }
