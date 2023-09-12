@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:57:45 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 16:12:14 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:08:43 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void	set_term(void);
 void	print_prompt_cursor(void);
-void	set_sigquit(void);
-void	set_sigint(void);
 void	print_signal_d(void);
 
 #endif
