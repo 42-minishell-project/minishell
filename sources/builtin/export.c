@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:46 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:02:12 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 09:49:50 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "libft/libft.h"
+#include "builtin/builtin_utils.h"
 #include "env/env.h"
 #include "utils/utils.h"
-#include "utils/builtin_error.h"
-#include <stdio.h>
 
-static void	sorted_list(char **list, int size)
+static void	sort_list(char **list, int size)
 {
 	int		i;
 	int		j;
@@ -29,7 +29,7 @@ static void	sorted_list(char **list, int size)
 		j = 0;
 		while (j < size - 1 - i)
 		{
-			if (ft_strncmp(list[j], list[j + 1], ft_strlen(list[j])) > 0)
+			if (ft_strcmp(list[j], list[j + 1]) > 0)
 			{
 				temp = list[j];
 				list[j] = list[j + 1];
@@ -41,76 +41,67 @@ static void	sorted_list(char **list, int size)
 	}
 }
 
-static void	free_export(char *name, char *value, char **str)
+static void	print_envvar_list(void)
 {
-	if (name)
-		free(name);
-	if (value)
-		free(value);
-	if (str)
-		free_2d_str_array(str);
-}
-
-static void	print_export(void)
-{
-	char	**str;
+	char	**envp;
 	char	*name;
 	char	*value;
 	int		size;
 	int		i;
 
-	str = get_envp();
+	envp = get_envp();
 	size = 0;
-	while (str[size])
+	while (envp[size])
 		size++;
+	sort_list(envp, size);
 	i = 0;
-	sorted_list(str, size);
-	name = NULL;
-	value = NULL;
-	while (str[i])
+	while (envp[i])
 	{
-		parse_identifier(str[i], &name, &value);
-		print_export_correct(name, value);
+		parse_identifier(envp[i], &name, &value);
+		if (name && value)
+			printf("declare -x %s=\"%s\"\n", name, value);
+		free(name);
+		free(value);
 		i++;
 	}
-	free_export(name, value, str);
+	free_2d_str_array(envp);
 }
 
-static int	run_one_export(int argc)
+int	export_identifers(int n_ids, char **identifiers)
 {
-	if (argc == 1)
+	int		exit_code;
+	int		idx;
+	char	*name;
+	char	*value;
+
+	exit_code = 0;
+	idx = 0;
+	while (idx < n_ids)
 	{
-		print_export();
-		return (0);
+		if (parse_identifier(identifiers[idx], &name, &value))
+		{
+			if (name && value)
+				update_env(name, value);
+			free(name);
+			free(value);
+		}
+		else
+		{
+			print_identifier_error("export", identifiers[idx]);
+			exit_code = 1;
+		}
+		idx++;
 	}
-	return (1);
+	return (exit_code);
 }
 
 int	run_export(int argc, char **argv)
 {
-	int		idx;
-	int		valid;
-	char	*name;
-	char	*value;
-
-	valid = 0;
-	idx = 1;
-	if (run_one_export(argc) == 0)
-		return (0);
-	while (idx < argc)
+	if (argc == 1)
 	{
-		if (parse_identifier(argv[idx], &name, &value))
-		{
-			if (name && value)
-				update_env(name, value);
-			free_export(name, value, 0);
-		}
-		else
-		{
-			print_export_error(argv[idx]);
-			valid = 1;
-		}
-		idx++;
+		print_envvar_list();
+		return (0);
 	}
-	return (valid);
+	else
+		return (export_identifers(argc - 1, &argv[1]));
 }

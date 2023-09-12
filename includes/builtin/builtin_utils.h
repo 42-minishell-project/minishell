@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.h                                     :+:      :+:    :+:   */
+/*   builtin_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 16:23:57 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/10 16:26:36 by yeohong          ###   ########.fr       */
+/*   Created: 2023/09/12 09:48:07 by jimlee            #+#    #+#             */
+/*   Updated: 2023/09/12 09:55:21 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_EXIT_H
-# define BUILTIN_EXIT_H
+#ifndef BUILTIN_UTILS_H
+# define BUILTIN_UTILS_H
 
-// exit_func.c
-int				is_number(char *str);
-int				check_long_num(char *str, int standard, int i, int sum);
+void	print_identifier_error(char *type, char *str);
+
+int		is_number(char *str);
+int		check_long_num(char *str, int standard, int i, int sum);
 
 #endif

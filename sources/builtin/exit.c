@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:51:10 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/11 17:21:05 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 10:04:54 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include "utils/builtin_error.h"
+#include "builtin/builtin_utils.h"
 #include "utils/utils.h"
-#include "builtin/builtin_exit.h"
 
 static int	check_long_long_atoi(char *str, long long sum, int i, int sign)
 {
@@ -82,7 +81,6 @@ static void	run_exit_number(char *str)
 {
 	long long	sum;
 	int			over;
-	int			result;
 
 	over = 0;
 	sum = ft_long_long_atoi(str, 0, &over);
@@ -105,9 +103,6 @@ static void	run_exit_number(char *str)
 
 int	run_exit(int argc, char **argv)
 {
-	int	over;
-
-	over = 0;
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (argc == 1)
 		exit(0);
@@ -126,6 +121,8 @@ int	run_exit(int argc, char **argv)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", \
 				STDERR_FILENO);
+			return (1);
 		}
 	}
+	return (0);
 }
