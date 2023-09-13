@@ -6,7 +6,7 @@
 /*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:05:17 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 19:47:58 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:12:21 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	open_heredoc(const char *eof, int *exit_code)
 	close(pipe_fd[1]);
 	waitpid(pid, &status, 0);
 	*exit_code = status_to_exit_code(status);
-	signal(SIGINT, sig_handler);
+	// signal(SIGINT, sig_handler);
 	if (*exit_code != 0)
 	{
 		close(pipe_fd[0]);

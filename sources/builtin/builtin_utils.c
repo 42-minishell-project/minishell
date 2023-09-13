@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 09:49:10 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/12 10:12:17 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 16:59:01 by yeohong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,26 @@ void	print_identifier_error(char *type, char *str)
 int	is_number(char *str)
 {
 	int	i;
+	int	flag;
 
+	flag = 0;
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
+	while (str[i] && ft_isspace(str[i]))
 		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		i++;
+		flag = 1;
+	}
 	if (!str[i])
 		return (0);
-	while (str[i] && ft_isdigit(str[i]))
-		i++;
 	while (str[i])
 	{
-		if (!('0' <= str[i] && str[i] <= '9') && !ft_isdigit(str[i]))
+		if (flag == 1 && ft_isspace(str[i]))
+			return (0);
+		else
+			flag = 0;
+		if (!('0' <= str[i] && str[i] <= '9') && !ft_isspace(str[i]))
 			return (0);
 		i++;
 	}
