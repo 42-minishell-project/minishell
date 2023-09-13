@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chr_array.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:43:56 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/10 16:07:25 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 10:16:32 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_chr_arr	*new_chr_array(void)
 	ret = malloc(sizeof(t_chr_arr));
 	ret->capa = INITIAL_CAPA;
 	ret->size = 0;
-	ret->arr = calloc(ret->capa + 1, sizeof(char));
+	ret->arr = ft_calloc(ret->capa + 1, sizeof(char));
 	return (ret);
 }
 
@@ -31,7 +31,7 @@ void	push_chr_array(t_chr_arr *arr, char value)
 
 	if (arr->size == arr->capa)
 	{
-		new_arr = calloc(2 * arr->capa + 1, sizeof(char));
+		new_arr = ft_calloc(2 * arr->capa + 1, sizeof(char));
 		ft_memcpy(new_arr, arr->arr, arr->size * sizeof(char));
 		free(arr->arr);
 		arr->arr = new_arr;

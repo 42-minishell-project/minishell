@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:41:47 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:20:27 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:06:16 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,4 @@ void	update_env_path(char *path_str)
 	}
 	if (path_str)
 		s->paths = ft_split(path_str, ':');
-}
-
-char	*get_last_exit_code(void)
-{
-	t_env_state	*s;
-
-	s = get_env_state();
-	if (!s->exit_code_str)
-		return ("0");
-	return (s->exit_code_str);
-}
-
-void	update_last_exit_code(int exit_code)
-{
-	t_env_state	*s;
-
-	s = get_env_state();
-	if (s->exit_code_str)
-		free(s->exit_code_str);
-	s->exit_code_str = ft_itoa(exit_code);
 }

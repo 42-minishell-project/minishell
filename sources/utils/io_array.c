@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:43:56 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 18:37:57 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 10:17:03 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_io_arr	*new_io_array(void)
 	ret = malloc(sizeof(t_io_arr));
 	ret->capa = INITIAL_CAPA;
 	ret->size = 0;
-	ret->arr = calloc(ret->capa, sizeof(t_io_file));
+	ret->arr = ft_calloc(ret->capa, sizeof(t_io_file));
 	return (ret);
 }
 
@@ -31,7 +31,7 @@ void	push_io_array(t_io_arr *arr, t_io_file value)
 
 	if (arr->size == arr->capa)
 	{
-		new_arr = calloc(2 * arr->capa, sizeof(t_io_file));
+		new_arr = ft_calloc(2 * arr->capa, sizeof(t_io_file));
 		ft_memcpy(new_arr, arr->arr, arr->size * sizeof(t_io_file));
 		free(arr->arr);
 		arr->arr = new_arr;

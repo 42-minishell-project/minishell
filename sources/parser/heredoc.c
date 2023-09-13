@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:05:17 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/12 17:12:21 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:16:08 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
-#include <sys/wait.h>
 #include <stdio.h>
+#include <sys/wait.h>
 #include <readline/readline.h>
 #include "libft/libft.h"
 #include "command/exec_utils.h"
@@ -50,18 +50,19 @@ int	open_heredoc(const char *eof, int *exit_code)
 
 	if (pipe(pipe_fd) == -1)
 		fatal_error("pipe() failed");
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, sigint_run_handler);
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		close(pipe_fd[0]);
 		get_heredoc_content(eof, pipe_fd[1]);
 		exit(0);
 	}
+	signal(SIGINT, sigint_enter_handler);
 	close(pipe_fd[1]);
 	waitpid(pid, &status, 0);
 	*exit_code = status_to_exit_code(status);
-	// signal(SIGINT, sig_handler);
 	if (*exit_code != 0)
 	{
 		close(pipe_fd[0]);

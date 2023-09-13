@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/12 17:09:25 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:14:48 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <termios.h>
-#include <stdio.h>
 #include "libft/libft.h"
 #include "env/env.h"
 #include "command/execute.h"

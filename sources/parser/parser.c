@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:11:48 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 19:36:15 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 10:16:02 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,37 +100,6 @@ t_parse_result	parse_and_interpret(
 	push_cmd_array(cmds, tmp_cmd);
 	return (RES_OK);
 }
-
-/*
-int	parse_line_internal(t_cmd_arr *cmds, t_cursor *s)
-{
-	t_parse_result	result;
-	int				exit_code;
-	t_command_end	last_result;
-
-	last_result = CMD_START;
-	while (1)
-	{
-		result = parse_and_interpret(s, cmds, &last_result, &exit_code);
-		if (result == RES_ERROR)
-			return (exit_code);
-		if (result == RES_END)
-			break ;
-	}
-	return (0);
-}
-
-int	parse_line2(char *line, t_cmd_arr *cmds)
-{
-	t_cursor	s;
-	int			exit_code;
-
-	init_cursor(&s, line);
-	exit_code = parse_line_internal(cmds, &s);
-	destruct_cursor(&s);
-	return (exit_code);
-}
-*/
 
 int	parse_line(char *line, t_cmd_arr *cmds)
 {

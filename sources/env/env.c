@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:02:18 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:34:01 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/12 10:15:37 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ char	**get_envp(void)
 	int			len_value;
 
 	node = get_env_deque()->head;
-	ret = calloc(get_env_deque()->size + 1, sizeof(char *));
+	ret = ft_calloc(get_env_deque()->size + 1, sizeof(char *));
 	idx = 0;
 	while (node)
 	{
 		len_name = ft_strlen(node->name);
 		len_value = ft_strlen(node->value);
-		ret[idx] = calloc(len_name + len_value + 2, sizeof(char));
+		ret[idx] = ft_calloc(len_name + len_value + 2, sizeof(char));
 		ft_memcpy(ret[idx], node->name, len_name);
 		ret[idx][len_name] = '=';
 		ft_memcpy(ret[idx] + (len_name + 1), node->value, len_value);
