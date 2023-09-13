@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:38:50 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/13 20:07:26 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:23:15 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	expand_env_name(t_cursor *s)
 		}
 	}
 	if (name->size == 0)
-		push_cursor(s, "$", 0);
+		push_cursor(s, "$", CURSOR_NOEXPAND);
 	else
 	{
 		env_value = find_env(name->arr);
@@ -65,7 +65,7 @@ char	peek_cursor_with_env(t_cursor *s)
 	char	c;
 
 	c = peek_cursor(s);
-	if (c == '$')
+	if (c == '$' && !(s->cur->flag & CURSOR_NOEXPAND))
 	{
 		expand_env(s);
 		c = peek_cursor_with_env(s);

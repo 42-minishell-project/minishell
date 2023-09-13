@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:32:02 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 19:07:20 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:22:50 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_cursor
 typedef enum e_cursor_flag
 {
 	CURSOR_OWNERSHIP = 1 << 0,
-	CURSOR_SPECIAL = 1 << 1
+	CURSOR_SPECIAL = 1 << 1,
+	CURSOR_NOEXPAND = 1 << 2
 }	t_cursor_flag;
 
 void	init_cursor(t_cursor *cursor, char *s);
