@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:33:15 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/12 17:11:41 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:09:50 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNAL_H
 # define SIGNAL_H
 
-void	sigquit_handler(void);
-void	sigint_run_handler(int signal);
-void	sigint_enter_handler(int signal);
+void	sigquit_handler(int signo);
+void	sigint_run_handler(int signo);
+void	sigint_enter_handler(int signo);
 
 #endif

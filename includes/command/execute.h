@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 13:49:41 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 12:15:14 by yeohong          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:05:45 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 
 int	execute_commands(t_cmd_arr *commands);
 
-extern int	g_child_pid;
+extern int	g_last_exit_code;
 
 #endif

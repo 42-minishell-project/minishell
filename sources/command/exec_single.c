@@ -6,11 +6,12 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:10:11 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/12 09:31:43 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:08:31 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <signal.h>
 #include <sys/wait.h>
 #include "command/command.h"
 #include "command/execute.h"
@@ -46,10 +47,12 @@ int	execute_single_non_builtin(t_command *cmd)
 
 	pid = fork();
 	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		run_non_builtin(cmd);
-	g_child_pid = pid;
+	}
 	waitpid(pid, &status, 0);
-	g_child_pid = 0;
 	return (status_to_exit_code(status));
 }
 

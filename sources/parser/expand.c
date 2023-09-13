@@ -6,12 +6,13 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:38:50 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 19:20:25 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:07:26 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "parser/cursor.h"
+#include "command/execute.h"
 #include "env/env.h"
 #include "utils/chr_array.h"
 
@@ -53,7 +54,7 @@ void	expand_env(t_cursor *s)
 	if (c == '?')
 	{
 		forward_cursor(s);
-		push_cursor(s, get_last_exit_code(), 0);
+		push_cursor(s, ft_itoa(g_last_exit_code), CURSOR_OWNERSHIP);
 	}
 	else
 		expand_env_name(s);
