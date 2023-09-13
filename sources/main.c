@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 03:13:25 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/13 20:34:13 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:38:29 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	parse_and_run(char *line)
 	t_cmd_arr	*arr;
 	int			ret;
 
-	add_history(line);
 	arr = new_cmd_array();
 	ret = parse_line(line, arr);
 	if (ret == 0)
@@ -67,6 +66,7 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		if (check_command_nonempty(line))
 		{
+			add_history(line);
 			parse_and_run(line);
 		}
 		free(line);
