@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:52:48 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/13 20:14:48 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:31:50 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,9 @@
 #include "env/env.h"
 #include "command/execute.h"
 
-void	print_prompt_cursor(void)
+void	exit_eof(void)
 {
 	ft_putstr_fd("\033[1Aminishell$ exit\n", STDOUT_FILENO);
-}
-
-void	print_signal_d(void)
-{
-	print_prompt_cursor();
 	exit(0);
 }
 
