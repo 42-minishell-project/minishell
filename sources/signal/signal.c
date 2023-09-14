@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:32:09 by yeohong           #+#    #+#             */
-/*   Updated: 2023/09/13 20:13:20 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/14 11:10:25 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@
 #include "libft/libft.h"
 #include "env/env.h"
 
-// 실행상태 일 때 ctrl - c 
 void	sigint_run_handler(int signo)
 {
 	(void)signo;
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
-// 입력상태 일 때 ctrl - c 
 void	sigint_enter_handler(int signo)
 {
 	(void)signo;

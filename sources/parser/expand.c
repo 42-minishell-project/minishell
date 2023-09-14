@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:38:50 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/13 20:23:15 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:51:13 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	expand_env_name(t_cursor *s)
 	{
 		env_value = find_env(name->arr);
 		if (env_value)
-			push_cursor(s, env_value, 0);
+			push_cursor(s, env_value, CURSOR_NOEXPAND);
 	}
 	delete_chr_array(name);
 }

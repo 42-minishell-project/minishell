@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeohong <yeohong@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:31:51 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 16:17:53 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/14 10:17:16 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,6 @@ void	destruct_cursor(t_cursor *cursor)
 		free(tmp);
 	}
 }
-
-// char	peek_cursor(t_cursor *cursor)
-// {
-// 	if (!cursor->cur)
-// 		return ('\0');
-// 	return (*cursor->cur->ptr);
-// }
-
-// char	forward_cursor(t_cursor *cursor)
-// {
-// 	char	c;
-// 	t_node	*tmp;
-
-// 	if (!cursor->cur)
-// 		return ('\0');
-// 	c = *cursor->cur->ptr;
-// 	cursor->cur->ptr++;
-// 	if (*cursor->cur->ptr == '\0' || *cursor->cur->ptr == cursor->cur->end)
-// 	{
-// 		tmp = cursor->cur;
-// 		cursor->cur = cursor->cur->prev;
-// 		if (tmp->flag & CURSOR_OWNERSHIP)
-// 			free(tmp->start);
-// 		free(tmp);
-// 	}
-// 	return (c);
-// }
 
 void	push_cursor(t_cursor *cursor, char *s, int flags)
 {
