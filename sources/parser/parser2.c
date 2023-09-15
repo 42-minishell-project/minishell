@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:55:09 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/11 19:33:30 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/15 22:18:59 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "parser/parse_error.h"
 #include "utils/chr_array.h"
 
-int	parse_io_file(t_cursor *s, t_io_type type, t_io_arr *io)
+int	parse_io_file(t_cursor *s, t_special_type type, t_io_arr *io)
 {
 	t_parse_result	ret;
 	t_token			tmp;
@@ -35,7 +35,7 @@ int	parse_io_file(t_cursor *s, t_io_type type, t_io_arr *io)
 		syntax_error_unexpected_token(io_token_type_to_str(tmp.type));
 		return (2);
 	}
-	if (type == IO_IN_HEREDOC)
+	if (type == SP_IN_HEREDOC)
 	{
 		file = make_heredoc_from_token(&tmp, &heredoc_exit_code);
 		if (heredoc_exit_code != 0)
