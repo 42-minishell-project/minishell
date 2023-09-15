@@ -6,7 +6,7 @@
 /*   By: jimlee <jimlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:05:17 by jimlee            #+#    #+#             */
-/*   Updated: 2023/09/13 20:16:08 by jimlee           ###   ########.fr       */
+/*   Updated: 2023/09/15 18:36:13 by jimlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	open_heredoc(const char *eof, int *exit_code)
 		get_heredoc_content(eof, pipe_fd[1]);
 		exit(0);
 	}
-	signal(SIGINT, sigint_enter_handler);
 	close(pipe_fd[1]);
 	waitpid(pid, &status, 0);
+	signal(SIGINT, sigint_enter_handler);
 	*exit_code = status_to_exit_code(status);
 	if (*exit_code != 0)
 	{
